@@ -48,12 +48,20 @@ public class Triangle {
   	*/
 	public double area() {
 		// расстояния между точками A и B на плоскости
-		double ab = Math.sqrt(((this.a.getX() - this.b.getX()) * (this.a.getX() - this.b.getX()) + (this.a.getY() - this.b.getY()) * (this.a.getY() - this.b.getY())));
+		double ab = distance(a, b);
 		// расстояния между точками B и С на плоскости
-		double bc = Math.sqrt(((this.b.getX() - this.c.getX()) * (this.b.getX() - this.c.getX()) + (this.b.getY() - this.c.getY()) * (this.b.getY() - this.c.getY())));
+		double bc = distance(b, c);
 		// расстояния между точками С и A на плоскости
-		double ca = Math.sqrt(((this.c.getX() - this.a.getX()) * (this.c.getX() - this.a.getX()) + (this.c.getY() - this.a.getY()) * (this.c.getY() - this.a.getY())));
+		double ca = distance(c, a);
 		double pp = (ab + bc + ca) / 2.0;  // полупериметр
         return Math.sqrt(pp * (pp - ab) * (pp - bc) * (pp - ca)); // полощадь по формуле Герона
+	}
+	/**
+	* @param a - точка a.
+	* @param b - точка b.
+	* @return расстояние между точками A и B на плоскости
+  	*/
+	private double distance(Point a, Point b) {
+		return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
 	}
 }

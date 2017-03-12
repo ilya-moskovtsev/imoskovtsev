@@ -41,6 +41,6 @@ public class Point {
   * Определяет находится ли точка на фукнции y(x) = a * x + b.
   */
   public boolean is(int a, int b) {
-    return getY() == a * getX() + b ? true : false;
+    return this.y == a * this.x + b ? true : false;
   }
 }

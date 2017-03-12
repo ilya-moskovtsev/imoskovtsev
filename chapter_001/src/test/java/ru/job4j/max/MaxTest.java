@@ -19,4 +19,14 @@ public class MaxTest {
         int expected = 2;
         assertThat(result, is(expected));
     }
+    /**
+ 	* When One And Two And Three Are Compared Then Max Is Three.
+ 	*/
+    @Test
+    public void whenOneAndTwoAndThreeAreComparedThenMaxIsThree() {
+        Max max = new Max();
+        int result = max.max(1, 2, 3);
+        int expected = 3;
+        assertThat(result, is(expected));
+    }
 }

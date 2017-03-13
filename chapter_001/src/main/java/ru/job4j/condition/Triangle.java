@@ -20,7 +20,6 @@ public class Triangle {
 	* @param b - точка b.
 	* @param c - точка c.
 	* Конструктор.
-	* Проверяет возможность построить треугольник через точки a, b, c.
 	* Устанавливает значения точек a, b, c.
 	*/
 	public Triangle(Point a, Point b, Point c) {

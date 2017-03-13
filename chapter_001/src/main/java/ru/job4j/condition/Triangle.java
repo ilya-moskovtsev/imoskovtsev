@@ -6,27 +6,15 @@ public class Triangle {
 	/**
   	* Точка a.
   	*/
-	private Point a;
+	private final Point a;
 	/**
   	* Точка b.
   	*/
-	private Point b;
+	private final Point b;
 	/**
   	* Точка c.
   	*/
-	private Point c;
-	/**
-	* расстояния между точками A и B на плоскости.
-	*/
-	private double ab;
-	/**
-	* расстояния между точками B и С на плоскости.
-	*/
-	private double bc;
-	/**
-	* расстояния между точками С и A на плоскости.
-	*/
-	private double ca;
+	private final Point c;
 	/**
 	* @param a - точка a.
 	* @param b - точка b.
@@ -46,9 +34,12 @@ public class Triangle {
   	* Calculate the triangle area.
   	*/
 	public double area() throws Exception {
-		this.ab = distance(a, b);
-		this.bc = distance(b, c);
-		this.ca = distance(c, a);
+		//расстояния между точками A и B на плоскости.
+		double ab = distance(a, b);
+		//расстояния между точками B и С на плоскости.
+		double bc = distance(b, c);
+		//расстояния между точками С и A на плоскости.
+		double ca = distance(c, a);
 		//трегуольник существует, если длина одной из сторон меньше суммы двух других сторон
 		if (ab >= bc + ca || bc >= ab + ca || ca >= ab + bc) {
 			throw new Exception("трегуольник не существует");

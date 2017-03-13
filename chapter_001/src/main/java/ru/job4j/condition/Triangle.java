@@ -16,43 +16,43 @@ public class Triangle {
   	*/
 	private Point c;
 	/**
+	* расстояния между точками A и B на плоскости.
+	*/
+	private double ab;
+	/**
+	* расстояния между точками B и С на плоскости.
+	*/
+	private double bc;
+	/**
+	* расстояния между точками С и A на плоскости.
+	*/
+	private double ca;
+	/**
 	* @param a - точка a.
 	* @param b - точка b.
 	* @param c - точка c.
-	* @throws Exception - точки совпадают, точки лежат на одной прямой.
 	* Конструктор.
 	* Проверяет возможность построить треугольник через точки a, b, c.
 	* Устанавливает значения точек a, b, c.
 	*/
-	public Triangle(Point a, Point b, Point c) throws Exception {
-		//Проверяем, что точки не совпадают
-		//Проверяем, что точки не лежат на одной прямой
-		//уравнение прямой (y1 - y2)x + (x2 - x1)y + (x1y2 - x2y1) = 0
-		if (
-				(a.getX() == b.getX() && a.getY() == b.getY())
-				|| (b.getX() == c.getX() && b.getY() == c.getY())
-				|| (c.getX() == a.getX() && c.getY() == a.getY())
-			) {
-			throw new Exception("точки совпадают");
-		} else if ((a.getY() - b.getY()) * c.getX() + (b.getX() - a.getX()) * c.getY() + (a.getX() * b.getY() - b.getX() * a.getY()) == 0) {
-			throw new Exception("точки лежат на одной прямой");
-		} else {
-			this.a = a;
-			this.b = b;
-			this.c = c;
-		}
+	public Triangle(Point a, Point b, Point c) {
+		this.a = a;
+		this.b = b;
+		this.c = c;
 	}
 	/**
+	* @throws Exception - трегуольник не существует.
 	* @return triangle area
   	* Calculate the triangle area.
   	*/
-	public double area() {
-		// расстояния между точками A и B на плоскости
-		double ab = distance(a, b);
-		// расстояния между точками B и С на плоскости
-		double bc = distance(b, c);
-		// расстояния между точками С и A на плоскости
-		double ca = distance(c, a);
+	public double area() throws Exception {
+		this.ab = distance(a, b);
+		this.bc = distance(b, c);
+		this.ca = distance(c, a);
+		//трегуольник существует, если длина одной из сторон меньше суммы двух других сторон
+		if (ab >= bc + ca || bc >= ab + ca || ca >= ab + bc) {
+			throw new Exception("трегуольник не существует");
+		}
 		double pp = (ab + bc + ca) / 2.0;  // полупериметр
         return Math.sqrt(pp * (pp - ab) * (pp - bc) * (pp - ca)); // полощадь по формуле Герона
 	}

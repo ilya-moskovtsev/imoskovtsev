@@ -27,7 +27,7 @@ public class TriangleTest {
 	assertThat(result, closeTo(expected, 0.01));
 	}
 	/**
-	* @throws Exception - точки совпадают, точки лежат на одной прямой.
+	* @throws Exception - трегуольник не существует.
 	* When Vertices Coincide Then Triangle Throws Exception.
 	*/
 	@Test
@@ -35,17 +35,18 @@ public class TriangleTest {
     Point vertexA = new Point(1, 1);
     Point vertexB = new Point(1, 1);
     Point vertexC = new Point(10, 1);
+    Triangle triangle = new Triangle(vertexA, vertexB, vertexC);
 	    try {
-	    	Triangle triangle = new Triangle(vertexA, vertexB, vertexC);
+	    	triangle.area();
 	    	fail("Expected an Exception to be thrown");
 		} catch (Exception e) {
 			String result = e.getMessage();
-			String expected = "точки совпадают";
+			String expected = "трегуольник не существует";
 			assertThat(result, is(expected));
 		}
 	}
 	/**
-	* @throws Exception - точки совпадают, точки лежат на одной прямой.
+	* @throws Exception - трегуольник не существует.
 	* When Vertices Are On A Straight Line Then Triangle Throws Exception.
 	*/
 	@Test
@@ -53,12 +54,13 @@ public class TriangleTest {
     Point vertexA = new Point(1, 1);
     Point vertexB = new Point(1, 2);
     Point vertexC = new Point(1, 3);
+    Triangle triangle = new Triangle(vertexA, vertexB, vertexC);
 	    try {
-	    	Triangle triangle = new Triangle(vertexA, vertexB, vertexC);
+	    	triangle.area();
 	    	fail("Expected an Exception to be thrown");
 		} catch (Exception e) {
 			String result = e.getMessage();
-			String expected = "точки лежат на одной прямой";
+			String expected = "трегуольник не существует";
 			assertThat(result, is(expected));
 		}
 	}

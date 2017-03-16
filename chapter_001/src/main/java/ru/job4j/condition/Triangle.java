@@ -1,6 +1,7 @@
 package ru.job4j.condition;
 /**
  * Треугольник по точкам.
+ * @author imoskovtsev
  */
 public class Triangle {
 	/**
@@ -16,11 +17,11 @@ public class Triangle {
   	*/
 	private final Point c;
 	/**
+	* Конструктор.
+	* Устанавливает значения точек a, b, c.
 	* @param a - точка a.
 	* @param b - точка b.
 	* @param c - точка c.
-	* Конструктор.
-	* Устанавливает значения точек a, b, c.
 	*/
 	public Triangle(Point a, Point b, Point c) {
 		this.a = a;
@@ -28,9 +29,9 @@ public class Triangle {
 		this.c = c;
 	}
 	/**
+	* Calculate the triangle area.
 	* @throws Exception - трегуольник не существует.
 	* @return triangle area
-  	* Calculate the triangle area.
   	*/
 	public double area() throws Exception {
 		//расстояния между точками A и B на плоскости.
@@ -47,6 +48,7 @@ public class Triangle {
         return Math.sqrt(pp * (pp - ab) * (pp - bc) * (pp - ca)); // полощадь по формуле Герона
 	}
 	/**
+	* Вычисляет расстояние между точками A и B на плоскости.
 	* @param a - точка a.
 	* @param b - точка b.
 	* @return расстояние между точками A и B на плоскости

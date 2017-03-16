@@ -7,12 +7,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 /**
  * Тестирование вычисления факториала.
+ * @author imoskovtsev
  */
 public class FactorialTest {
 	/**
-	* @throws Exception - n - не положительное целое число.
 	* Факториал для числа 5 должен быть равен 120 (1 * 2 * 3 * 4 * 5).
 	* When Factorial 5 Then 120.
+	* @throws Exception - n - не положительное целое число.
 	*/
 	@Test
 	public void whenFactorial5Then120() throws Exception {
@@ -22,9 +23,9 @@ public class FactorialTest {
 		assertThat(result, is(expected));
 	}
 	/**
-	* @throws Exception - n - не положительное целое число.
 	* Факториал для числа 0 равен 1.
 	* When Factorial 0 Then 1.
+	* @throws Exception - n - не положительное целое число.
 	*/
 	@Test
 	public void whenFactorial0Then1() throws Exception {
@@ -34,8 +35,8 @@ public class FactorialTest {
 		assertThat(result, is(expected));
 	}
 	/**
-	* @throws Exception - n - не положительное целое число.
 	* When Factorial Less Than Zero Then Exception.
+	* @throws Exception - n - не положительное целое число.
 	*/
 	@Test
 	public void whenFactorialLessThanZeroThenException() throws Exception {

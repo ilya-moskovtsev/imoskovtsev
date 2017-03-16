@@ -6,7 +6,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- *  Тестирование подсчета суммы чётных чисел в диапазоне.
+ * Тестирование подсчета суммы чётных чисел в диапазоне.
+ * @author imoskovtsev
  */
  public class CounterTest {
  	/**

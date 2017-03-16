@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 /**
 * Тестирование построения пирамиды в псевдографике.
+* @author imoskovtsev
 */
 public class PaintTest {
 	/**

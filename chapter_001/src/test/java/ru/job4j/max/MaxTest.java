@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Tests maximum of two numbers.
+ * @author imoskovtsev
  */
 public class MaxTest {
 	/**

@@ -6,6 +6,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
 * Проверка 5.1. Создать программу для сортировки массива методом перестановки.
+* @author imoskovtsev
 */
 public class BubbleSortTest {
 	/**

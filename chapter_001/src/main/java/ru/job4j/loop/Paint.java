@@ -1,6 +1,7 @@
 package ru.job4j.loop;
 /**
 * Построение пирамиды в псевдографике.
+* @author imoskovtsev
 */
 public class Paint {
 	/**
@@ -15,9 +16,9 @@ public class Paint {
 		this.sb = new StringBuilder();
 	}
 	/**
+	* Рисует пирамиду из символа ^ и пробелов.
 	* @param h - высота пирамиды.
 	* @return пирамида из символа ^ и пробелов.
-	* Рисует пирамиду из символа ^ и пробелов.
 	*/
 	public String piramid(int h) {
 		//высота пирамиды
@@ -34,9 +35,9 @@ public class Paint {
 		return sb.toString();
 	}
 	/**
+	* Вычисляет ширину пирамиды по высоте.
 	* @param h - высота пирамиды.
 	* @return ширина пирамиды.
-	* Вычисляет ширину пирамиды по высоте.
 	*/
 	private int width(int h) {
 		int width = 1;
@@ -46,9 +47,9 @@ public class Paint {
 		return width;
 	}
 	/**
+	* Добавляет пробелы к пирамиде.
 	* @param h - высота пирамиды.
 	* @param i - текущий уровень.
-	* Добавляет пробелы к пирамиде.
 	*/
 	private void sideSpaces(int h, int i) {
 		int sideSpaces = (width(h - i) - 1) / 2;
@@ -57,8 +58,8 @@ public class Paint {
 		}
 	}
 	/**
-	* @param i - текущий уровень.
 	* Добавляет тело пирамиды.
+	* @param i - текущий уровень.
 	*/
 	private void piramidBody(int i) {
 		if (i == 0) {
@@ -72,9 +73,9 @@ public class Paint {
 		}
 	}
 	/**
+	* Переносит строку.
 	* @param h - высота пирамиды.
 	* @param i - текущий уровень.
-	* Переносит строку.
 	*/
 	private void lineSeparator(int h, int i) {
 		//не добавляем line.separator в конце нижнего уровня

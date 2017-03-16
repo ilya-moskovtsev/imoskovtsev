@@ -9,12 +9,13 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 
 /**
  * Треугольник по точкам.
+ * @author imoskovtsev
  */
 public class TriangleTest {
 	/**
-	* @throws Exception - точки совпадают, точки лежат на одной прямой.
 	* Calculate the triangle area.
 	* When Vertex A Vertex B Vertex C Then Triangle Has Area.
+	* @throws Exception - точки совпадают, точки лежат на одной прямой.
 	*/
 	@Test
 	public void whenVertexAVertexBVertexCThenTriangleHasArea() throws Exception {
@@ -27,8 +28,8 @@ public class TriangleTest {
 	assertThat(result, closeTo(expected, 0.01));
 	}
 	/**
-	* @throws Exception - трегуольник не существует.
 	* When Vertices Coincide Then Triangle Throws Exception.
+	* @throws Exception - трегуольник не существует.
 	*/
 	@Test
 	public void whenVerticesCoincideThenTriangleThrowsException() {
@@ -46,8 +47,8 @@ public class TriangleTest {
 		}
 	}
 	/**
-	* @throws Exception - трегуольник не существует.
 	* When Vertices Are On A Straight Line Then Triangle Throws Exception.
+	* @throws Exception - трегуольник не существует.
 	*/
 	@Test
 	public void whenVerticesAreOnAStraightLineThenTriangleThrowsException() {

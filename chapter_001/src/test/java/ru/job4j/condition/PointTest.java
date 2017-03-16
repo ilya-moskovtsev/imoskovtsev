@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Проверяет нахождение точки на фукнции y(x) = a * x + b.
+ * @author imoskovtsev
  */
 public class PointTest {
   /**

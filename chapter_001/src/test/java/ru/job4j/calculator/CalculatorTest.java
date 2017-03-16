@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Tests covering basic calculator.
+ * @author imoskovtsev
  */
 public class CalculatorTest {
 	/**

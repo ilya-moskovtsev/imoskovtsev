@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 /**
 * Проверка 5.0 Перевернуть массив.
+* @author imoskovtsev
 */
 public class TurnTest {
 	/**

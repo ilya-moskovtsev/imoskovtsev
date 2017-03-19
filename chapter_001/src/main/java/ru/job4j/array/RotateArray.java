@@ -17,14 +17,14 @@ public class RotateArray {
 			array[1][0] = array[1][1];
 			array[1][1] = array[0][1];
 			array[0][1] = temp;
-		} else if (array.length == 3) {
+		} else if (array.length > 2) {
 			int temp = 0;
 			for (int i = 0; i < array.length - 1; i++) {
 				temp = array[0][i];
 				array[0][i] = array[array.length - 1 - i][0];
-				array[array.length - 1 - i][0] = array[2][array.length - 1 - i];
-				array[2][array.length - 1 - i] = array[i][2];
-				array[i][2] = temp;
+				array[array.length - 1 - i][0] = array[array.length - 1][array.length - 1 - i];
+				array[array.length - 1][array.length - 1 - i] = array[i][array.length - 1];
+				array[i][array.length - 1] = temp;
 			}
 		}
 		return array;

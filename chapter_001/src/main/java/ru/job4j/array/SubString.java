@@ -28,6 +28,7 @@ public class SubString {
 				}
 				if (count == subChars.length) {
 					isSubstring = true;
+					break;
 				}
 			}
 		}

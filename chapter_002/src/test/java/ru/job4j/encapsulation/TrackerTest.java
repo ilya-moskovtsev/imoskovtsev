@@ -3,6 +3,8 @@ package ru.job4j.encapsulation;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -25,7 +27,7 @@ public class TrackerTest {
     @Before
     public void setUp() {
         tracker = new Tracker(10);
-        item = new Item("id1", "key1");
+        item = new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime());
     }
 
     /**
@@ -53,11 +55,28 @@ public class TrackerTest {
     @Test
     public void update() {
         tracker.add(item);
-        Item updateItem = new Item("id1", "updatedKey");
+        long updatedCreateDate = new Date().getTime();
+        long updatedUpdateDate = new Date().getTime();
+        Item updateItem = new Item("id1", "updatedKey", "updatedName", "updatedDesc", updatedCreateDate, updatedUpdateDate);
         tracker.update(updateItem);
-        String result = tracker.getItems()[0].getKey();
-        String expected = "updatedKey";
-        assertThat(result, is(expected));
+
+        String resultKey = tracker.getItems()[0].getKey();
+        String expectedKey = "updatedKey";
+        assertThat(resultKey, is(expectedKey));
+
+        String resultName = tracker.getItems()[0].getName();
+        String expectedName = "updatedName";
+        assertThat(resultName, is(expectedName));
+
+        String resultDesc = tracker.getItems()[0].getDesc();
+        String expectedDesc = "updatedDesc";
+        assertThat(resultDesc, is(expectedDesc));
+
+        long resultCreateDate = tracker.getItems()[0].getCreateDate();
+        assertThat(resultCreateDate, is(updatedCreateDate));
+
+        long resultUpdateDate = tracker.getItems()[0].getUpdateDate();
+        assertThat(resultUpdateDate, is(updatedUpdateDate));
     }
 
     /**

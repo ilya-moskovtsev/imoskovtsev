@@ -58,6 +58,10 @@ class Tracker {
         for (Item i : items) {
             if (i.getId().equals(item.getId())) {
                 i.setKey(item.getKey());
+                i.setName(item.getName());
+                i.setDesc(item.getDesc());
+                i.setCreateDate(item.getCreateDate());
+                i.setUpdateDate(item.getUpdateDate());
                 break;
             }
         }

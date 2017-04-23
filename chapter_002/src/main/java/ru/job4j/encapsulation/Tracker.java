@@ -1,5 +1,7 @@
 package ru.job4j.encapsulation;
 
+import java.util.Arrays;
+
 /**
  * 2. Реализовать класс Tracker
  * @author imoskovtsev
@@ -84,13 +86,7 @@ class Tracker {
      * @return Item[]
      */
     Item[] findAll() {
-        int notNullItemsCounter = 0;
-        for (Item item : items) {
-            if (item != null) {
-                notNullItemsCounter++;
-            }
-        }
-        Item[] resultArray = new Item[notNullItemsCounter];
+        Item[] resultArray = new Item[items.length];
         int resultArrayIndex = 0;
         for (Item item : items) {
             if (item != null) {
@@ -98,7 +94,7 @@ class Tracker {
                 resultArrayIndex++;
             }
         }
-        return resultArray;
+        return Arrays.copyOf(resultArray, resultArrayIndex);
     }
 
     /**

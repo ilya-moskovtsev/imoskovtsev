@@ -1,7 +1,5 @@
 package ru.job4j.encapsulation;
 
-import java.util.Arrays;
-
 /**
  * 2. Реализовать класс Tracker
  * @author imoskovtsev
@@ -82,11 +80,25 @@ class Tracker {
     }
 
     /**
-     * получение списка всех заявок.
+     * получение списка всех не null заявок.
      * @return Item[]
      */
     Item[] findAll() {
-        return Arrays.copyOf(items, itemCounter);
+        int notNullItemsCounter = 0;
+        for (Item item : items) {
+            if (item != null) {
+                notNullItemsCounter++;
+            }
+        }
+        Item[] resultArray = new Item[notNullItemsCounter];
+        int resultArrayIndex = 0;
+        for (Item item : items) {
+            if (item != null) {
+                resultArray[resultArrayIndex] = item;
+                resultArrayIndex++;
+            }
+        }
+        return resultArray;
     }
 
     /**

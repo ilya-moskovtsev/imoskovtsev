@@ -1,4 +1,4 @@
-package ru.job4j.encapsulation;
+package ru.job4j.tracker;
 
 import java.util.Arrays;
 

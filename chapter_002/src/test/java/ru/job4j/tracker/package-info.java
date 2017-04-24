@@ -5,4 +5,4 @@
 * @version $Id$
 * @since 0.1
 */
-package ru.job4j.encapsulation;
+package ru.job4j.tracker;

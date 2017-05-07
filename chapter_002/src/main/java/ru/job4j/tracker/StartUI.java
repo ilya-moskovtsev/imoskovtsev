@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import java.util.Scanner;
 
+import static ru.job4j.tracker.Menu.*;
+
+
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения
  * @author imoskovtsev
@@ -15,11 +18,14 @@ public class StartUI {
 
         ConsoleInput input = new ConsoleInput();
 
-        Scanner scanner = new Scanner(System.in);
-
         Tracker tracker = new Tracker(100);
 
-        while (true) {
+        init(input, tracker);
+    }
+
+    private static void init(ConsoleInput input, Tracker tracker) {
+        boolean isDone = false;
+        while (!isDone) {
             System.out.println("0. Add new Item");
             System.out.println("1. Show all items");
             System.out.println("2. Edit item");
@@ -27,10 +33,9 @@ public class StartUI {
             System.out.println("4. Find item by Id");
             System.out.println("5. Find items by name");
             System.out.println("6. Exit Program");
-            System.out.print("Select: ");
-            int select = scanner.nextInt();
+            int select = Integer.valueOf(input.ask("Select: "));
 
-            if (select == 0) {
+            if (select == ADD) {
                 tracker.add(
                         new Item(
                                 input.ask("id заявки: "),
@@ -41,11 +46,11 @@ public class StartUI {
                                 System.currentTimeMillis()
                         )
                 );
-            } else if (select == 1) {
+            } else if (select == SHOW_ALL) {
                 for (Item item : tracker.findAll()) {
                     System.out.printf("id заявки: %1$s, имя заявки: %2$s%3$s", item.getId(), item.getKey(), System.lineSeparator());
                 }
-            } else if (select == 2) {
+            } else if (select == EDIT) {
                 tracker.update(
                         new Item(
                                 input.ask("id заявки: "),
@@ -56,19 +61,19 @@ public class StartUI {
                                 System.currentTimeMillis()
                         )
                 );
-            } else if (select == 3) {
+            } else if (select == DELETE) {
                 tracker.delete(
                         new Item(
                                 input.ask("id заявки: "),
                                 "", "", "", 0L, 0L
                         )
                 );
-            } else if (select == 4) {
+            } else if (select == FIND_BY_ID) {
                 tracker.findById(input.ask("id заявки: "));
-            } else if (select == 5) {
+            } else if (select == FIND_BY_NAME) {
                 tracker.findByName(input.ask("имя заявки: "));
-            } else if (select == 6) {
-                break;
+            } else if (select == EXIT) {
+                isDone = true;
             }
         }
     }

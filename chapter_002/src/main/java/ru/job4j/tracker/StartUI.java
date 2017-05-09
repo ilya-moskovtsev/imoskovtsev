@@ -1,8 +1,12 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
-
-import static ru.job4j.tracker.Menu.*;
+import static ru.job4j.tracker.Menu.ADD;
+import static ru.job4j.tracker.Menu.SHOW_ALL;
+import static ru.job4j.tracker.Menu.EDIT;
+import static ru.job4j.tracker.Menu.DELETE;
+import static ru.job4j.tracker.Menu.FIND_BY_ID;
+import static ru.job4j.tracker.Menu.FIND_BY_NAME;
+import static ru.job4j.tracker.Menu.EXIT;
 
 
 /**
@@ -23,6 +27,11 @@ public class StartUI {
         init(input, tracker);
     }
 
+    /**
+     * Инициализация.
+     * @param input выбранный ввод.
+     * @param tracker выбранный трекер.
+     */
     private static void init(ConsoleInput input, Tracker tracker) {
         boolean isDone = false;
         while (!isDone) {

@@ -15,24 +15,36 @@ import static ru.job4j.tracker.Menu.EXIT;
  */
 public class StartUI {
     /**
+     * выбранный ввод.
+     */
+    private static Input input;
+    /**
+     * выбранный трекер.
+     */
+    private static Tracker tracker;
+
+    /**
+     * Конструктор.
+     * @param input задаем ввод
+     * @param tracker задаем трекер
+     */
+    public StartUI(Input input, Tracker tracker) {
+        this.input = input;
+        this.tracker = tracker;
+    }
+
+    /**
      * точка входа.
      * @param args параметры запуска
      */
     public static void main(String[] args) {
-
-        ConsoleInput input = new ConsoleInput();
-
-        Tracker tracker = new Tracker(100);
-
-        init(input, tracker);
+        init();
     }
 
     /**
      * Инициализация.
-     * @param input выбранный ввод.
-     * @param tracker выбранный трекер.
      */
-    private static void init(ConsoleInput input, Tracker tracker) {
+    static void init() {
         boolean isDone = false;
         while (!isDone) {
             System.out.println("0. Add new Item");

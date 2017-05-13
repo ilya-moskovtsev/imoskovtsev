@@ -74,11 +74,15 @@ class Tracker {
      * @param item заявка
      */
     void delete(Item item) {
-        for (Item i : items) {
-            if (i.getId().equals(item.getId())) {
-                i = null;
+        Item[] resultArray = new Item[items.length];
+        int resultArrayIndex = 0;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && !items[i].getId().equals(item.getId())) {
+                System.arraycopy(items, i, resultArray, resultArrayIndex, 1);
+                resultArrayIndex++;
             }
         }
+        this.items = Arrays.copyOf(resultArray, resultArrayIndex);
     }
 
     /**

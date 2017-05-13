@@ -82,7 +82,7 @@ public class TrackerTest {
     /**
      * Проверить удаление заявок.
      */
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void delete() {
         tracker.add(item);
         tracker.delete(item);

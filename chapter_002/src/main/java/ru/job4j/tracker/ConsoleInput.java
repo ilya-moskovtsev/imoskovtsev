@@ -6,7 +6,7 @@ import java.util.Scanner;
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения
  * @author imoskovtsev
  */
-class ConsoleInput {
+class ConsoleInput implements Input {
     /**
      * Слушаем ввод с консоли.
      */
@@ -17,7 +17,8 @@ class ConsoleInput {
      * @param question вопрос пользователю
      * @return String ответ пользователя
      */
-    String ask(String question) {
+    @Override
+    public String ask(String question) {
         System.out.println(question);
         return scanner.nextLine();
     }

@@ -1,11 +1,7 @@
 package ru.job4j.tracker;
 
 /**
- * Реализовать события на внутренних классах. [#15201]
- * Класс MenuTracker, который реализует меню.
- * В классе MenuTracker реализованы внутренние классы событий: добавление, редактирование, удаление, поиск по имени, поиск по id и вывод на экран всех заявок.
- * При реализации событий использованы статический внутренний класс, не статический внутренний класс и внешний класс, расположенный в одном файле с MenuTracker.
- * @author imoskovtsev
+ * Edit item.
  */
 class EditItem implements UserAction {
 
@@ -33,17 +29,44 @@ class EditItem implements UserAction {
         return String.format("%s. %s", this.key(), "Edit item");
     }
 }
+
+/**
+ * Реализовать события на внутренних классах. [#15201]
+ * Класс MenuTracker, который реализует меню.
+ * В классе MenuTracker реализованы внутренние классы событий: добавление, редактирование, удаление, поиск по имени, поиск по id и вывод на экран всех заявок.
+ * При реализации событий использованы статический внутренний класс, не статический внутренний класс и внешний класс, расположенный в одном файле с MenuTracker.
+ *
+ * @author imoskovtsev
+ */
 public class MenuTracker {
 
+    /**
+     * Система ввода.
+     */
     private Input input;
+    /**
+     * Трекер задач.
+     */
     private Tracker tracker;
+    /**
+     * Пункты меню.
+     */
     private UserAction[] actions = new UserAction[7];
 
+    /**
+     * Конструктор.
+     *
+     * @param input   система ввода
+     * @param tracker трекер задач
+     */
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
+    /**
+     * Заполняем пункты меню.
+     */
     public void fillActions() {
         this.actions[0] = this.new AddItem();
         this.actions[1] = new MenuTracker.ShowAll();
@@ -54,10 +77,18 @@ public class MenuTracker {
         this.actions[6] = new MenuTracker.ExitProgram();
     }
 
+    /**
+     * Выбор пункта меню.
+     *
+     * @param key пункт меню
+     */
     public void select(int key) {
         this.actions[key].execute(this.input, this.tracker);
     }
 
+    /**
+     * Отрисовка пунктов меню.
+     */
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
@@ -66,6 +97,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Add new Item.
+     */
     private class AddItem implements UserAction {
 
         @Override
@@ -93,6 +127,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Show all items.
+     */
     private static class ShowAll implements UserAction {
 
         @Override
@@ -113,6 +150,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Delete item.
+     */
     private static class DeleteItem implements UserAction {
 
         @Override
@@ -136,6 +176,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Find item by Id.
+     */
     private static class FindById implements UserAction {
 
         @Override
@@ -154,6 +197,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Find item by name.
+     */
     private static class FindByName implements UserAction {
 
         @Override
@@ -172,6 +218,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Exit Program.
+     */
     private static class ExitProgram implements UserAction {
 
         @Override
@@ -181,7 +230,7 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-
+            StartUI.setIsDone(true);
         }
 
         @Override

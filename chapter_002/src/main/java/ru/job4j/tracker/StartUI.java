@@ -1,16 +1,8 @@
 package ru.job4j.tracker;
 
-import static ru.job4j.tracker.Menu.ADD;
-import static ru.job4j.tracker.Menu.SHOW_ALL;
-import static ru.job4j.tracker.Menu.EDIT;
-import static ru.job4j.tracker.Menu.DELETE;
-import static ru.job4j.tracker.Menu.FIND_BY_ID;
-import static ru.job4j.tracker.Menu.FIND_BY_NAME;
-import static ru.job4j.tracker.Menu.EXIT;
-
-
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения
+ *
  * @author imoskovtsev
  */
 public class StartUI {
@@ -24,8 +16,14 @@ public class StartUI {
     private static Tracker tracker;
 
     /**
+     * Флаг выхода из программы.
+     */
+    private static boolean isDone = false;
+
+    /**
      * Конструктор.
-     * @param input задаем ввод
+     *
+     * @param input   задаем ввод
      * @param tracker задаем трекер
      */
     public StartUI(Input input, Tracker tracker) {
@@ -34,7 +32,17 @@ public class StartUI {
     }
 
     /**
+     * устанавливаем значение флага выхода из программы.
+     *
+     * @param isDone значение флага выхода из программы
+     */
+    public static void setIsDone(boolean isDone) {
+        StartUI.isDone = isDone;
+    }
+
+    /**
      * точка входа.
+     *
      * @param args параметры запуска
      */
     public static void main(String[] args) {
@@ -48,7 +56,6 @@ public class StartUI {
         MenuTracker menuTracker = new MenuTracker(input, tracker);
         menuTracker.fillActions();
 
-        boolean isDone = false;
         while (!isDone) {
             menuTracker.show();
             menuTracker.select(Integer.valueOf(input.ask("Select: ")));

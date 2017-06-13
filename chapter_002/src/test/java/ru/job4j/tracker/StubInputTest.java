@@ -2,12 +2,10 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Date;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * 3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]
@@ -21,7 +19,10 @@ public class StubInputTest {
     public void whenUserAddsItemThenTrackerHasNewItem() {
         Tracker tracker = new Tracker(1);
         Input input = new StubInput(new String[]{"0", "test id", "test key", "test name", "test description", "6"});
-        new StartUI(input, tracker).init();
+        StartUI startUI = new StartUI(input, tracker);
+        StartUI.init();
+
+
         Item item = tracker.findAll()[0];
         assertThat(item.getId(), is("test id"));
         assertThat(item.getKey(), is("test key"));
@@ -38,7 +39,8 @@ public class StubInputTest {
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(new String[]{"1", "6"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker);
+        StartUI.init();
         Item[] items = tracker.findAll();
         assertThat(items[0].getId(), is("id1"));
         assertThat(items[1].getId(), is("id2"));

@@ -80,6 +80,8 @@ class Tracker {
             if (items[i] != null && !items[i].getId().equals(item.getId())) {
                 System.arraycopy(items, i, resultArray, resultArrayIndex, 1);
                 resultArrayIndex++;
+            } else {
+                itemCounter--;
             }
         }
         this.items = Arrays.copyOf(resultArray, resultArrayIndex);

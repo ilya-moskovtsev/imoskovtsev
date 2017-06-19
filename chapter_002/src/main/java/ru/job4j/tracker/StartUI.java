@@ -36,8 +36,17 @@ public class StartUI {
      *
      * @param isDone значение флага выхода из программы
      */
-    public static void setIsDone(boolean isDone) {
+    static void setIsDone(boolean isDone) {
         StartUI.isDone = isDone;
+    }
+
+    /**
+     * возвращаем значение флага выхода из программы.
+     *
+     * @return isDone значение флага выхода из программы
+     */
+    static boolean getIsDone() {
+        return isDone;
     }
 
     /**
@@ -55,7 +64,7 @@ public class StartUI {
     static void init() {
         MenuTracker menuTracker = new MenuTracker(input, tracker);
         menuTracker.fillActions();
-
+        isDone = false;
         while (!isDone) {
             menuTracker.show();
             menuTracker.select(Integer.valueOf(input.ask("Select: ")));

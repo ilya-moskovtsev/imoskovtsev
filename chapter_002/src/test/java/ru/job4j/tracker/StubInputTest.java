@@ -111,5 +111,6 @@ public class StubInputTest {
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(new String[]{"6"});
         new StartUI(input, tracker).init();
+        assertThat(StartUI.getIsDone(), is(true));
     }
 }

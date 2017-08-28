@@ -1,7 +1,8 @@
 package ru.job4j.tracker;
 
 /**
- *  3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]
+ *  3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]<br>
+ *  Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
  * @author imoskovtsev
  */
 public class StubInput implements Input {
@@ -30,5 +31,10 @@ public class StubInput implements Input {
     @Override
     public String ask(String question) {
         return answers[position++];
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        return Integer.valueOf(answers[position++]);
     }
 }

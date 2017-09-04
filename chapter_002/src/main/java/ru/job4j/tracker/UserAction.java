@@ -8,14 +8,6 @@ package ru.job4j.tracker;
  */
 public interface UserAction {
     /**
-     * Запршиваем номер действия у пользователя.
-     *
-     * @return int номер действия
-     */
-    int key();
-
-
-    /**
      * Выполняем действие.
      *
      * @param input   система ввода

@@ -5,13 +5,13 @@ package ru.job4j.chess;
  *
  * @author imoskovtsev
  */
-class Bishop extends Chesspiece {
+public class Bishop extends ChessPiece {
     /**
      * Конструктор.
      *
      * @param currentPosition клетка фигуры на доске
      */
-    Bishop(ChessboardCell currentPosition) {
+    public Bishop(ChessboardCell currentPosition) {
         super(currentPosition);
     }
 
@@ -23,24 +23,11 @@ class Bishop extends Chesspiece {
      * @throws ImpossibleMoveException Если фигура туда пойти не может. выбросить исключение ImpossibleMoveException
      */
     @Override
-    ChessboardCell[] way(ChessboardCell destination) throws ImpossibleMoveException {
-        final int currentNumber = this.getCurrentPosition().getNumber();
-        final int currentLetter = this.getCurrentPosition().getLetter();
-        final int destinationNumber = destination.getNumber();
-        final int destinationLetter = destination.getLetter();
-
-        final int numbersDirection = destinationNumber - currentNumber > 0 ? 1 : -1;
-        final int lettersDirection = destinationLetter - currentLetter > 0 ? 1 : -1;
-
-        int numbersSteps = Math.abs(destinationNumber - currentNumber);
-        int lettersSteps = Math.abs(destinationLetter - currentLetter);
+    public ChessboardCell[] way(ChessboardCell destination) throws ImpossibleMoveException {
         ChessboardCell[] way;
-
-        if (numbersSteps == lettersSteps) {
-            way = new ChessboardCell[numbersSteps];
-            for (int i = 1; i <= numbersSteps; i++) {
-                way[i - 1] = new ChessboardCell(currentLetter + i * lettersDirection, currentNumber + i * numbersDirection);
-            }
+        if (verticalStepsTo(destination) == horizontalStepsTo(destination)) {
+            //diagonal movement
+            way = diagonalWayTo(destination);
         } else {
             throw new ImpossibleMoveException(IMPOSSIBLE_MOVE);
         }
@@ -48,7 +35,7 @@ class Bishop extends Chesspiece {
     }
 
     @Override
-    Chesspiece clone(ChessboardCell destination) {
+    public ChessPiece clone(ChessboardCell destination) {
         return new Bishop(destination);
     }
 }

@@ -5,16 +5,18 @@ import java.util.Scanner;
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения<br>
  * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
+ *
  * @author imoskovtsev
  */
-class ConsoleInput implements Input {
+public class ConsoleInput implements Input {
     /**
      * Слушаем ввод с консоли.
      */
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Задаем пользователю вопрос. Возвращаем ответ пользователя.
+     *
      * @param question вопрос пользователю
      * @return String ответ пользователя
      */
@@ -26,8 +28,9 @@ class ConsoleInput implements Input {
 
     /**
      * Задаем пользователю вопрос. Возвращаем ответ пользователя.
+     *
      * @param question вопрос пользователю
-     * @param range диапазон ответов
+     * @param range    диапазон ответов
      * @return int ответ пользователя
      */
     @Override

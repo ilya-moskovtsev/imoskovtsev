@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * 4. Шаблон проектирования - стратегия
+ *
  * @author imoskovtsev
  */
 public class PaintTest {
@@ -18,6 +19,7 @@ public class PaintTest {
      * Поток вывода.
      */
     private ByteArrayOutputStream out;
+
     /**
      * setUp.
      */
@@ -26,19 +28,23 @@ public class PaintTest {
         out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
     }
+
     /**
      * Нарисовать фигуру квадрат.
      */
     @Test
     public void drawSquare() {
         new Paint().draw(new Square());
-        String expected = new StringBuilder()
-                .append("* * * * *").append(System.lineSeparator())
-                .append("* * * * *").append(System.lineSeparator())
-                .append("* * * * *").append(System.lineSeparator())
-                .append("* * * * *").append(System.lineSeparator())
-                .append("* * * * *").append(System.lineSeparator())
-                .toString();
+        String expected = "* * * * *"
+                + System.lineSeparator()
+                + "* * * * *"
+                + System.lineSeparator()
+                + "* * * * *"
+                + System.lineSeparator()
+                + "* * * * *"
+                + System.lineSeparator()
+                + "* * * * *"
+                + System.lineSeparator();
         assertThat(out.toString(), is(expected));
     }
 
@@ -47,13 +53,12 @@ public class PaintTest {
      */
     @Test
     public void drawTriangle() {
-        String expected = new StringBuilder()
-                .append("* ").append(System.lineSeparator())
-                .append("* * ").append(System.lineSeparator())
-                .append("* * * ").append(System.lineSeparator())
-                .append("* * * * ").append(System.lineSeparator())
-                .append("* * * * * ").append(System.lineSeparator())
-                .toString();
+        String expected = "* "
+                + System.lineSeparator()
+                + "* * " + System.lineSeparator()
+                + "* * * " + System.lineSeparator()
+                + "* * * * " + System.lineSeparator()
+                + "* * * * * " + System.lineSeparator();
         new Paint().draw(new Triangle());
         assertThat(out.toString(), is(expected));
     }

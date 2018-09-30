@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Проверить 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
 public class EngineerTest {
@@ -23,6 +24,7 @@ public class EngineerTest {
      * Проект.
      */
     private static Project project;
+
     /**
      * Подготовка к тестам.
      */

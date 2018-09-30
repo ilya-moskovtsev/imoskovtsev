@@ -4,9 +4,10 @@ import java.util.Arrays;
 
 /**
  * 2. Реализовать класс Tracker
+ *
  * @author imoskovtsev
  */
-class Tracker {
+public class Tracker {
     /**
      * Класс трекер - это обертка над массивом заявок.
      */
@@ -18,34 +19,38 @@ class Tracker {
 
     /**
      * Конструктор.
+     *
      * @param numberOfItems количество заявок
      */
-    Tracker(int numberOfItems) {
+    public Tracker(int numberOfItems) {
         this.items = new Item[numberOfItems];
         itemCounter = 0;
     }
 
     /**
      * Возвращает items.
+     *
      * @return Item[]
      */
-    Item[] getItems() {
+    public Item[] getItems() {
         return items;
     }
 
     /**
      * Возвращает itemCounter.
+     *
      * @return int
      */
-    int getItemCounter() {
+    public int getItemCounter() {
         return itemCounter;
     }
 
     /**
      * добавление заявок.
+     *
      * @param item заявка
      */
-    void add(Item item) {
+    public void add(Item item) {
         if (itemCounter < items.length) {
             items[itemCounter] = item;
             itemCounter++;
@@ -54,9 +59,10 @@ class Tracker {
 
     /**
      * редактирование заявок.
+     *
      * @param item заявка
      */
-    void update(Item item) {
+    public void update(Item item) {
         for (Item i : items) {
             if (i.getId().equals(item.getId())) {
                 i.setKey(item.getKey());
@@ -71,9 +77,10 @@ class Tracker {
 
     /**
      * удаление заявок.
+     *
      * @param item заявка
      */
-    void delete(Item item) {
+    public void delete(Item item) {
         Item[] resultArray = new Item[items.length];
         int resultArrayIndex = 0;
         for (int i = 0; i < items.length; i++) {
@@ -89,9 +96,10 @@ class Tracker {
 
     /**
      * получение списка всех не null заявок.
+     *
      * @return Item[]
      */
-    Item[] findAll() {
+    public Item[] findAll() {
         Item[] resultArray = new Item[items.length];
         int resultArrayIndex = 0;
         for (Item item : items) {
@@ -105,10 +113,11 @@ class Tracker {
 
     /**
      * получение списка по имени.
+     *
      * @param key имя
      * @return Item
      */
-    Item findByName(String key) {
+    public Item findByName(String key) {
         Item result = null;
         for (Item item : items) {
             if (item != null && item.getKey().equals(key)) {
@@ -121,10 +130,11 @@ class Tracker {
 
     /**
      * получение заявки по id.
+     *
      * @param id id
      * @return Item
      */
-    Item findById(String id) {
+    public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
             if (item != null && item.getId().equals(id)) {

@@ -9,6 +9,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * 3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]
+ *
  * @author imoskovtsev
  */
 public class StubInputTest {
@@ -18,8 +19,14 @@ public class StubInputTest {
     @Test
     public void whenUserAddsItemThenTrackerHasNewItem() {
         Tracker tracker = new Tracker(1);
-        Input input = new StubInput(new String[]{"0", "test id", "test key", "test name", "test description", "6"});
-        StartUI startUI = new StartUI(input, tracker);
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.ADD),
+                "test id",
+                "test key",
+                "test name",
+                "test description",
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
         StartUI.init();
 
 
@@ -38,7 +45,9 @@ public class StubInputTest {
         Tracker tracker = new Tracker(2);
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"1", "6"});
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.SHOW_ALL),
+                String.valueOf(Menu.EXIT)});
         new StartUI(input, tracker);
         StartUI.init();
         Item[] items = tracker.findAll();
@@ -53,8 +62,15 @@ public class StubInputTest {
     public void whenUserEditsItemThenTrackerHasEditedItem() {
         Tracker tracker = new Tracker(1);
         tracker.add(new Item("id", "key", "name", "desc", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"2", "id", "updatedKey", "updatedName", "updatedDesc", "6"});
-        new StartUI(input, tracker).init();
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.EDIT),
+                "id",
+                "updatedKey",
+                "updatedName",
+                "updatedDesc",
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
+        StartUI.init();
         Item item = tracker.findAll()[0];
         assertThat(item.getId(), is("id"));
         assertThat(item.getKey(), is("updatedKey"));
@@ -65,13 +81,19 @@ public class StubInputTest {
     /**
      * Тест на пункт меню "3. Delete item".
      */
-    @Test (expected = ArrayIndexOutOfBoundsException.class)
+    @Test
     public void whenUserDeletesItemThenTrackerHasNoItem() {
         Tracker tracker = new Tracker(1);
         tracker.add(new Item("id", "key", "name", "desc", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"3", "id", "6"});
-        new StartUI(input, tracker).init();
-        Item item = tracker.findAll()[0];
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.DELETE),
+                "id",
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
+        StartUI.init();
+        Item[] allItems = tracker.findAll();
+        Item[] expected = {};
+        assertThat(allItems, is(expected));
     }
 
     /**
@@ -82,8 +104,12 @@ public class StubInputTest {
         Tracker tracker = new Tracker(2);
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"4", "id2", "6"});
-        new StartUI(input, tracker).init();
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.FIND_BY_ID),
+                "id2",
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
+        StartUI.init();
         Item item = tracker.findById("id2");
         assertThat(item.getKey(), is("key2"));
     }
@@ -96,8 +122,12 @@ public class StubInputTest {
         Tracker tracker = new Tracker(2);
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"4", "id2", "6"});
-        new StartUI(input, tracker).init();
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.FIND_BY_NAME),
+                "name2",
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
+        StartUI.init();
         Item item = tracker.findByName("key2");
         assertThat(item.getId(), is("id2"));
     }
@@ -109,8 +139,10 @@ public class StubInputTest {
     public void whenUserExitsThenTrackerProgramStops() {
         Tracker tracker = new Tracker(1);
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
-        Input input = new StubInput(new String[]{"6"});
-        new StartUI(input, tracker).init();
+        Input input = new StubInput(new String[]{
+                String.valueOf(Menu.EXIT)});
+        new StartUI(input, tracker);
+        StartUI.init();
         assertThat(StartUI.getIsDone(), is(true));
     }
 }

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Проверить 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
 public class TeacherTest {
@@ -23,6 +24,7 @@ public class TeacherTest {
      * Ученик.
      */
     private static Student student;
+
     /**
      * Подготовка к тестам.
      */

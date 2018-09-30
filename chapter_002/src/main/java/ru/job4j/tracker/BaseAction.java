@@ -6,25 +6,27 @@ package ru.job4j.tracker;
  * 2. Конструктор BaseAction должен принимать параметры name и key.<br>
  * 3. Реализовать метод info(), остальные методы оставить абстрактыми.<br>
  * 4. Все события наследовать от BaseAction.<br>
+ *
  * @author imoskovtsev
  */
 public abstract class BaseAction implements UserAction {
     /**
      * Номер пункта меню.
      */
-    private int key;
+    private final int key;
 
     /**
      * Название пунка меню.
      */
-    private String name;
+    private final String name;
 
     /**
      * Конструктор.
-     * @param key Номер пункта меню.
+     *
+     * @param key  Номер пункта меню.
      * @param name Название пунка меню.
      */
-    BaseAction(int key, String name) {
+    public BaseAction(int key, String name) {
         this.key = key;
         this.name = name;
     }

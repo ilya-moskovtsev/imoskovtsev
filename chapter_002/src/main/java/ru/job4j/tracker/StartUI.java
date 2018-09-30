@@ -3,13 +3,22 @@ package ru.job4j.tracker;
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения<br>
  * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
+ *
  * @author imoskovtsev
  */
 public class StartUI {
     /**
      * допустимый диапазон ответов.
      */
-    private static int[] ranges = new int[] {0, 1, 2, 3, 4, 5, 6};
+    private static final int[] RANGES = new int[]{
+            Menu.ADD,
+            Menu.SHOW_ALL,
+            Menu.EDIT,
+            Menu.DELETE,
+            Menu.FIND_BY_ID,
+            Menu.FIND_BY_NAME,
+            Menu.EXIT
+    };
     /**
      * выбранный ввод.
      */
@@ -31,8 +40,8 @@ public class StartUI {
      * @param tracker задаем трекер
      */
     public StartUI(Input input, Tracker tracker) {
-        this.input = input;
-        this.tracker = tracker;
+        StartUI.input = input;
+        StartUI.tracker = tracker;
     }
 
     /**
@@ -40,7 +49,7 @@ public class StartUI {
      *
      * @param isDone значение флага выхода из программы
      */
-    static void setIsDone(boolean isDone) {
+    public static void setIsDone(boolean isDone) {
         StartUI.isDone = isDone;
     }
 
@@ -49,7 +58,7 @@ public class StartUI {
      *
      * @return isDone значение флага выхода из программы
      */
-    static boolean getIsDone() {
+    public static boolean getIsDone() {
         return isDone;
     }
 
@@ -68,13 +77,13 @@ public class StartUI {
     /**
      * Инициализация.
      */
-    static void init() {
+    public static void init() {
         MenuTracker menuTracker = new MenuTracker(input, tracker);
         menuTracker.fillActions();
         isDone = false;
         while (!isDone) {
             menuTracker.show();
-            menuTracker.select(Integer.valueOf(input.ask("Select: ", ranges)));
+            menuTracker.select(input.ask("Select: ", RANGES));
         }
     }
 }

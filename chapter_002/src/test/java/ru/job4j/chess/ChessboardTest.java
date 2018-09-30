@@ -17,7 +17,7 @@ public class ChessboardTest extends TestBase {
      * Правило для проверки исключений.
      */
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public final ExpectedException thrown = ExpectedException.none();
 
     /**
      * Конструктор.
@@ -36,12 +36,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopC1toD2() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c1);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(c1, d2);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterD));
         assertThat(resultNumber, is(number2));
@@ -56,12 +56,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopC1toE3() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c1);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(c1, e3);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterE));
         assertThat(resultNumber, is(number3));
@@ -76,12 +76,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopC8toB7() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c8);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c8);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(c8, b7);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterB));
         assertThat(resultNumber, is(number7));
@@ -96,12 +96,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopC8toD7() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c8);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c8);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(c8, d7);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterD));
         assertThat(resultNumber, is(number7));
@@ -116,8 +116,8 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopFigureNotFound() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c1);
+        chessboard = new Chessboard(chessPieces);
 
         thrown.expect(FigureNotFoundException.class);
         thrown.expectMessage("В начальной ячейке нет фигуры.");
@@ -133,8 +133,8 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopImpossibleMoveException() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Bishop(c1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Bishop(c1);
+        chessboard = new Chessboard(chessPieces);
 
         thrown.expect(ImpossibleMoveException.class);
         thrown.expectMessage(IMPOSSIBLE_MOVE);
@@ -150,10 +150,10 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveBishopOccupiedWayException() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        Chesspiece[] chesspieces = new Chesspiece[2];
-        chesspieces[0] = new Bishop(c1);
-        chesspieces[1] = new Bishop(d2);
-        chessboard = new Chessboard(chesspieces);
+        ChessPiece[] chessPieces = new ChessPiece[2];
+        chessPieces[0] = new Bishop(c1);
+        chessPieces[1] = new Bishop(d2);
+        chessboard = new Chessboard(chessPieces);
 
         thrown.expect(OccupiedWayException.class);
         thrown.expectMessage("Путь занят фигурами.");
@@ -169,12 +169,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMovePawnA2toA3() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Pawn(a2);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Pawn(a2);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(a2, a3);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterA));
         assertThat(resultNumber, is(number3));
@@ -189,12 +189,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMovePawnB2toB4() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Pawn(b2);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Pawn(b2);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(b2, b4);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterB));
         assertThat(resultNumber, is(number4));
@@ -209,8 +209,8 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMovePawnImpossibleMoveException() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Pawn(c2);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Pawn(c2);
+        chessboard = new Chessboard(chessPieces);
 
         thrown.expect(ImpossibleMoveException.class);
         thrown.expectMessage(IMPOSSIBLE_MOVE);
@@ -226,12 +226,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveCastleA1toA8() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Castle(a1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Castle(a1);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(a1, a8);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterA));
         assertThat(resultNumber, is(number8));
@@ -246,12 +246,12 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveCastleA1toH1() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Castle(a1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Castle(a1);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(a1, h1);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(letterH));
         assertThat(resultNumber, is(number1));
@@ -266,8 +266,8 @@ public class ChessboardTest extends TestBase {
      */
     @Test
     public void shouldMoveCastleImpossibleMoveException() throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Castle(a1);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Castle(a1);
+        chessboard = new Chessboard(chessPieces);
 
         thrown.expect(ImpossibleMoveException.class);
         thrown.expectMessage(IMPOSSIBLE_MOVE);

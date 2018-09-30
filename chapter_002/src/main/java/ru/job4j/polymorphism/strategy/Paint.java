@@ -2,6 +2,7 @@ package ru.job4j.polymorphism.strategy;
 
 /**
  * 4. Шаблон проектирования - стратегия
+ *
  * @author imoskovtsev
  */
 public class Paint {
@@ -20,6 +21,7 @@ public class Paint {
 
     /**
      * Нарисовать фигуру.
+     *
      * @param shape фигура
      */
     public void draw(Shape shape) {

@@ -7,10 +7,11 @@ class EditItem extends BaseAction {
 
     /**
      * Конструктор.
-     * @param key Номер пункта меню.
+     *
+     * @param key  Номер пункта меню.
      * @param name Название пунка меню.
      */
-    EditItem(int key, String name) {
+    public EditItem(int key, String name) {
         super(key, name);
     }
 
@@ -37,6 +38,7 @@ class EditItem extends BaseAction {
  * <br>
  * Нужно сделать абстрактный класс BaseAction с конструктором [#23232]<br>
  * 4. Все события наследовать от BaseAction.<br>
+ *
  * @author imoskovtsev
  */
 public class MenuTracker {
@@ -44,15 +46,15 @@ public class MenuTracker {
     /**
      * Система ввода.
      */
-    private Input input;
+    private final Input input;
     /**
      * Трекер задач.
      */
-    private Tracker tracker;
+    private final Tracker tracker;
     /**
      * Пункты меню.
      */
-    private UserAction[] actions = new UserAction[7];
+    private final UserAction[] actions = new UserAction[7];
 
     /**
      * Конструктор.
@@ -69,13 +71,13 @@ public class MenuTracker {
      * Заполняем пункты меню.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem(0, "Add new Item");
-        this.actions[1] = new MenuTracker.ShowAll(1, "Show all items");
-        this.actions[2] = new EditItem(2, "Edit item");
-        this.actions[3] = new MenuTracker.DeleteItem(3, "Delete item");
-        this.actions[4] = new MenuTracker.FindById(4, "Find item by Id");
-        this.actions[5] = new MenuTracker.FindByName(5, "Find item by name");
-        this.actions[6] = new MenuTracker.ExitProgram(6, "Exit Program");
+        this.actions[0] = this.new AddItem(Menu.ADD, "Add new Item");
+        this.actions[1] = new MenuTracker.ShowAll(Menu.SHOW_ALL, "Show all items");
+        this.actions[2] = new EditItem(Menu.EDIT, "Edit item");
+        this.actions[3] = new MenuTracker.DeleteItem(Menu.DELETE, "Delete item");
+        this.actions[4] = new MenuTracker.FindById(Menu.FIND_BY_ID, "Find item by Id");
+        this.actions[5] = new MenuTracker.FindByName(Menu.FIND_BY_NAME, "Find item by name");
+        this.actions[6] = new MenuTracker.ExitProgram(Menu.EXIT, "Exit Program");
     }
 
     /**
@@ -105,10 +107,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        AddItem(int key, String name) {
+        public AddItem(int key, String name) {
             super(key, name);
         }
 
@@ -134,10 +137,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        ShowAll(int key, String name) {
+        public ShowAll(int key, String name) {
             super(key, name);
         }
 
@@ -156,10 +160,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        DeleteItem(int key, String name) {
+        public DeleteItem(int key, String name) {
             super(key, name);
         }
 
@@ -181,10 +186,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        FindById(int key, String name) {
+        public FindById(int key, String name) {
             super(key, name);
         }
 
@@ -201,10 +207,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        FindByName(int key, String name) {
+        public FindByName(int key, String name) {
             super(key, name);
         }
 
@@ -221,10 +228,11 @@ public class MenuTracker {
 
         /**
          * Конструктор.
-         * @param key Номер пункта меню.
+         *
+         * @param key  Номер пункта меню.
          * @param name Название пунка меню.
          */
-        ExitProgram(int key, String name) {
+        public ExitProgram(int key, String name) {
             super(key, name);
         }
 

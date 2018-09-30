@@ -23,18 +23,18 @@ public class QueenTest extends TestBase {
      *
      * @throws ImpossibleMoveException Координата за пределами шахматной доски. Фигура не может туда пойти.
      */
-    QueenTest() throws ImpossibleMoveException {
+    public QueenTest() throws ImpossibleMoveException {
     }
 
     @ParameterizedTest(name = "{index}. Queen {0}->{1}")
     @MethodSource("queenPossibleMoveProvider")
     public void shouldMoveQueenFromTo(ChessboardCell from, ChessboardCell to) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Queen(from);
-        chessboard = new Chessboard(chesspieces);
+        chessPieces[0] = new Queen(from);
+        chessboard = new Chessboard(chessPieces);
 
         chessboard.move(from, to);
-        int resultLetter = chessboard.getChesspieces()[0].getCurrentPosition().getLetter();
-        int resultNumber = chessboard.getChesspieces()[0].getCurrentPosition().getNumber();
+        int resultLetter = chessboard.getChessPieces()[0].getCurrentPosition().getLetter();
+        int resultNumber = chessboard.getChessPieces()[0].getCurrentPosition().getNumber();
 
         assertThat(resultLetter, is(to.getLetter()));
         assertThat(resultNumber, is(to.getNumber()));
@@ -42,17 +42,15 @@ public class QueenTest extends TestBase {
 
     @ParameterizedTest(name = "{index}. Queen {0}->{1}")
     @MethodSource("queenImpossibleMoveProvider")
-    public void shouldNotMoveQueenFromTo(ChessboardCell from, ChessboardCell to) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
-        chesspieces[0] = new Queen(from);
-        chessboard = new Chessboard(chesspieces);
+    public void shouldNotMoveQueenFromTo(ChessboardCell from, ChessboardCell to) {
+        chessPieces[0] = new Queen(from);
+        chessboard = new Chessboard(chessPieces);
 
-        Throwable exception = assertThrows(ImpossibleMoveException.class, () -> {
-            chessboard.move(from, to);
-        });
+        Throwable exception = assertThrows(ImpossibleMoveException.class, () -> chessboard.move(from, to));
         assertEquals("Фигура не может туда пойти.", exception.getMessage());
     }
 
-    static Stream<Arguments> queenPossibleMoveProvider() throws ImpossibleMoveException {
+    public static Stream<Arguments> queenPossibleMoveProvider() throws ImpossibleMoveException {
         TestBase testBase = new TestBase();
         return Stream.of(
                 //https://ru.wikipedia.org/wiki/Ферзь
@@ -86,7 +84,7 @@ public class QueenTest extends TestBase {
         );
     }
 
-    static Stream<Arguments> queenImpossibleMoveProvider() throws ImpossibleMoveException {
+    public static Stream<Arguments> queenImpossibleMoveProvider() throws ImpossibleMoveException {
         TestBase testBase = new TestBase();
         return Stream.of(
                 //https://ru.wikipedia.org/wiki/Ферзь

@@ -1,6 +1,8 @@
 package ru.job4j.calculator;
+
 /**
  * Basic calculator.
+ *
  * @author imoskovtsev
  */
 public class Calculator {
@@ -11,7 +13,8 @@ public class Calculator {
 
     /**
      * adds second to first.
-     * @param first - first value
+     *
+     * @param first  - first value
      * @param second - second value
      */
     public void add(double first, double second) {
@@ -20,7 +23,8 @@ public class Calculator {
 
     /**
      * subtracts second from first.
-     * @param first - first value
+     *
+     * @param first  - first value
      * @param second - second value
      */
     public void subtract(double first, double second) {
@@ -28,17 +32,19 @@ public class Calculator {
     }
 
     /**
-     * devides first by second.
-     * @param first - first value
+     * divides first by second.
+     *
+     * @param first  - first value
      * @param second - second value
      */
-    public void devide(double first, double second) {
+    public void divide(double first, double second) {
         this.result = first / second;
     }
 
     /**
      * multiplies first by second.
-     * @param first - first value
+     *
+     * @param first  - first value
      * @param second - second value
      */
     public void multiply(double first, double second) {
@@ -47,6 +53,7 @@ public class Calculator {
 
     /**
      * Returns calculation result.
+     *
      * @return result
      */
     public double getResult() {

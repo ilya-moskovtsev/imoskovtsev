@@ -5,28 +5,28 @@ package ru.job4j.chess;
  *
  * @author imoskovtsev
  */
-class Chessboard {
+public class Chessboard {
     /**
      * Шахматные фигуры.
      */
-    private Chesspiece[] chesspieces;
+    private final ChessPiece[] chessPieces;
 
     /**
-     * get chesspieces.
+     * get chessPieces.
      *
-     * @return chesspieces
+     * @return chessPieces
      */
-    Chesspiece[] getChesspieces() {
-        return chesspieces;
+    public ChessPiece[] getChessPieces() {
+        return chessPieces;
     }
 
     /**
      * Конструктор.
      *
-     * @param chesspieces фигуры
+     * @param chessPieces фигуры
      */
-    Chessboard(Chesspiece[] chesspieces) {
-        this.chesspieces = chesspieces;
+    public Chessboard(ChessPiece[] chessPieces) {
+        this.chessPieces = chessPieces;
     }
 
     /**
@@ -44,26 +44,26 @@ class Chessboard {
      * @throws ImpossibleMoveException Если фигура не может так двигаться, то выкинуть исключение.
      * @throws OccupiedWayException    Если путь занят фигурами, то выкинуть исключение.
      */
-    void move(ChessboardCell source, ChessboardCell destination) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
+    public void move(ChessboardCell source, ChessboardCell destination) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
 
-        Chesspiece currentChesspiece = null;
-        int currentChesspieceIndex = -1;
+        ChessPiece currentChessPiece = null;
+        int currentChessPieceIndex = -1;
         boolean isFound = false;
-        for (int i = 0; i < chesspieces.length; i++) {
-            if (source.getLetter() == chesspieces[i].getCurrentPosition().getLetter() && source.getNumber() == chesspieces[i].getCurrentPosition().getNumber()) {
+        for (int i = 0; i < chessPieces.length; i++) {
+            if (source.getLetter() == chessPieces[i].getCurrentPosition().getLetter() && source.getNumber() == chessPieces[i].getCurrentPosition().getNumber()) {
                 isFound = true;
-                currentChesspiece = chesspieces[i];
-                currentChesspieceIndex = i;
+                currentChessPiece = chessPieces[i];
+                currentChessPieceIndex = i;
             }
         }
         if (!isFound) {
             throw new FigureNotFoundException("В начальной ячейке нет фигуры.");
         }
 
-        final ChessboardCell[] way = currentChesspiece.way(destination);
+        final ChessboardCell[] way = currentChessPiece.way(destination);
 
         boolean isWayOccupied = false;
-        for (Chesspiece chesspiece : chesspieces) {
+        for (ChessPiece chesspiece : chessPieces) {
             for (ChessboardCell chessboardCell : way) {
                 if (chesspiece.getCurrentPosition().getLetter() == chessboardCell.getLetter()
                         && chesspiece.getCurrentPosition().getNumber() == chessboardCell.getNumber()) {
@@ -76,6 +76,6 @@ class Chessboard {
         }
 
         //Если все отлично. Записать в ячейку новое новое положение Figure figure.clone(Cell dist)
-        chesspieces[currentChesspieceIndex] = chesspieces[currentChesspieceIndex].clone(destination);
+        chessPieces[currentChessPieceIndex] = chessPieces[currentChessPieceIndex].clone(destination);
     }
 }

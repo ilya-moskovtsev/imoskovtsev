@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Проверить 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
 public class DoctorTest {
@@ -56,6 +57,26 @@ public class DoctorTest {
     public void checkPatient() {
         String result = doctor.checkPatient(patient);
         String expected = "Доктор Иван обследует пациента Сергей";
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Check confirmation of doctor's qualification.
+     */
+    @Test
+    public void confirmQualification() {
+        String result = doctor.confirmQualification();
+        String expected = "Доктор Иван подтверждает диплом Медицинский";
+        assertThat(result, is(expected));
+    }
+
+    /**
+     * Check giving contact information to a patient.
+     */
+    @Test
+    public void provideContactInformation() {
+        String result = doctor.provideContactInformation(patient);
+        String expected = "Доктор Иван передоставляет контактную информацию (адрес: Москва, телефон: 495) пациенту Сергей";
         assertThat(result, is(expected));
     }
 

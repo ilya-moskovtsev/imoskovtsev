@@ -1,22 +1,24 @@
 package ru.job4j.tracker;
 
 /**
- *  3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]<br>
- *  Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
+ * 3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]<br>
+ * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
+ *
  * @author imoskovtsev
  */
 public class StubInput implements Input {
     /**
      * Ответы пользователя.
      */
-    private String[] answers;
+    private final String[] answers;
     /**
-     * Cчётчик ответов.
+     * Answers counter.
      */
     private int position;
 
     /**
      * Конструктор.
+     *
      * @param answers задаем ответы пользователя
      */
     public StubInput(String[] answers) {
@@ -25,6 +27,7 @@ public class StubInput implements Input {
 
     /**
      * Задаем пользователю вопрос. Возвращаем ответ пользователя.
+     *
      * @param question вопрос пользователю
      * @return String ответ пользователя
      */

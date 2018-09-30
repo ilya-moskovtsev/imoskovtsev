@@ -2,11 +2,13 @@ package ru.job4j.polymorphism.strategy;
 
 /**
  * 4. Шаблон проектирования - стратегия
+ *
  * @author imoskovtsev
  */
 public class Square implements Shape {
     /**
      * Внешний вид фигуры.
+     *
      * @return String псевдокартинка
      */
     @Override

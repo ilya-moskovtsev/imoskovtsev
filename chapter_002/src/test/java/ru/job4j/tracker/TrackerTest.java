@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Проверить 2. Реализовать класс Tracker
+ *
  * @author imoskovtsev
  */
 public class TrackerTest {
@@ -21,6 +22,7 @@ public class TrackerTest {
      * Заявка.
      */
     private Item item;
+
     /**
      * setUp.
      */
@@ -82,11 +84,13 @@ public class TrackerTest {
     /**
      * Проверить удаление заявок.
      */
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test
     public void delete() {
         tracker.add(item);
         tracker.delete(item);
-        Item resultItem = tracker.getItems()[0];
+        Item[] items = tracker.getItems();
+        Item[] expected = {};
+        assertThat(items, is(expected));
     }
 
     /**

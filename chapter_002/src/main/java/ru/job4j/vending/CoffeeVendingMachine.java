@@ -24,7 +24,7 @@ public class CoffeeVendingMachine {
      * @param price цена кофе
      * @return массив {10, 5} = 15 рублей.
      */
-    int[] giveChange(int value, int price) {
+    public int[] giveChange(int value, int price) {
         // Номиналы монет.
         int one = 1;
         int two = 2;

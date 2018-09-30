@@ -1,27 +1,31 @@
 package ru.job4j.inheritance;
+
 /**
  * 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
-class Project {
+public class Project {
     /**
      * Название проекта.
      */
-    private String name;
+    private final String name;
 
     /**
      * Конструктор.
+     *
      * @param name название проекта
      */
-    Project(String name) {
+    public Project(String name) {
         this.name = name;
     }
 
     /**
      * Возвращает название проекта.
+     *
      * @return название проекта
      */
-    String getName() {
+    public String getName() {
         return this.name;
     }
 }

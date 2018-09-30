@@ -7,12 +7,13 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Tests maximum of two numbers.
+ *
  * @author imoskovtsev
  */
 public class MaxTest {
-	/**
- 	* When One And Two Are Compared Then Max Is Two.
- 	*/
+    /**
+     * When One And Two Are Compared Then Max Is Two.
+     */
     @Test
     public void whenOneAndTwoAreComparedThenMaxIsTwo() {
         Max max = new Max();
@@ -20,9 +21,10 @@ public class MaxTest {
         int expected = 2;
         assertThat(result, is(expected));
     }
+
     /**
- 	* When One And Two And Three Are Compared Then Max Is Three.
- 	*/
+     * When One And Two And Three Are Compared Then Max Is Three.
+     */
     @Test
     public void whenOneAndTwoAndThreeAreComparedThenMaxIsThree() {
         Max max = new Max();

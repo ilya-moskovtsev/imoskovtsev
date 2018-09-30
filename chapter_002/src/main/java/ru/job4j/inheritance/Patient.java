@@ -1,9 +1,11 @@
 package ru.job4j.inheritance;
+
 /**
  * 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
-class Patient extends Profession {
+public class Patient extends Profession {
     /**
      * Конструктор.
      *
@@ -12,7 +14,7 @@ class Patient extends Profession {
      * @param address     адрес
      * @param phoneNumber номер телефона
      */
-    Patient(String diploma, String name, String address, String phoneNumber) {
+    public Patient(String diploma, String name, String address, String phoneNumber) {
         super(diploma, name, address, phoneNumber);
     }
 }

@@ -5,7 +5,7 @@ package ru.job4j.chess;
  *
  * @author imoskovtsev
  */
-class ChessboardCell {
+public class ChessboardCell {
     /**
      * Буква.
      */
@@ -40,7 +40,7 @@ class ChessboardCell {
      * @param number цифра
      * @throws ImpossibleMoveException Координата за пределами шахматной доски
      */
-    ChessboardCell(int letter, int number) throws ImpossibleMoveException {
+    public ChessboardCell(int letter, int number) throws ImpossibleMoveException {
         if (number > 7 || letter > 7) {
             throw new ImpossibleMoveException("Координата за пределами шахматной доски");
         }
@@ -53,10 +53,8 @@ class ChessboardCell {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(getLetterByInt(letter))
-                .append(getNumberByInt(number))
-                .toString();
+        return String.valueOf(getLetterByInt(letter))
+                + getNumberByInt(number);
     }
 
     private char getLetterByInt(int i) {

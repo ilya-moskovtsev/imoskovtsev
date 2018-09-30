@@ -1,27 +1,31 @@
 package ru.job4j.inheritance;
+
 /**
  * 1. Реализация профессий в коде
+ *
  * @author imoskovtsev
  */
-class MyData {
+public class MyData {
     /**
      * Тип данных.
      */
-    private String type;
+    private final String type;
 
     /**
      * Конструктор.
+     *
      * @param type тип данных
      */
-    MyData(String type) {
+    public MyData(String type) {
         this.type = type;
     }
 
     /**
      * Возвращает тип данных.
+     *
      * @return тип данных
      */
-    String getType() {
+    public String getType() {
         return this.type;
     }
 }

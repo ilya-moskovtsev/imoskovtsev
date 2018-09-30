@@ -5,13 +5,13 @@ package ru.job4j.chess;
  *
  * @author imoskovtsev
  */
-class Queen extends Chesspiece {
+public class Queen extends ChessPiece {
     /**
      * Конструктор.
      *
      * @param currentPosition клетка фигуры на доске
      */
-    Queen(ChessboardCell currentPosition) {
+    public Queen(ChessboardCell currentPosition) {
         super(currentPosition);
     }
 
@@ -23,46 +23,19 @@ class Queen extends Chesspiece {
      * @throws ImpossibleMoveException Если фигура туда пойти не может. выбросить исключение ImpossibleMoveException
      */
     @Override
-    ChessboardCell[] way(ChessboardCell destination) throws ImpossibleMoveException {
-        final int currentNumber = this.getCurrentPosition().getNumber();
-        final int currentLetter = this.getCurrentPosition().getLetter();
-        final int destinationNumber = destination.getNumber();
-        final int destinationLetter = destination.getLetter();
-
-        final int numbersDirection = destinationNumber - currentNumber > 0 ? 1 : -1;
-        final int lettersDirection = destinationLetter - currentLetter > 0 ? 1 : -1;
-
-        final int numbersSteps = Math.abs(destinationNumber - currentNumber);
-        final int lettersSteps = Math.abs(destinationLetter - currentLetter);
+    public ChessboardCell[] way(ChessboardCell destination) throws ImpossibleMoveException {
         ChessboardCell[] way;
-
-        if (numbersSteps == lettersSteps) {
-            //двежение по диагонали
-            way = new ChessboardCell[numbersSteps];
-            for (int i = 1; i <= numbersSteps; i++) {
-                way[i - 1] = new ChessboardCell(currentLetter + i * lettersDirection, currentNumber + i * numbersDirection);
-            }
-        } else if (numbersSteps == 0) {
-            //движение по горизонтали
-            way = new ChessboardCell[lettersSteps];
-            for (int i = 1; i <= lettersSteps; i++) {
-                way[i - 1] = new ChessboardCell(currentLetter + i * lettersDirection, currentNumber);
-            }
-        } else if (lettersSteps == 0) {
-            //движение по вертикали
-            way = new ChessboardCell[numbersSteps];
-            for (int i = 1; i <= numbersSteps; i++) {
-                way[i - 1] = new ChessboardCell(currentLetter, currentNumber + i * numbersDirection);
-            }
+        if (verticalStepsTo(destination) == horizontalStepsTo(destination)) {
+            //diagonal movement
+            way = diagonalWayTo(destination);
         } else {
-            throw new ImpossibleMoveException(IMPOSSIBLE_MOVE);
+            way = castleWay(destination);
         }
-
         return way;
     }
 
     @Override
-    Chesspiece clone(ChessboardCell destination) {
+    public ChessPiece clone(ChessboardCell destination) {
         return new Queen(destination);
     }
 }

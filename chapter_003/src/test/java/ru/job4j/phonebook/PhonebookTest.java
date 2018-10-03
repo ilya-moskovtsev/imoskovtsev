@@ -1,13 +1,13 @@
 package ru.job4j.phonebook;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-class PhonebookTest {
+public class PhonebookTest {
     @Test
     public void whenNameContainsQueryShouldFindPerson() {
         Phonebook phonebook = new Phonebook();

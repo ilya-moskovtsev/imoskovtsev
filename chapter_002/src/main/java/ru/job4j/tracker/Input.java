@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * 3. Используя класс StubInput написать тесты проверяющие поведение пользователя [#14650]<br>
  * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
@@ -23,5 +25,5 @@ public interface Input {
      * @param range    диапазон ответов
      * @return int ответ пользователя
      */
-    int ask(String question, int[] range);
+    int ask(String question, List<Integer> range);
 }

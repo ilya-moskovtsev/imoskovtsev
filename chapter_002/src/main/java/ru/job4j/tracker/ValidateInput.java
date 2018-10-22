@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
  * 3. Создать класс ValidateInput, наследующий ConsoleInput.<br>
@@ -16,7 +18,7 @@ package ru.job4j.tracker;
  */
 public class ValidateInput extends ConsoleInput {
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         boolean isValid = false;
         int value = -1;
         do {

@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 2. Реализовать класс Tracker
@@ -11,28 +12,21 @@ public class Tracker {
     /**
      * Класс трекер - это обертка над массивом заявок.
      */
-    private Item[] items;
-    /**
-     * Счетчик заявок.
-     */
-    private int itemCounter;
+    private List<Item> items;
 
     /**
      * Конструктор.
-     *
-     * @param numberOfItems количество заявок
      */
-    public Tracker(int numberOfItems) {
-        this.items = new Item[numberOfItems];
-        itemCounter = 0;
+    public Tracker() {
+        items = new ArrayList<>();
     }
 
     /**
      * Возвращает items.
      *
-     * @return Item[]
+     * @return items
      */
-    public Item[] getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
@@ -42,7 +36,7 @@ public class Tracker {
      * @return int
      */
     public int getItemCounter() {
-        return itemCounter;
+        return items.size();
     }
 
     /**
@@ -51,10 +45,7 @@ public class Tracker {
      * @param item заявка
      */
     public void add(Item item) {
-        if (itemCounter < items.length) {
-            items[itemCounter] = item;
-            itemCounter++;
-        }
+        items.add(item);
     }
 
     /**
@@ -81,34 +72,16 @@ public class Tracker {
      * @param item заявка
      */
     public void delete(Item item) {
-        Item[] resultArray = new Item[items.length];
-        int resultArrayIndex = 0;
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && !items[i].getId().equals(item.getId())) {
-                System.arraycopy(items, i, resultArray, resultArrayIndex, 1);
-                resultArrayIndex++;
-            } else {
-                itemCounter--;
-            }
-        }
-        this.items = Arrays.copyOf(resultArray, resultArrayIndex);
+        items.remove(item);
     }
 
     /**
      * получение списка всех не null заявок.
      *
-     * @return Item[]
+     * @return items
      */
-    public Item[] findAll() {
-        Item[] resultArray = new Item[items.length];
-        int resultArrayIndex = 0;
-        for (Item item : items) {
-            if (item != null) {
-                resultArray[resultArrayIndex] = item;
-                resultArrayIndex++;
-            }
-        }
-        return Arrays.copyOf(resultArray, resultArrayIndex);
+    public List<Item> findAll() {
+        return items;
     }
 
     /**

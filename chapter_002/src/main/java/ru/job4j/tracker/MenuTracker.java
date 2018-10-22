@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Edit item.
  */
@@ -54,7 +57,7 @@ public class MenuTracker {
     /**
      * Пункты меню.
      */
-    private final UserAction[] actions = new UserAction[7];
+    private final List<UserAction> actions = new ArrayList<>();
 
     /**
      * Конструктор.
@@ -71,13 +74,13 @@ public class MenuTracker {
      * Заполняем пункты меню.
      */
     public void fillActions() {
-        this.actions[0] = this.new AddItem(Menu.ADD, "Add new Item");
-        this.actions[1] = new MenuTracker.ShowAll(Menu.SHOW_ALL, "Show all items");
-        this.actions[2] = new EditItem(Menu.EDIT, "Edit item");
-        this.actions[3] = new MenuTracker.DeleteItem(Menu.DELETE, "Delete item");
-        this.actions[4] = new MenuTracker.FindById(Menu.FIND_BY_ID, "Find item by Id");
-        this.actions[5] = new MenuTracker.FindByName(Menu.FIND_BY_NAME, "Find item by name");
-        this.actions[6] = new MenuTracker.ExitProgram(Menu.EXIT, "Exit Program");
+        actions.add(new AddItem(Menu.ADD, "Add new Item"));
+        actions.add(new MenuTracker.ShowAll(Menu.SHOW_ALL, "Show all items"));
+        actions.add(new EditItem(Menu.EDIT, "Edit item"));
+        actions.add(new MenuTracker.DeleteItem(Menu.DELETE, "Delete item"));
+        actions.add(new MenuTracker.FindById(Menu.FIND_BY_ID, "Find item by Id"));
+        actions.add(new MenuTracker.FindByName(Menu.FIND_BY_NAME, "Find item by name"));
+        actions.add(new MenuTracker.ExitProgram(Menu.EXIT, "Exit Program"));
     }
 
     /**
@@ -86,14 +89,14 @@ public class MenuTracker {
      * @param key пункт меню
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        actions.get(key).execute(input, tracker);
     }
 
     /**
      * Отрисовка пунктов меню.
      */
     public void show() {
-        for (UserAction action : this.actions) {
+        for (UserAction action : actions) {
             if (action != null) {
                 System.out.println(action.info());
             }

@@ -3,7 +3,10 @@ package ru.job4j.tracker;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -28,7 +31,7 @@ public class TrackerTest {
      */
     @Before
     public void setUp() {
-        tracker = new Tracker(10);
+        tracker = new Tracker();
         item = new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime());
     }
 
@@ -42,11 +45,11 @@ public class TrackerTest {
         int expectedItemCounter = 1;
         assertThat(resultItemCounter, is(expectedItemCounter));
 
-        String resultId = tracker.getItems()[expectedItemCounter - 1].getId();
+        String resultId = tracker.getItems().get(expectedItemCounter - 1).getId();
         String expectedId = "id1";
         assertThat(resultId, is(expectedId));
 
-        String resultKey = tracker.getItems()[expectedItemCounter - 1].getKey();
+        String resultKey = tracker.getItems().get(expectedItemCounter - 1).getKey();
         String expectedKey = "key1";
         assertThat(resultKey, is(expectedKey));
     }
@@ -62,22 +65,22 @@ public class TrackerTest {
         Item updateItem = new Item("id1", "updatedKey", "updatedName", "updatedDesc", updatedCreateDate, updatedUpdateDate);
         tracker.update(updateItem);
 
-        String resultKey = tracker.getItems()[0].getKey();
+        String resultKey = tracker.getItems().get(0).getKey();
         String expectedKey = "updatedKey";
         assertThat(resultKey, is(expectedKey));
 
-        String resultName = tracker.getItems()[0].getName();
+        String resultName = tracker.getItems().get(0).getName();
         String expectedName = "updatedName";
         assertThat(resultName, is(expectedName));
 
-        String resultDesc = tracker.getItems()[0].getDesc();
+        String resultDesc = tracker.getItems().get(0).getDesc();
         String expectedDesc = "updatedDesc";
         assertThat(resultDesc, is(expectedDesc));
 
-        long resultCreateDate = tracker.getItems()[0].getCreateDate();
+        long resultCreateDate = tracker.getItems().get(0).getCreateDate();
         assertThat(resultCreateDate, is(updatedCreateDate));
 
-        long resultUpdateDate = tracker.getItems()[0].getUpdateDate();
+        long resultUpdateDate = tracker.getItems().get(0).getUpdateDate();
         assertThat(resultUpdateDate, is(updatedUpdateDate));
     }
 
@@ -88,8 +91,8 @@ public class TrackerTest {
     public void delete() {
         tracker.add(item);
         tracker.delete(item);
-        Item[] items = tracker.getItems();
-        Item[] expected = {};
+        List<Item> items = tracker.getItems();
+        List<Item> expected = new ArrayList<>();
         assertThat(items, is(expected));
     }
 
@@ -100,15 +103,15 @@ public class TrackerTest {
     public void findAll() {
         tracker.add(item);
 
-        int resultLength = tracker.findAll().length;
+        int resultLength = tracker.findAll().size();
         int expectedLength = 1;
         assertThat(resultLength, is(expectedLength));
 
-        String resultId = tracker.findAll()[expectedLength - 1].getId();
+        String resultId = tracker.findAll().get(expectedLength - 1).getId();
         String expectedId = "id1";
         assertThat(resultId, is(expectedId));
 
-        String resultKey = tracker.findAll()[expectedLength - 1].getKey();
+        String resultKey = tracker.findAll().get(expectedLength - 1).getKey();
         String expectedKey = "key1";
         assertThat(resultKey, is(expectedKey));
     }

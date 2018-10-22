@@ -1,5 +1,9 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения<br>
  * Обеспечить бесперебойную работу приложения Tracker.[#20170]<br>
@@ -10,7 +14,7 @@ public class StartUI {
     /**
      * допустимый диапазон ответов.
      */
-    private static final int[] RANGES = new int[]{
+    private static final List<Integer> RANGES = Arrays.asList(
             Menu.ADD,
             Menu.SHOW_ALL,
             Menu.EDIT,
@@ -18,7 +22,8 @@ public class StartUI {
             Menu.FIND_BY_ID,
             Menu.FIND_BY_NAME,
             Menu.EXIT
-    };
+    );
+
     /**
      * выбранный ввод.
      */
@@ -69,7 +74,7 @@ public class StartUI {
      */
     public static void main(String[] args) {
         Input input = new ValidateInput();
-        Tracker tracker = new Tracker(10);
+        Tracker tracker = new Tracker();
         new StartUI(input, tracker);
         init();
     }

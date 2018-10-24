@@ -1,5 +1,5 @@
 /**
- * Sort users by age.
+ * Sort users.
  *
  * @author imoskovtsev
  * @version $Id$

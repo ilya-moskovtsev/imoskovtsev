@@ -29,4 +29,42 @@ public class SortUserTest {
         Set<User> result = new SortUser().sort(input);
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void sortByNameLength() {
+        List<User> input = Arrays.asList(
+                new User("ab", 21),
+                new User("abcd", 21),
+                new User("abc", 21),
+                new User("a", 21)
+        );
+        List<User> expected = Arrays.asList(
+                new User("a", 21),
+                new User("ab", 21),
+                new User("abc", 21),
+                new User("abcd", 21)
+        );
+
+        List<User> result = new SortUser().sortByNameLength(input);
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void sortByAllFields() {
+        List<User> input = Arrays.asList(
+                new User("xyz", 25),
+                new User("abc", 30),
+                new User("xyz", 20),
+                new User("abc", 25)
+        );
+        List<User> expected = Arrays.asList(
+                new User("abc", 25),
+                new User("abc", 30),
+                new User("xyz", 20),
+                new User("xyz", 25)
+        );
+
+        List<User> result = new SortUser().sortByAllFields(input);
+        assertThat(result, is(expected));
+    }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 public class SortedDepartments {
 
@@ -11,9 +12,7 @@ public class SortedDepartments {
 
     public void addDepartment(String departmentName) {
         List<String> subdivisions = Arrays.asList(departmentName.split("\\\\"));
-        for (int i = 0; i < subdivisions.size(); i++) {
-            this.departmentNames.add(String.join("\\", subdivisions.subList(0, i + 1)));
-        }
+        IntStream.range(0, subdivisions.size()).forEach(i -> this.departmentNames.add(String.join("\\", subdivisions.subList(0, i + 1))));
     }
 
     public List<Department> getAscendingDepartments() {

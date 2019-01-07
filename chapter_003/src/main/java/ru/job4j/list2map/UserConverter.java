@@ -7,9 +7,8 @@ import java.util.HashMap;
 public class UserConverter {
     public Map<Integer, User> process(List<User> list) {
         Map<Integer, User> users = new HashMap<>();
-        for (User user : list) {
-            users.put(user.getId(), user);
-        }
+        list.forEach(user -> users.put(user.getId(), user));
+
         return users;
     }
 }

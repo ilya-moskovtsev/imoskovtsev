@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 /**
  * Нужно сделать абстрактный класс BaseAction с конструктором [#23232]<br>
  * 1. Реализовать абстрактный класс BaseAction, наследующий интерфейс UserAction.<br>
@@ -32,7 +34,7 @@ public abstract class BaseAction implements UserAction {
     }
 
     @Override
-    public abstract void execute(Input input, Tracker tracker);
+    public abstract void execute(Input input, Tracker tracker, Consumer<String> output);
 
     @Override
     public String info() {

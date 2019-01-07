@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Edit item.
@@ -19,7 +20,7 @@ class EditItem extends BaseAction {
     }
 
     @Override
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, Tracker tracker, Consumer<String> output) {
         tracker.update(
                 new Item(
                         input.ask("Please, enter the task's id: "),
@@ -54,6 +55,7 @@ public class MenuTracker {
      * Трекер задач.
      */
     private final Tracker tracker;
+    private final Consumer<String> output;
     /**
      * Пункты меню.
      */
@@ -64,10 +66,12 @@ public class MenuTracker {
      *
      * @param input   система ввода
      * @param tracker трекер задач
+     * @param output
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -89,7 +93,7 @@ public class MenuTracker {
      * @param key пункт меню
      */
     public void select(int key) {
-        actions.get(key).execute(input, tracker);
+        actions.get(key).execute(input, tracker, output);
     }
 
     /**
@@ -98,7 +102,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : actions) {
             if (action != null) {
-                System.out.println(action.info());
+                output.accept(action.info());
             }
         }
     }
@@ -119,7 +123,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             tracker.add(
                     new Item(
                             input.ask("Please, enter the task's id: "),
@@ -149,9 +153,9 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             for (Item item : tracker.findAll()) {
-                System.out.printf("id заявки: %1$s, имя заявки: %2$s%3$s", item.getId(), item.getKey(), System.lineSeparator());
+                output.accept(String.format("id заявки: %1$s, имя заявки: %2$s%3$s", item.getId(), item.getKey(), System.lineSeparator()));
             }
         }
     }
@@ -172,7 +176,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             tracker.delete(
                     new Item(
                             input.ask("id заявки: "),
@@ -198,7 +202,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             tracker.findById(input.ask("id заявки: "));
         }
     }
@@ -219,7 +223,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             tracker.findByName(input.ask("имя заявки: "));
         }
     }
@@ -240,7 +244,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, Tracker tracker, Consumer<String> output) {
             StartUI.setIsDone(true);
         }
     }

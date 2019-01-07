@@ -1,8 +1,8 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 1. Используя класс ConsoleInput в классе StartUI обеспечить полноценную работу всего приложения<br>
@@ -32,6 +32,7 @@ public class StartUI {
      * выбранный трекер.
      */
     private static Tracker tracker;
+    private static Consumer<String> output;
 
     /**
      * Флаг выхода из программы.
@@ -43,10 +44,12 @@ public class StartUI {
      *
      * @param input   задаем ввод
      * @param tracker задаем трекер
+     * @param output  задаем вывод
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
         StartUI.input = input;
         StartUI.tracker = tracker;
+        StartUI.output = output;
     }
 
     /**
@@ -75,7 +78,7 @@ public class StartUI {
     public static void main(String[] args) {
         Input input = new ValidateInput();
         Tracker tracker = new Tracker();
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, System.out::println);
         init();
     }
 
@@ -83,7 +86,7 @@ public class StartUI {
      * Инициализация.
      */
     public static void init() {
-        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        MenuTracker menuTracker = new MenuTracker(input, tracker, output);
         menuTracker.fillActions();
         isDone = false;
         while (!isDone) {

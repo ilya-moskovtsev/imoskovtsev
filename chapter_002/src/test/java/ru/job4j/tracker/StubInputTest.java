@@ -2,7 +2,14 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -13,6 +20,17 @@ import static org.junit.Assert.assertThat;
  * @author imoskovtsev
  */
 public class StubInputTest {
+
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
+
     /**
      * Тест на пункт меню "0. Add new Item".
      */
@@ -26,7 +44,7 @@ public class StubInputTest {
                 "test name",
                 "test description",
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         Item item = tracker.findAll().get(0);
@@ -47,7 +65,7 @@ public class StubInputTest {
         Input input = new StubInput(Arrays.asList(
                 String.valueOf(Menu.SHOW_ALL),
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         List<Item> items = tracker.findAll();
@@ -69,7 +87,7 @@ public class StubInputTest {
                 "updatedName",
                 "updatedDesc",
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         Item item = tracker.findAll().get(0);
@@ -90,7 +108,7 @@ public class StubInputTest {
                 String.valueOf(Menu.DELETE),
                 "id",
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         List<Item> allItems = tracker.findAll();
@@ -110,7 +128,7 @@ public class StubInputTest {
                 String.valueOf(Menu.FIND_BY_ID),
                 "id2",
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         Item item = tracker.findById("id2");
@@ -129,7 +147,7 @@ public class StubInputTest {
                 String.valueOf(Menu.FIND_BY_NAME),
                 "name2",
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         Item item = tracker.findByName("key2");
@@ -145,7 +163,7 @@ public class StubInputTest {
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Collections.singletonList(
                 String.valueOf(Menu.EXIT)));
-        new StartUI(input, tracker);
+        new StartUI(input, tracker, output);
         StartUI.init();
 
         assertThat(StartUI.getIsDone(), is(true));

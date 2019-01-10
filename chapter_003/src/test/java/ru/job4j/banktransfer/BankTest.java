@@ -2,7 +2,12 @@ package ru.job4j.banktransfer;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -14,12 +19,13 @@ public class BankTest {
         final Map<User, List<Account>> expected = new HashMap<>();
         expected.put(new User("name1", "100"), new ArrayList<>());
         expected.put(new User("name2", "200"), new ArrayList<>());
+        expected.put(new User("name3", "300"), new ArrayList<>());
 
 
         final Bank bank = new Bank();
         bank.addUser(new User("name1", "100"));
         bank.addUser(new User("name2", "200"));
-        bank.addUser(new User("name3", "100"));
+        bank.addUser(new User("name3", "300"));
         final Map<User, List<Account>> result = bank.getMap();
 
         assertThat(result, is(expected));

@@ -11,6 +11,14 @@ public class User {
         this.passport = passport;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -20,11 +28,12 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(passport, user.passport);
+        return Objects.equals(name, user.name)
+                && Objects.equals(passport, user.passport);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(passport);
+        return Objects.hash(name, passport);
     }
 }

@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 2. Реализовать класс Tracker
@@ -54,16 +55,10 @@ public class Tracker {
      * @param item заявка
      */
     public void update(Item item) {
-        for (Item i : items) {
-            if (i.getId().equals(item.getId())) {
-                i.setKey(item.getKey());
-                i.setName(item.getName());
-                i.setDesc(item.getDesc());
-                i.setCreateDate(item.getCreateDate());
-                i.setUpdateDate(item.getUpdateDate());
-                break;
-            }
-        }
+        items.set(
+                items.indexOf(item),
+                item
+        );
     }
 
     /**
@@ -88,17 +83,10 @@ public class Tracker {
      * получение списка по имени.
      *
      * @param key имя
-     * @return Item
+     * @return Items
      */
-    public Item findByName(String key) {
-        Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getKey().equals(key)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+    public List<Item> findByName(String key) {
+        return items.stream().filter(item -> item != null && item.getKey().equals(key)).collect(Collectors.toList());
     }
 
     /**
@@ -108,13 +96,6 @@ public class Tracker {
      * @return Item
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item item : items) {
-            if (item != null && item.getId().equals(id)) {
-                result = item;
-                break;
-            }
-        }
-        return result;
+        return items.stream().filter(item -> item != null && item.getId().equals(id)).findFirst().get();
     }
 }

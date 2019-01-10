@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, List<Account>> map = new HashMap<>();
@@ -33,7 +32,7 @@ public class Bank {
     }
 
     public List<Account> getUserAccounts(String passport) {
-        return map.entrySet().stream().filter(entry -> passport.equals(entry.getKey().getPassport())).collect(Collectors.toList()).get(0).getValue();
+        return map.entrySet().stream().filter(entry -> passport.equals(entry.getKey().getPassport())).findFirst().get().getValue();
     }
 
     public Account getUserAccount(String passport, String requisite) {

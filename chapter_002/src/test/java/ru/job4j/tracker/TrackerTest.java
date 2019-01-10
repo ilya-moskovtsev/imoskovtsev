@@ -3,7 +3,6 @@ package ru.job4j.tracker;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,13 +122,10 @@ public class TrackerTest {
     public void findByName() {
         tracker.add(item);
 
-        String resultId = tracker.findByName("key1").getId();
-        String expectedId = "id1";
-        assertThat(resultId, is(expectedId));
+        Item resultItem = tracker.findByName("key1").get(0);
 
-        String resultKey = tracker.findByName("key1").getKey();
-        String expectedKey = "key1";
-        assertThat(resultKey, is(expectedKey));
+        assertThat(resultItem.getId(), is("id1"));
+        assertThat(resultItem.getKey(), is("key1"));
     }
 
     /**
@@ -147,5 +143,4 @@ public class TrackerTest {
         String expectedKey = "key1";
         assertThat(resultKey, is(expectedKey));
     }
-
 }

@@ -145,12 +145,12 @@ public class StubInputTest {
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
                 String.valueOf(Menu.FIND_BY_NAME),
-                "name2",
+                "key2",
                 String.valueOf(Menu.EXIT)));
         new StartUI(input, tracker, output);
         StartUI.init();
 
-        Item item = tracker.findByName("key2");
+        Item item = tracker.findByName("key2").get(0);
         assertThat(item.getId(), is("id2"));
     }
 

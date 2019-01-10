@@ -115,45 +115,55 @@ public class Item {
      * Устанавливает key.
      *
      * @param key имя заявки.
+     * @return this item
      */
-    public void setKey(String key) {
+    public Item setKey(String key) {
         this.key = key;
+        return this;
     }
 
     /**
      * Устанавливает name.
      *
      * @param name имя ответственного
+     * @return this item
      */
-    public void setName(String name) {
+    public Item setName(String name) {
         this.name = name;
+        return this;
     }
 
     /**
      * Устанавливает desc.
      *
      * @param desc описание заявки
+     * @return this item
      */
-    public void setDesc(String desc) {
+    public Item setDesc(String desc) {
         this.desc = desc;
+        return this;
     }
 
     /**
      * Устанавливает createDate.
      *
      * @param createDate дата создания
+     * @return this item
      */
-    public void setCreateDate(long createDate) {
+    public Item setCreateDate(long createDate) {
         this.createDate = createDate;
+        return this;
     }
 
     /**
      * Устанавливает updateDate.
      *
      * @param updateDate дата обновления
+     * @return this item
      */
-    public void setUpdateDate(long updateDate) {
+    public Item setUpdateDate(long updateDate) {
         this.updateDate = updateDate;
+        return this;
     }
 
     @Override

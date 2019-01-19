@@ -1,5 +1,7 @@
 package ru.job4j.chess;
 
+import java.util.Arrays;
+
 /**
  * Шахматная доска.
  *
@@ -46,19 +48,9 @@ public class Chessboard {
      */
     public void move(ChessboardCell source, ChessboardCell destination) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
 
-        ChessPiece currentChessPiece = null;
-        int currentChessPieceIndex = -1;
-        boolean isFound = false;
-        for (int i = 0; i < chessPieces.length; i++) {
-            if (source.getLetter() == chessPieces[i].getCurrentPosition().getLetter() && source.getNumber() == chessPieces[i].getCurrentPosition().getNumber()) {
-                isFound = true;
-                currentChessPiece = chessPieces[i];
-                currentChessPieceIndex = i;
-            }
-        }
-        if (!isFound) {
-            throw new FigureNotFoundException("В начальной ячейке нет фигуры.");
-        }
+        ChessPiece currentChessPiece = Arrays.stream(chessPieces)
+                .filter(chessPiece -> source.getLetter() == chessPiece.getCurrentPosition().getLetter() && source.getNumber() == chessPiece.getCurrentPosition().getNumber())
+                .findFirst().orElseThrow(FigureNotFoundException::new);
 
         final ChessboardCell[] way = currentChessPiece.way(destination);
 
@@ -76,6 +68,6 @@ public class Chessboard {
         }
 
         //Если все отлично. Записать в ячейку новое новое положение Figure figure.clone(Cell dist)
-        chessPieces[currentChessPieceIndex] = chessPieces[currentChessPieceIndex].clone(destination);
+        chessPieces[Arrays.asList(chessPieces).indexOf(currentChessPiece)] = currentChessPiece.clone(destination);
     }
 }

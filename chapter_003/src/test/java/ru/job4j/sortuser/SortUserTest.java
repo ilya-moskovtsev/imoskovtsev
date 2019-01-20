@@ -15,16 +15,16 @@ public class SortUserTest {
 
     @Test
     public void sort() {
-        List<User> input = new ArrayList<>(Arrays.asList(
+        List<User> input = List.of(
                 new User("name1", 40),
                 new User("name2", 30),
                 new User("name3", 50)
-        ));
-        Set<User> expected = new TreeSet<>(Arrays.asList(
+        );
+        Set<User> expected = Set.of(
                 new User("name2", 30),
                 new User("name1", 40),
                 new User("name3", 50)
-        ));
+        );
 
         Set<User> result = new SortUser().sort(input);
         assertThat(result, is(expected));
@@ -38,7 +38,7 @@ public class SortUserTest {
                 new User("abc", 21),
                 new User("a", 21)
         );
-        List<User> expected = Arrays.asList(
+        List<User> expected = List.of(
                 new User("a", 21),
                 new User("ab", 21),
                 new User("abc", 21),
@@ -57,7 +57,7 @@ public class SortUserTest {
                 new User("xyz", 20),
                 new User("abc", 25)
         );
-        List<User> expected = Arrays.asList(
+        List<User> expected = List.of(
                 new User("abc", 25),
                 new User("abc", 30),
                 new User("xyz", 20),

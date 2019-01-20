@@ -3,9 +3,6 @@ package ru.job4j.banktransfer;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +13,11 @@ public class BankTest {
 
     @Test
     public void addUser() {
-        final Map<User, List<Account>> expected = new HashMap<>();
-        expected.put(new User("name1", "100"), new ArrayList<>());
-        expected.put(new User("name2", "200"), new ArrayList<>());
-        expected.put(new User("name3", "300"), new ArrayList<>());
+        final Map<User, List<Account>> expected = Map.of(
+                new User("name1", "100"), new ArrayList<>(),
+                new User("name2", "200"), new ArrayList<>(),
+                new User("name3", "300"), new ArrayList<>()
+        );
 
 
         final Bank bank = new Bank();
@@ -33,8 +31,9 @@ public class BankTest {
 
     @Test
     public void deleteUser() {
-        final Map<User, List<Account>> expected = new HashMap<>();
-        expected.put(new User("name1", "100"), new ArrayList<>());
+        final Map<User, List<Account>> expected = Map.of(
+                new User("name1", "100"), new ArrayList<>()
+        );
 
         final Bank bank = new Bank();
         bank.addUser(new User("name1", "100"));
@@ -47,10 +46,9 @@ public class BankTest {
 
     @Test
     public void addAccountToUser() {
-        final Map<User, List<Account>> expected = new HashMap<>();
-        expected.put(
-                new User("name1", "100"),
-                Collections.singletonList(new Account(10000d, "1001")));
+        final Map<User, List<Account>> expected = Map.of(
+                new User("name1", "100"), List.of(new Account(10000d, "1001"))
+        );
 
         final Bank bank = new Bank();
         bank.addUser(new User("name1", "100"));
@@ -62,11 +60,10 @@ public class BankTest {
 
     @Test
     public void deleteAccountFromUser() {
-        final Map<User, List<Account>> expected = new HashMap<>();
-        expected.put(
+        final Map<User, List<Account>> expected = Map.of(
                 new User("name1", "100"),
-                Collections.singletonList(new Account(10000d, "1002")));
-
+                List.of(new Account(10000d, "1002"))
+        );
 
         final Bank bank = new Bank();
         bank.addUser(new User("name1", "100"));
@@ -80,7 +77,7 @@ public class BankTest {
 
     @Test
     public void getUserAccounts() {
-        final List<Account> expected = Arrays.asList(
+        final List<Account> expected = List.of(
                 new Account(10000d, "1001"),
                 new Account(10000d, "1002")
         );
@@ -120,7 +117,7 @@ public class BankTest {
 
         final List<Account> accounts2 = bank.getUserAccounts("200");
         final int index2 = accounts2.indexOf(new Account(0d, "1002"));
-        final Account account2 = accounts2.get(index);
+        final Account account2 = accounts2.get(index2);
 
         assertThat(account2.getValue(), is(10500d));
 

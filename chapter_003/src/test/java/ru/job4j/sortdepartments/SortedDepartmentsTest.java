@@ -14,7 +14,7 @@ public class SortedDepartmentsTest {
     public void getAscendingDepartments() {
         SortedDepartments sortedDepartments = new SortedDepartments();
 
-        List<String> input = Arrays.asList(
+        List<String> input = List.of(
                 "K1\\SK1",
                 "K1\\SK2",
                 "K1\\SK1\\SSK1",
@@ -24,7 +24,7 @@ public class SortedDepartmentsTest {
                 "K2\\SK1\\SSK2"
         );
 
-        List<Department> expected = Arrays.asList(
+        List<Department> expected = List.of(
                 new Department("K1"),
                 new Department("K1\\SK1"),
                 new Department("K1\\SK1\\SSK1"),
@@ -47,7 +47,7 @@ public class SortedDepartmentsTest {
     public void getDescendingDepartments() {
         SortedDepartments sortedDepartments = new SortedDepartments();
 
-        List<String> input = Arrays.asList(
+        List<String> input = List.of(
                 "K1\\SK1",
                 "K1\\SK2",
                 "K1\\SK1\\SSK1",
@@ -57,7 +57,7 @@ public class SortedDepartmentsTest {
                 "K2\\SK1\\SSK2"
         );
 
-        List<Department> expected = Arrays.asList(
+        List<Department> expected = List.of(
                 new Department("K2"),
                 new Department("K2\\SK1"),
                 new Department("K2\\SK1\\SSK2"),

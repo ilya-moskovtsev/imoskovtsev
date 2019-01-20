@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -16,7 +17,7 @@ public class PriorityQueueTest {
 
     @Parameters()
     public static Collection<Object[][]> data() {
-        return Arrays.asList(new Object[][][]{
+        return List.of(new Object[][][]{
                 {{"urgent", 1}, {"urgent", 1}, {"urgent", 1}, {"urgent", "urgent", "urgent"}},
                 {{"urgent", 1}, {"urgent", 1}, {"middle", 3}, {"urgent", "urgent", "middle"}},
                 {{"urgent", 1}, {"urgent", 1}, {"low", 5}, {"urgent", "urgent", "low"}},

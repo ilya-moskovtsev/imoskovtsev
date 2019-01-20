@@ -13,13 +13,9 @@ public class ConvertList2ListTest {
 
     @Test
     public void convert() {
-        List<int[]> input = new ArrayList<>();
-        input.add(new int[]{1, 2});
-        input.add(new int[]{3, 4, 5, 6});
+        List<int[]> input = List.of(new int[]{1, 2}, new int[]{3, 4, 5, 6});
 
-        List<Integer> expected = Arrays.asList(
-                1, 2, 3, 4, 5, 6
-        );
+        List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
 
         ConvertList2List convertList2List = new ConvertList2List();
         List<Integer> result = convertList2List.convert(input);

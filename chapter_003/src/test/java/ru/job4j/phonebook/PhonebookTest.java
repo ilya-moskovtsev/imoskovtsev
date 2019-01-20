@@ -2,55 +2,53 @@ package ru.job4j.phonebook;
 
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class PhonebookTest {
     @Test
     public void whenNameContainsQueryShouldFindPerson() {
-        Phonebook phonebook = new Phonebook();
+        var phonebook = new Phonebook();
         phonebook.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        List<Person> result = phonebook.search("Pet");
+        var result = phonebook.search("Pet");
         assertThat(result.iterator().next().getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenSurnameContainsQueryShouldFindPerson() {
-        Phonebook phonebook = new Phonebook();
+        var phonebook = new Phonebook();
         phonebook.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        List<Person> result = phonebook.search("sent");
+        var result = phonebook.search("sent");
         assertThat(result.iterator().next().getName(), is("Petr"));
     }
 
     @Test
     public void whenPhoneContainsQueryShouldFindPerson() {
-        Phonebook phonebook = new Phonebook();
+        var phonebook = new Phonebook();
         phonebook.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        List<Person> result = phonebook.search("72");
+        var result = phonebook.search("72");
         assertThat(result.iterator().next().getAddress(), is("Bryansk"));
     }
 
     @Test
     public void whenAddressContainsQueryShouldFindPerson() {
-        Phonebook phones = new Phonebook();
+        var phones = new Phonebook();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        List<Person> result = phones.search("ans");
+        var result = phones.search("ans");
         assertThat(result.iterator().next().getPhone(), is("534872"));
     }
 
     @Test
     public void whenQueryMatchesMultiplePersonsShouldFindAllThatMatch() {
-        Phonebook phones = new Phonebook();
+        var phones = new Phonebook();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -61,7 +59,7 @@ public class PhonebookTest {
                 new Person("no match", "no match", "no match", "no match")
         );
 
-        List<Person> result = phones.search("348");
+        var result = phones.search("348");
         assertThat(result.get(0).getName(), is("Petr"));
         assertThat(result.get(1).getName(), is("Petr"));
         assertThat(result.size(), is(2));
@@ -69,24 +67,24 @@ public class PhonebookTest {
 
     @Test
     public void whenQueryMatchesMultiplePropertiesOfOnePersonShouldBeNoDuplicates() {
-        Phonebook phonebook = new Phonebook();
+        var phonebook = new Phonebook();
         phonebook.add(
                 new Person("Petr", "Petr", "Petr", "Petr")
         );
 
-        List<Person> result = phonebook.search("et");
+        var result = phonebook.search("et");
         assertThat(result.get(0).getName(), is("Petr"));
         assertThat(result.size(), is(1));
     }
 
     @Test
     public void searchShouldBeCaseInsensitive() {
-        Phonebook phonebook = new Phonebook();
+        var phonebook = new Phonebook();
         phonebook.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
 
-        List<Person> result = phonebook.search("pEtR");
+        var result = phonebook.search("pEtR");
         assertThat(result.get(0).getName(), is("Petr"));
         assertThat(result.size(), is(1));
     }

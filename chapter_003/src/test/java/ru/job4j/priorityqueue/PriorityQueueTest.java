@@ -70,7 +70,7 @@ public class PriorityQueueTest {
 
     @Test
     public void putViaOneLoop() {
-        PriorityQueue queue = new PriorityQueue();
+        var queue = new PriorityQueue();
         queue.put(task1);
         queue.put(task2);
         queue.put(task3);

@@ -1,4 +1,4 @@
-package groupstudents;
+package ru.job4j.groupstudents;
 
 import java.util.Comparator;
 import java.util.List;

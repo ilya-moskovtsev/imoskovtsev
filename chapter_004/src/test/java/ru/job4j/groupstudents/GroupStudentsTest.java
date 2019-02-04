@@ -1,4 +1,4 @@
-package groupstudents;
+package ru.job4j.groupstudents;
 
 import org.junit.Assert;
 import org.junit.Test;

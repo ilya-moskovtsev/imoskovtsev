@@ -5,4 +5,4 @@
  * @version $Id$
  * @since 0.1
  */
-package groupstudents;
+package ru.job4j.groupstudents;

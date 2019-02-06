@@ -1,10 +1,10 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.job4j</groupId>
-    <artifactId>junior</artifactId>
+    <artifactId>imoskovtsev</artifactId>
     <packaging>pom</packaging>
     <version>2.0</version>
-    <name>junior</name>
+    <name>imoskovtsev</name>
     <url>http://job4j.ru/</url>
 
     <properties>
@@ -19,10 +19,8 @@
     </properties>
 
     <modules>
-        <module>chapter_001</module>
-        <module>chapter_002</module>
-        <module>chapter_003</module>
-        <module>chapter_004</module>
+        <module>intern</module>
+        <module>junior</module>
     </modules>
 
     <dependencies>

@@ -3,9 +3,7 @@ package ru.job4j.list2map;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

@@ -1,5 +1,5 @@
 /**
- * Iterator for a jagged array.
+ * Array Iterator.
  *
  * @author imoskovtsev
  * @version $Id$

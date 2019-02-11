@@ -19,7 +19,8 @@ public class JaggedArrayIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return jaggedArray[indexI].length > indexJ
+        return jaggedArray.length > indexI
+                && jaggedArray[indexI].length > indexJ
                 || jaggedArray.length > indexI + 1
                 && jaggedArray[indexI + 1].length > 0;
     }
@@ -30,9 +31,9 @@ public class JaggedArrayIterator implements Iterator {
             indexI++;
             indexJ = 0;
         }
-        try {
+        if (hasNext()) {
             return jaggedArray[indexI][indexJ++];
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } else {
             throw new NoSuchElementException();
         }
     }

@@ -18,9 +18,15 @@ public class MergeIterators {
                 boolean result = false;
                 if (currentIterator.hasNext()) {
                     result = true;
-                } else if (iterators.hasNext()) {
-                    currentIterator = iterators.next();
-                    result = currentIterator.hasNext();
+                } else {
+                    while (!result) {
+                        if (iterators.hasNext()) {
+                            currentIterator = iterators.next();
+                            result = currentIterator.hasNext();
+                        } else {
+                            break;
+                        }
+                    }
                 }
 
                 return result;

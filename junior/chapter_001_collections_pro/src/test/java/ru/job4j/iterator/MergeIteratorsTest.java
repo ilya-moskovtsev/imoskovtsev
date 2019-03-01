@@ -86,6 +86,17 @@ public class MergeIteratorsTest {
         assertThat(it.hasNext(), is(false));
     }
 
+    @Test
+    public void whenIteratorWithoutValuesIsFollowedByIteratorWithValuesThenHasNextShouldReturnTrue() {
+        Iterator<Integer> it1 = new ArrayList<Integer>().iterator();
+        Iterator<Integer> it2 = new ArrayList<Integer>().iterator();
+        Iterator<Integer> it3 = Arrays.asList(1, 2, 3).iterator();
+        Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
+        MergeIterators mergeIterators = new MergeIterators();
+        it = mergeIterators.mergeIterators(its);
+        assertThat(it.hasNext(), is(true));
+    }
+
     @Test(expected = NoSuchElementException.class)
     public void invocationOfNextMethodShouldThrowNoSuchElementException() {
         Iterator<Integer> it1 = Arrays.asList(1, 2, 3).iterator();
@@ -97,4 +108,5 @@ public class MergeIteratorsTest {
         assertThat(it.next(), is(3));
         it.next();
     }
+
 }

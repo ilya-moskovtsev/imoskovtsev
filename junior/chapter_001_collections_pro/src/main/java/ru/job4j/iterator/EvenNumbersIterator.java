@@ -20,18 +20,17 @@ public class EvenNumbersIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return getFirstEven().isPresent();
+        this.index += (int) IntStream.range(index, numbers.length)
+                .takeWhile(i -> numbers[i] % 2 != 0)
+                .count();
+        return index < numbers.length;
     }
 
     @Override
     public Object next() throws NoSuchElementException {
-        index = getFirstEven().orElseThrow();
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
         return numbers[index++];
-    }
-
-    private OptionalInt getFirstEven() {
-        return IntStream.range(index, numbers.length)
-                .filter(i -> numbers[i] % 2 == 0)
-                .findFirst();
     }
 }

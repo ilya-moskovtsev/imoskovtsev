@@ -1,5 +1,5 @@
 /**
- * Array Iterator.
+ * Custom Iterators.
  *
  * @author imoskovtsev
  * @version $Id$

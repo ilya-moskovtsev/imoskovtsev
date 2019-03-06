@@ -16,14 +16,15 @@ public class GenericArrayContainer<E> implements Iterable<E> {
     }
 
     public void set(int index, E element) {
+        if (index > this.index) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         array[index] = element;
     }
 
     public void remove(int index) {
-        E[] newArray = (E[]) new Object[array.length - 1];
-        System.arraycopy(array, 0, newArray, 0, index); // copy left side
-        System.arraycopy(array, index + 1, newArray, index, array.length - index - 1); // copy right side
-        array = newArray;
+        System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+        this.index--;
     }
 
     public E get(int index) {
@@ -34,11 +35,11 @@ public class GenericArrayContainer<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         return new Iterator<>() {
 
-            private int index = 0;
+            private int iteratorIndex = 0;
 
             @Override
             public boolean hasNext() {
-                return index < array.length;
+                return iteratorIndex < index;
             }
 
             @Override
@@ -46,7 +47,7 @@ public class GenericArrayContainer<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return array[index++];
+                return array[iteratorIndex++];
             }
         };
     }

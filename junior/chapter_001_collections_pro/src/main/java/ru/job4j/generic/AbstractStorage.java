@@ -1,11 +1,8 @@
 package ru.job4j.generic;
 
-import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.NoSuchElementException;
 
-public abstract class AbstractStorage<T> {
+public abstract class AbstractStorage<T extends Base> implements Storage<T> {
     GenericArrayContainer<T> container;
 
     public AbstractStorage(int capacity) {
@@ -17,44 +14,40 @@ public abstract class AbstractStorage<T> {
     }
 
     public boolean replace(String id, T model) {
-        var index = new AtomicInteger();
-        boolean isPresent = isPresent(id, index);
-        if (isPresent) {
-            container.set(index.get(), model);
+        var iterator = container.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            if (id.equals(iterator.next().getId())) {
+                container.set(index, model);
+                return true;
+            }
+            index++;
         }
-        return isPresent;
+        return false;
     }
 
     public boolean delete(String id) {
-        var index = new AtomicInteger();
-        boolean isPresent = isPresent(id, index);
-        if (isPresent) {
-            container.remove(index.get());
+        var iterator = container.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            if (id.equals(iterator.next().getId())) {
+                container.remove(index);
+                return true;
+            }
+            index++;
         }
-        return isPresent;
+        return false;
     }
 
     public T findById(String id) {
-        return getStream().filter(element -> id.equals(((Base) element).getId())).findFirst().get();
-    }
-
-    protected Stream<T> getStream() {
-        Iterator<T> iterator = container.iterator();
-        Iterable<T> iterable = () -> iterator;
-        return StreamSupport.stream(iterable.spliterator(), false);
-    }
-
-    protected boolean isPresent(String id, AtomicInteger index) {
-        return getStream()
-                .anyMatch(element -> {
-                    boolean result;
-                    if (id.equals(((Base) element).getId())) {
-                        result = true;
-                    } else {
-                        index.incrementAndGet();
-                        result = false;
-                    }
-                    return result;
-                });
+        var iterator = container.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            if (id.equals(iterator.next().getId())) {
+                return container.get(index);
+            }
+            index++;
+        }
+        throw new NoSuchElementException();
     }
 }

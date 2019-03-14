@@ -25,6 +25,7 @@ public class SimpleSinglyLinkedList<E> {
     public E deleteFirst() {
         E result = this.first.data;
         this.first = this.first.next;
+        size--;
         return result;
     }
 

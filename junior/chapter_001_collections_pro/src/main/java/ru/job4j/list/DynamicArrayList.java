@@ -16,11 +16,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
     public void add(E element) {
         modificationCounter++;
-        if (array.length <= index) {
-            E[] longerArray = (E[]) new Object[(int) (array.length * 1.5)];
-            System.arraycopy(array, 0, longerArray, 0, array.length);
-            this.array = longerArray;
-        }
+        enlargeIfNeeded();
         array[index++] = element;
     }
 
@@ -53,5 +49,13 @@ public class DynamicArrayList<E> implements Iterable<E> {
                 return array[iteratorIndex++];
             }
         };
+    }
+
+    private void enlargeIfNeeded() {
+        if (array.length <= index) {
+            E[] longerArray = (E[]) new Object[(int) (array.length * 1.5)];
+            System.arraycopy(array, 0, longerArray, 0, array.length);
+            this.array = longerArray;
+        }
     }
 }

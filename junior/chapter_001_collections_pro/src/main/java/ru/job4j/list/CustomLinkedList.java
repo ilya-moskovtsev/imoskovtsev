@@ -65,6 +65,7 @@ public class CustomLinkedList<E> implements Iterable<E> {
 
             private int expectedModificationCounter = modificationCounter;
             private int iteratorIndex = 0;
+            private Node<E> currentNode = head;
 
             @Override
             public boolean hasNext() {
@@ -82,7 +83,10 @@ public class CustomLinkedList<E> implements Iterable<E> {
                 if (modificationCounter != expectedModificationCounter) {
                     throw new ConcurrentModificationException();
                 }
-                return get(iteratorIndex++);
+                var result = currentNode.data;
+                currentNode = currentNode.next;
+                iteratorIndex++;
+                return result;
             }
         };
     }

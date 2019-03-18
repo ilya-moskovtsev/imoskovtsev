@@ -6,13 +6,9 @@ import java.util.NoSuchElementException;
 
 public class DynamicArrayList<E> implements Iterable<E> {
 
-    private E[] array;
+    private E[] array = (E[]) new Object[10];
     private int index = 0;
     private int modificationCounter = 0;
-
-    public DynamicArrayList() {
-        this.array = (E[]) new Object[10];
-    }
 
     public void add(E element) {
         modificationCounter++;

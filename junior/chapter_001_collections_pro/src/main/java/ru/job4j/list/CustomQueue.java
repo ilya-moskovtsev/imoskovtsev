@@ -9,15 +9,10 @@ package ru.job4j.list;
  */
 public class CustomQueue<E> {
 
-    private CustomStack<E> write;
-    private CustomStack<E> read;
+    private final CustomStack<E> write = new CustomStack<>();
+    private final CustomStack<E> read = new CustomStack<>();
     private int writeSize;
     private int readSize;
-
-    public CustomQueue() {
-        this.write = new CustomStack<>();
-        this.read = new CustomStack<>();
-    }
 
     /**
      * Adds element to the beginning of the collection.

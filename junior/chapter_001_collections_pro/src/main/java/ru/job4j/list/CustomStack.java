@@ -10,11 +10,7 @@ import java.util.NoSuchElementException;
  */
 public class CustomStack<E> {
 
-    private SimpleSinglyLinkedList<E> collection;
-
-    public CustomStack() {
-        this.collection = new SimpleSinglyLinkedList<>();
-    }
+    private final SimpleSinglyLinkedList<E> collection = new SimpleSinglyLinkedList<>();
 
     /**
      * Adds element to the beginning of the collection.

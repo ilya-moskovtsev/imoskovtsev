@@ -2,7 +2,6 @@ package ru.job4j.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.OptionalInt;
 import java.util.stream.IntStream;
 
 /**

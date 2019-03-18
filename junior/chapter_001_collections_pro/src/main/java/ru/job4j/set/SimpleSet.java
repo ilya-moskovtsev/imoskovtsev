@@ -6,20 +6,23 @@ import java.util.Iterator;
 
 public class SimpleSet<E> implements Iterable<E> {
 
-    private DynamicArrayList<E> list = new DynamicArrayList<>();
+    private final DynamicArrayList<E> list = new DynamicArrayList<>();
 
     public void add(E element) {
-        var iterator = list.iterator();
+        if (!contains(element)) {
+            list.add(element);
+        }
+    }
+
+    public boolean contains(E element) {
         boolean contains = false;
-        while (iterator.hasNext()) {
-            if (iterator.next().equals(element)) {
+        for (E e : list) {
+            if (e.equals(element)) {
                 contains = true;
                 break;
             }
         }
-        if (!contains) {
-            list.add(element);
-        }
+        return contains;
     }
 
     @Override

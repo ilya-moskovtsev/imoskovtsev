@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 public class DynamicArrayList<E> implements Iterable<E> {
 
+    @SuppressWarnings("unchecked")
     private E[] array = (E[]) new Object[10];
     private int index = 0;
     private int modificationCounter = 0;
@@ -49,6 +50,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
     private void enlargeIfNeeded() {
         if (array.length <= index) {
+            @SuppressWarnings("unchecked")
             E[] longerArray = (E[]) new Object[(int) (array.length * 1.5)];
             System.arraycopy(array, 0, longerArray, 0, array.length);
             this.array = longerArray;

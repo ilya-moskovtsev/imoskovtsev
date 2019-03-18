@@ -7,6 +7,7 @@ public class GenericArrayContainer<E> implements Iterable<E> {
     private E[] array;
     private int index = 0;
 
+    @SuppressWarnings("unchecked")
     public GenericArrayContainer(int length) {
         array = (E[]) new Object[length];
     }

@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.list.DynamicArrayList;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
 
@@ -17,7 +18,7 @@ public class SimpleSet<E> implements Iterable<E> {
     public boolean contains(E element) {
         boolean contains = false;
         for (E e : list) {
-            if (e.equals(element)) {
+            if (Objects.equals(e, element)) {
                 contains = true;
                 break;
             }

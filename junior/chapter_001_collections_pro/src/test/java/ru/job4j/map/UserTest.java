@@ -1,15 +1,27 @@
 package ru.job4j.map;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class UserTest {
+
+    private String name = "name";
+    private int children = 1;
+    private Calendar calendar = Calendar.getInstance();
+
+    @Before
+    public void setUp() {
+        calendar.set(1988, Calendar.JANUARY, 31);
+    }
 
     /**
      * Equals and hashCode are not overridden.
@@ -28,23 +40,55 @@ public class UserTest {
 
     @Test
     public void equalsAndHashCodeAreNotOverridden() {
-        String name = "name";
-        int children = 1;
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(1988, Calendar.JANUARY, 31);
-
         // two users have same fields
-        User user1 = new User(name, children, calendar);
-        User user2 = new User(name, children, calendar);
+        User first = new User(name, children, calendar);
+        User second = new User(name, children, calendar);
 
         Map<User, Object> map = new HashMap<>();
 
-        map.put(user1, new Object());
-        map.put(user2, new Object());
+        map.put(first, new Object());
+        map.put(second, new Object());
 
         System.out.println(map);
 
-        assertTrue("hashCode is different", user1.hashCode() != user2.hashCode());
-        assertNotEquals("users not equal", user1, user2);
+        assertTrue("hashCode is different", first.hashCode() != second.hashCode());
+        assertNotEquals("users not equal", first, second);
+    }
+
+    /**
+     * HashCode is overridden.
+     */
+    public static class User2 {
+        public String name;
+        public int children;
+        public Calendar birthday;
+
+        public User2(String name, int children, Calendar birthday) {
+            this.name = name;
+            this.children = children;
+            this.birthday = birthday;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, children, birthday);
+        }
+    }
+
+    @Test
+    public void hashCodeIsOverridden() {
+        // two users have same fields
+        User2 first = new User2(name, children, calendar);
+        User2 second = new User2(name, children, calendar);
+
+        Map<User2, Object> map = new HashMap<>();
+
+        map.put(first, new Object());
+        map.put(second, new Object());
+
+        System.out.println(map);
+
+        assertEquals("hashCode is the same", first.hashCode(), second.hashCode());
+        assertNotEquals("users not equal", first, second);
     }
 }

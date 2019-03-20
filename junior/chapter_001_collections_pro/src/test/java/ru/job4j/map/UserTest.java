@@ -152,4 +152,56 @@ public class UserTest {
         assertThat("users are equal", first, equalTo(second));
         assertThat("Map has both users", map.size(), is(2));
     }
+
+    /**
+     * Equals and hashCode are overridden.
+     */
+    public static class User4 {
+        public String name;
+        public int children;
+        public Calendar birthday;
+
+        public User4(String name, int children, Calendar birthday) {
+            this.name = name;
+            this.children = children;
+            this.birthday = birthday;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            User4 user4 = (User4) o;
+            return children == user4.children
+                    && Objects.equals(name, user4.name)
+                    && Objects.equals(birthday, user4.birthday);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, children, birthday);
+        }
+    }
+
+    @Test
+    public void equalsAndHashCodeAreOverridden() {
+        // two users have same fields
+        var first = new User4(name, children, calendar);
+        var second = new User4(name, children, calendar);
+
+        Map<User4, Object> map = new HashMap<>();
+
+        map.put(first, new Object());
+        map.put(second, new Object());
+
+        System.out.println(map);
+
+        assertThat("hashCode is the same", first.hashCode(), equalTo(second.hashCode()));
+        assertThat("users not equal", first, equalTo(second));
+        assertThat("Map has one user", map.size(), is(1));
+    }
 }

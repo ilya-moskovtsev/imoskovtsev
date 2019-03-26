@@ -9,3 +9,4 @@ achieve by mid 2018
 
 Combining Committed Changes
 git branching is used
+use git branching in IDEA

@@ -8,3 +8,4 @@ more auto testing<br>
 achieve by mid 2018
 
 Combining Committed Changes
+git branching is used

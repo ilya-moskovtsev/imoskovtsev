@@ -20,6 +20,17 @@ public class SimpleHashMapTest {
     }
 
     @Test
+    public void stringKey() {
+        var map = new SimpleHashMap<String, Integer>();
+        map.put("one", 1);
+        map.put("two", 2);
+        map.put("three", 3);
+        assertThat(map.get("one"), is(1));
+        assertThat(map.get("two"), is(2));
+        assertThat(map.get("three"), is(3));
+    }
+
+    @Test
     public void putAndGet() {
         assertThat(map.put(1, 101), is(true));
         assertThat(map.put(1, 102), is(false));

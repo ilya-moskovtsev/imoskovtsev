@@ -17,18 +17,19 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
 
     @SuppressWarnings("unchecked")
     private V[] array = (V[]) new Object[16];
-    private int pairCounter = 0;
-    private int modificationCounter = 0;
+    private int size = 0;
+    private int modifications = 0;
 
     public boolean put(K key, V value) {
-        modificationCounter++;
+        modifications++;
         enlargeIfNeeded();
+        boolean success = false;
         if (array[index(key)] == null) {
             array[index(key)] = value;
-            pairCounter++;
-            return true;
+            size++;
+            success = true;
         }
-        return false;
+        return success;
     }
 
     public V get(K key) throws NoSuchElementException {
@@ -39,42 +40,42 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     }
 
     public boolean remove(K key) {
-        if (array[index(key)] == null) {
-            return false;
-        } else {
+        boolean success = false;
+        if (array[index(key)] != null) {
             array[index(key)] = null;
-            pairCounter--;
-            return true;
+            size--;
+            success = true;
         }
+        return success;
     }
 
     @Override
     public Iterator<V> iterator() {
         return new Iterator<>() {
 
-            private int expectedModificationCounter = modificationCounter;
-            private int iteratorIndex = 0;
+            private int expectedModifications = modifications;
+            private int index = 0;
 
             @Override
             public boolean hasNext() {
-                if (modificationCounter != expectedModificationCounter) {
+                if (modifications != expectedModifications) {
                     throw new ConcurrentModificationException();
                 }
-                iteratorIndex += (int) IntStream.range(iteratorIndex, array.length)
+                index += (int) IntStream.range(index, array.length)
                         .takeWhile(i -> array[i] == null)
                         .count();
-                return iteratorIndex < array.length;
+                return index < array.length;
             }
 
             @Override
             public V next() {
-                if (modificationCounter != expectedModificationCounter) {
+                if (modifications != expectedModifications) {
                     throw new ConcurrentModificationException();
                 }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return array[iteratorIndex++];
+                return array[index++];
             }
         };
     }
@@ -84,7 +85,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     }
 
     private void enlargeIfNeeded() {
-        if (array.length * 0.75 <= pairCounter) {
+        if (array.length * 0.75 <= size) {
             @SuppressWarnings("unchecked")
             V[] longerArray = (V[]) new Object[(int) (array.length * 1.5)];
             System.arraycopy(array, 0, longerArray, 0, array.length);

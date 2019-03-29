@@ -3,12 +3,15 @@ package ru.job4j.map;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import ru.job4j.map.UserTest.User4;
 
 public class SimpleHashMapTest {
 
@@ -17,17 +20,6 @@ public class SimpleHashMapTest {
     @Before
     public void setUp() {
         map = new SimpleHashMap<>();
-    }
-
-    @Test
-    public void stringKey() {
-        var map = new SimpleHashMap<String, Integer>();
-        map.put("one", 1);
-        map.put("two", 2);
-        map.put("three", 3);
-        assertThat(map.get("one"), is(1));
-        assertThat(map.get("two"), is(2));
-        assertThat(map.get("three"), is(3));
     }
 
     @Test
@@ -93,5 +85,38 @@ public class SimpleHashMapTest {
         Iterator<Integer> iterator = map.iterator();
         map.put(1, 101);
         iterator.next();
+    }
+
+    @Test
+    public void stringKey() {
+        var map = new SimpleHashMap<String, Integer>();
+        map.put("one", 1);
+        map.put("two", 2);
+        map.put("three", 3);
+        assertThat(map.get("one"), is(1));
+        assertThat(map.get("two"), is(2));
+        assertThat(map.get("three"), is(3));
+    }
+
+    @Test
+    public void userKey() {
+        var map = new SimpleHashMap<User4, Integer>();
+
+        var calendar = Calendar.getInstance();
+        calendar.set(1988, Calendar.JANUARY, 1);
+        var user = new User4("name", 1, calendar);
+
+        map.put(user, 1);
+        assertThat(map.get(user), is(1));
+    }
+
+    @Test
+    public void enlargeIfNeeded() {
+        for (int i = 0; i < 20; i++) {
+            map.put(i, i);
+        }
+        for (int i = 0; i < 20; i++) {
+            assertThat(map.get(i), is(i));
+        }
     }
 }

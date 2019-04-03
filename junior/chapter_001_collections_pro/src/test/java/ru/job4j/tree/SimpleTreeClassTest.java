@@ -95,4 +95,29 @@ public class SimpleTreeClassTest {
         iterator.next();
         iterator.next();
     }
+
+    @Test
+    public void isBinaryTrue() {
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void isBinaryFalse() {
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        tree.add(3, 8);
+
+        assertThat(tree.isBinary(), is(false));
+    }
 }

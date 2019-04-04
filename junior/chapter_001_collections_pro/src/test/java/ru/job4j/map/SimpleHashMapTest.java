@@ -2,6 +2,7 @@ package ru.job4j.map;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.map.UserTest.User4;
 
 import java.util.Calendar;
 import java.util.ConcurrentModificationException;
@@ -9,9 +10,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-
-import ru.job4j.map.UserTest.User4;
 
 public class SimpleHashMapTest {
 
@@ -28,12 +28,6 @@ public class SimpleHashMapTest {
         assertThat(map.put(1, 102), is(false));
         assertThat(map.get(1), is(101));
     }
-
-    @Test(expected = NoSuchElementException.class)
-    public void getException() {
-        map.get(1);
-    }
-
 
     @Test
     public void remove() {
@@ -118,5 +112,12 @@ public class SimpleHashMapTest {
         for (int i = 0; i < 20; i++) {
             assertThat(map.get(i), is(i));
         }
+    }
+
+    @Test
+    public void keysGiveSameIndex() {
+        SimpleHashMap<String, String> map = new SimpleHashMap<>();
+        map.put("idx", "Hello World!");
+        assertNull(map.get("in2"));
     }
 }

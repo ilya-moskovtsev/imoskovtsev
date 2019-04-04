@@ -1,9 +1,15 @@
 package ru.job4j.tree;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Queue;
 
 public class SimpleTreeClass<E extends Comparable<E>> implements SimpleTree<E> {
-    Node<E> root;
+    private Node<E> root;
 
     public SimpleTreeClass(E root) {
         this.root = new Node<>(root);
@@ -47,6 +53,7 @@ public class SimpleTreeClass<E extends Comparable<E>> implements SimpleTree<E> {
     public Iterator<E> iterator() {
         return new Iterator<>() {
             Queue<Node<E>> queue = new LinkedList<>();
+
             {
                 queue.offer(root);
             }
@@ -57,7 +64,7 @@ public class SimpleTreeClass<E extends Comparable<E>> implements SimpleTree<E> {
             }
 
             @Override
-            public E next() {
+            public E next() throws NoSuchElementException {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }

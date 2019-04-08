@@ -25,8 +25,16 @@ public class SimpleTreeClassTest {
     @Test
     public void whenAddToParentThatHasSameChildThanFalse() {
         var tree = new SimpleTreeClass<>(1);
-        assertThat(tree.add(1, 1), is(true));
-        assertThat("adding same child", tree.add(1, 1), is(false));
+        assertThat(tree.add(1, 2), is(true));
+        assertThat("adding same child", tree.add(1, 2), is(false));
+    }
+
+    @Test
+    public void whenAddChildSameToParentSiblingThanFalse() {
+        var tree = new SimpleTreeClass<>(1);
+        assertThat(tree.add(1, 2), is(true));
+        assertThat(tree.add(1, 3), is(true));
+        assertThat("adding child same to parent's sibling", tree.add(2, 3), is(false));
     }
 
     @Test

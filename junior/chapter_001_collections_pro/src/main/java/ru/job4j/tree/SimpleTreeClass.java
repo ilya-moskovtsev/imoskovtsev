@@ -18,14 +18,16 @@ public class SimpleTreeClass<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
-        Optional<Node<E>> optional = findBy(parent);
-        if (optional.isPresent()) {
-            Node<E> parentNode = optional.get();
-            List<Node<E>> leaves = parentNode.leaves();
-            Node<E> childNode = new Node<>(child);
-            if (leaves.stream().noneMatch(node -> node.eqValue(child))) {
-                parentNode.add(childNode);
-                result = true;
+        if (findBy(child).isEmpty()) {
+            Optional<Node<E>> optional = findBy(parent);
+            if (optional.isPresent()) {
+                Node<E> parentNode = optional.get();
+                List<Node<E>> leaves = parentNode.leaves();
+                Node<E> childNode = new Node<>(child);
+                if (leaves.stream().noneMatch(node -> node.eqValue(child))) {
+                    parentNode.add(childNode);
+                    result = true;
+                }
             }
         }
         return result;

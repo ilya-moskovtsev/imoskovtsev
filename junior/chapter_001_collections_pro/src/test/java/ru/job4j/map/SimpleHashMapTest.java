@@ -2,6 +2,7 @@ package ru.job4j.map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import ru.job4j.map.UserTest.User4;
 
 import java.util.Calendar;

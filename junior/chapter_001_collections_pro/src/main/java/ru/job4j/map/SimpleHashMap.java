@@ -89,7 +89,7 @@ public class SimpleHashMap<K, V> implements Iterable<V> {
     }
 
     private int index(K key) {
-        return key.hashCode() % (array.length - 1);
+        return Math.abs(key.hashCode() % (array.length - 1));
     }
 
     private void enlargeIfNeeded() {

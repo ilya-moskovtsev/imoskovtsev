@@ -18,11 +18,18 @@ public class Search {
      */
     public List<File> filesByExtensions(String parent, List<String> extensions) {
         List<File> allFiles = new LinkedList<>();
-//        listFilesRecursively(allFiles, new File(parent));
         listFilesUsingStack(allFiles, new File(parent));
 
         String regExp = getRegExp(extensions);
         return filterByRegExp(allFiles, regExp);
+    }
+
+    public List<File> filesThatExcludeExtensions(String parent, List<String> extensions) {
+        List<File> allFiles = new LinkedList<>();
+        listFilesRecursively(allFiles, new File(parent));
+
+        String regExp = getRegExp(extensions);
+        return filterNotMatchesRegExp(allFiles, regExp);
     }
 
     /**
@@ -76,6 +83,11 @@ public class Search {
 
     private List<File> filterByRegExp(List<File> allFiles, String regExp) {
         return allFiles.stream().filter(file -> file.getName().matches(regExp))
+                .collect(Collectors.toList());
+    }
+
+    private List<File> filterNotMatchesRegExp(List<File> allFiles, String regExp) {
+        return allFiles.stream().filter(file -> !file.getName().matches(regExp))
                 .collect(Collectors.toList());
     }
 }

@@ -2,7 +2,9 @@ package ru.job4j.io.client;
 
 import com.google.common.base.Joiner;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
@@ -11,6 +13,7 @@ public class Client {
     public static final int PORT = 5000;
     public static final String SPACE = " ";
     public static final String COLON = ":";
+    public static final String EMPTY_LINE = "";
     // client status
     public static final String CONNECTING_TO_SERVER = "Connecting to server:";
     public static final String CONNECTED_TO_SERVER = "Connected to server";

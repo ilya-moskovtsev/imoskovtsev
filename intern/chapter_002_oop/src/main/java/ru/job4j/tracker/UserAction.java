@@ -15,7 +15,7 @@ public interface UserAction {
      * @param input   система ввода
      * @param tracker трекер задач
      */
-    void execute(Input input, Tracker tracker, Consumer<String> output);
+    void execute(Input input, ITracker tracker, Consumer<String> output);
 
     /**
      * Описание действия.

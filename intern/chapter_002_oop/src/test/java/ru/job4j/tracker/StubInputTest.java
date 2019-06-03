@@ -36,7 +36,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserAddsItemThenTrackerHasNewItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Input input = new StubInput(Arrays.asList(
                 String.valueOf(Menu.ADD),
                 "test id",
@@ -59,7 +59,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserWantsToSeeAllItemsThenTrackerShowsAllItems() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
@@ -78,7 +78,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserEditsItemThenTrackerHasEditedItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id", "key", "name", "desc", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
                 String.valueOf(Menu.EDIT),
@@ -102,7 +102,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserDeletesItemThenTrackerHasNoItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id", "key", "name", "desc", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
                 String.valueOf(Menu.DELETE),
@@ -121,7 +121,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserSearchesByIdThenTrackerShowsItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
@@ -140,7 +140,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserSearchesByNameThenTrackerShowsItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         tracker.add(new Item("id2", "key2", "name2", "desc2", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Arrays.asList(
@@ -159,7 +159,7 @@ public class StubInputTest {
      */
     @Test
     public void whenUserExitsThenTrackerProgramStops() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         tracker.add(new Item("id1", "key1", "name1", "desc1", new Date().getTime(), new Date().getTime()));
         Input input = new StubInput(Collections.singletonList(
                 String.valueOf(Menu.EXIT)));

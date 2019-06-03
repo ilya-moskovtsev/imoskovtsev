@@ -34,7 +34,7 @@ public abstract class BaseAction implements UserAction {
     }
 
     @Override
-    public abstract void execute(Input input, Tracker tracker, Consumer<String> output);
+    public abstract void execute(Input input, ITracker tracker, Consumer<String> output);
 
     @Override
     public String info() {

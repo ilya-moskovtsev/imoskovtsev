@@ -22,5 +22,15 @@
             <artifactId>log4j-core</artifactId>
             <version>2.11.2</version>
         </dependency>
+        <dependency>
+            <groupId>ru.job4j</groupId>
+            <artifactId>chapter_002_oop</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.5</version>
+        </dependency>
     </dependencies>
 </project>

@@ -31,7 +31,7 @@ public class StartUI {
     /**
      * выбранный трекер.
      */
-    private static Tracker tracker;
+    private static ITracker tracker;
     private static Consumer<String> output;
 
     /**
@@ -46,7 +46,7 @@ public class StartUI {
      * @param tracker задаем трекер
      * @param output  задаем вывод
      */
-    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
         StartUI.input = input;
         StartUI.tracker = tracker;
         StartUI.output = output;
@@ -77,7 +77,7 @@ public class StartUI {
      */
     public static void main(String[] args) {
         Input input = new ValidateInput();
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         new StartUI(input, tracker, System.out::println);
         init();
     }

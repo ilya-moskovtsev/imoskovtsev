@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
  *
  * @author imoskovtsev
  */
-public class Tracker {
+public class Tracker implements ITracker {
     /**
      * Класс трекер - это обертка над массивом заявок.
      */

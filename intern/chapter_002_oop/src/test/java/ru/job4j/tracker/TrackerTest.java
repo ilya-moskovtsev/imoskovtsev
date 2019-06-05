@@ -19,7 +19,7 @@ public class TrackerTest {
     /**
      * Класс трекер - это обертка над массивом заявок.
      */
-    private Tracker tracker;
+    private ITracker tracker;
     /**
      * Заявка.
      */

@@ -7,6 +7,7 @@
     </Appenders>
     <Loggers>
         <Logger name="ru.job4j.sql" level="trace"/>
+        <Logger name="ru.job4j.sqlite" level="trace"/>
         <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>

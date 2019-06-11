@@ -1,6 +1,10 @@
 language: java
 jdk:
   - openjdk11
+services:
+  - postgresql
+before_install:
+  - psql -c 'create database tracker;' -U postgres
 sudo: false
 after_success:
   - bash <(curl -s https://codecov.io/bash)

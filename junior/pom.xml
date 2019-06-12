@@ -49,5 +49,6 @@
         <module>chapter_001_collections_pro</module>
         <module>chapter_002_input_output</module>
         <module>chapter_003_sql_jdbc</module>
+        <module>sql_ru_parser</module>
     </modules>
 </project>

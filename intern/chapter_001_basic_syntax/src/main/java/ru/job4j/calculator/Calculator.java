@@ -5,7 +5,7 @@ package ru.job4j.calculator;
  *
  * @author imoskovtsev
  */
-public class Calculator {
+public class Calculator implements ICalculator {
     /**
      * Calculation result.
      */

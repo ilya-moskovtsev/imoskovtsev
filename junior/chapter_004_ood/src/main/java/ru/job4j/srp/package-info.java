@@ -1,5 +1,6 @@
 /**
- * Single responsibility principle.
+ * The Single Responsibility Principle.
+ * A class should have one, and only one, reason to change.
  *
  * @author imoskovtsev
  * @version $Id$

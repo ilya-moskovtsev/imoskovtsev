@@ -1,6 +1,7 @@
 package ru.job4j.srp;
 
 import ru.job4j.calculator.ICalculator;
+import ru.job4j.ocp.EngineeringCalculator;
 import ru.job4j.tracker.Input;
 
 import java.util.ArrayList;
@@ -14,11 +15,16 @@ public class CalculatorMenu {
     public static final String SUBTRACT = "Subtract";
     public static final String DIVIDE = "Divide";
     public static final String MULTIPLY = "Multiply";
+    public static final String SIN = "Sine";
+    public static final String COS = "Cosine";
+    public static final String TAN = "Tangent";
+    public static final String COT = "Cotangent";
     public static final String GET_RESULT = "Get result";
     public static final String EXIT_PROGRAM = "Exit Program";
     // ask
     public static final String PLEASE_ENTER_THE_FIRST_NUMBER = "Please, enter the first number: ";
     public static final String PLEASE_ENTER_THE_SECOND_NUMBER = "Please, enter the second number: ";
+    public static final String PLEASE_ENTER_A = "Please, enter A: ";
 
     private final Input in;
     private final ICalculator calc;
@@ -41,6 +47,10 @@ public class CalculatorMenu {
         actions.add(new Subtract(Menu.SUBTRACT, SUBTRACT));
         actions.add(new Divide(Menu.DIVIDE, DIVIDE));
         actions.add(new Multiply(Menu.MULTIPLY, MULTIPLY));
+        actions.add(new Sin(Menu.SIN, SIN));
+        actions.add(new Cos(Menu.COS, COS));
+        actions.add(new Tan(Menu.TAN, TAN));
+        actions.add(new Cot(Menu.COT, COT));
         actions.add(new GetResult(Menu.GET_RESULT, GET_RESULT));
         actions.add(new ExitProgram(Menu.EXIT, EXIT_PROGRAM));
     }
@@ -109,6 +119,62 @@ public class CalculatorMenu {
             calc.multiply(
                     Integer.parseInt(in.ask(PLEASE_ENTER_THE_FIRST_NUMBER)),
                     Integer.parseInt(in.ask(PLEASE_ENTER_THE_SECOND_NUMBER))
+            );
+        }
+    }
+
+    private class Sin extends BaseAction {
+        public Sin(int key, String name) {
+            super(key, name);
+        }
+
+        @Override
+        public void execute(Input in, ICalculator calc, Consumer<String> out) {
+            EngineeringCalculator eCalc = (EngineeringCalculator) calc;
+            eCalc.sin(
+                    Double.parseDouble(in.ask(PLEASE_ENTER_A))
+            );
+        }
+    }
+
+    private class Cos extends BaseAction {
+        public Cos(int key, String name) {
+            super(key, name);
+        }
+
+        @Override
+        public void execute(Input in, ICalculator calc, Consumer<String> out) {
+            EngineeringCalculator eCalc = (EngineeringCalculator) calc;
+            eCalc.cos(
+                    Double.parseDouble(in.ask(PLEASE_ENTER_A))
+            );
+        }
+    }
+
+    private class Tan extends BaseAction {
+        public Tan(int key, String name) {
+            super(key, name);
+        }
+
+        @Override
+        public void execute(Input in, ICalculator calc, Consumer<String> out) {
+            EngineeringCalculator eCalc = (EngineeringCalculator) calc;
+            eCalc.tan(
+                    Double.parseDouble(in.ask(PLEASE_ENTER_A))
+            );
+        }
+    }
+
+    private class Cot extends BaseAction {
+        public Cot(int key, String name) {
+            super(key, name);
+        }
+
+        @Override
+        public void execute(Input in, ICalculator calc, Consumer<String> out) {
+            EngineeringCalculator eCalc = (EngineeringCalculator) calc;
+            eCalc.cot(
+                    Double.parseDouble(in.ask(PLEASE_ENTER_A))
             );
         }
     }

@@ -1,7 +1,7 @@
 package ru.job4j.srp;
 
-import ru.job4j.calculator.Calculator;
 import ru.job4j.calculator.ICalculator;
+import ru.job4j.ocp.EngineeringCalculator;
 import ru.job4j.tracker.Input;
 import ru.job4j.tracker.ValidateInput;
 
@@ -33,12 +33,16 @@ public class CalculatorInteraction {
             Menu.SUBTRACT,
             Menu.DIVIDE,
             Menu.MULTIPLY,
+            Menu.SIN,
+            Menu.COS,
+            Menu.TAN,
+            Menu.COT,
             Menu.GET_RESULT,
             Menu.EXIT
     );
 
     public static void main(String[] args) {
-        new CalculatorInteraction(new ValidateInput(), new Calculator(), System.out::println);
+        new CalculatorInteraction(new ValidateInput(), new EngineeringCalculator(), System.out::println);
         CalculatorMenu menu = new CalculatorMenu(in, calc, out);
         actions(menu);
     }

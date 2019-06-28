@@ -50,5 +50,6 @@
         <module>chapter_002_input_output</module>
         <module>chapter_003_sql_jdbc</module>
         <module>sql_ru_parser</module>
+        <module>chapter_004_ood</module>
     </modules>
 </project>

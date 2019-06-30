@@ -17,17 +17,6 @@
             <artifactId>chapter_002_oop</artifactId>
             <version>2.0</version>
         </dependency>
-        <!-- logging -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.11.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.2</version>
-        </dependency>
         <!-- data bases -->
         <dependency>
             <groupId>org.postgresql</groupId>

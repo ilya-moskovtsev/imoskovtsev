@@ -1,0 +1,25 @@
+launched the following app
+intern/chapter_002_oop/target/tracker.jar
+java -jar tracker.jar
+
+
+used command-line tools
+
+found out its <pid>
+jps
+
+connected to running process and printed information on objects awaiting finalization
+jmap -finalizerinfo <pid>
+
+connected to running process and printed information about locks and threads
+jstack -l -e <pid>
+
+
+used a JMX-compliant graphical tool for monitoring
+jconsole
+
+looked at garbage collector periodically performing collections in Memory tab
+
+looked at main thread stack trace in Threads tab
+
+looked at heap size and garbage collector details in VM Summary tab

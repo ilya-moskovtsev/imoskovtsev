@@ -12,6 +12,20 @@
     <artifactId>junior</artifactId>
     <packaging>pom</packaging>
 
+    <dependencies>
+        <!-- logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+    </dependencies>
+
     <profiles>
         <profile>
             <id>travis</id>
@@ -51,5 +65,6 @@
         <module>chapter_003_sql_jdbc</module>
         <module>sql_ru_parser</module>
         <module>chapter_004_ood</module>
+        <module>chapter_005_garbage_collection</module>
     </modules>
 </project>

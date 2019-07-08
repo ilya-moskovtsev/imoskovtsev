@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter_001_multithreading</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>downloader</module>
+    </modules>
 
 
 </project>

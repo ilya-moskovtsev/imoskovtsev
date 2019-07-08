@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class UserServlet extends HttpServlet {
 
-    private final ValidateService logicLayer = ValidateService.getInstance();
+    private final Validate logicLayer = ValidateService.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<User> users = logicLayer.findAll();
 
         resp.setContentType("text/html");
@@ -26,7 +26,7 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");
 
         // Many if statements can be replaced with

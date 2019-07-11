@@ -10,7 +10,7 @@ public class ValidateService implements Validate {
 
     private final Store persistentLayer = MemoryStore.getInstance();
 
-    public static ValidateService getInstance() {
+    public static Validate getInstance() {
         return INSTANCE;
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 public class ValidateService implements Validate {
     private static final ValidateService INSTANCE = new ValidateService();
 
-    private final Store persistentLayer = MemoryStore.getInstance();
+    private final Store persistentLayer = DbStore.getInstance();
 
     public static Validate getInstance() {
         return INSTANCE;

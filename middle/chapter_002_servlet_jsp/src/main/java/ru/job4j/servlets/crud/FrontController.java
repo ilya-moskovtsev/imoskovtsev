@@ -1,15 +1,36 @@
 package ru.job4j.servlets.crud;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Presentation layer.
  */
-public class UserServlet extends HttpServlet {
+public class FrontController extends HttpServlet {
     private final Validate logicLayer = ValidateService.getInstance();
+
+    private static Map<String, String> pathsToViews = new HashMap<>();
+
+    static {
+        pathsToViews.put("/", "/ListUsers.jsp");
+        pathsToViews.put("/create", "/CreateUser.jsp");
+        pathsToViews.put("/edit", "/EditUser.jsp");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("users", logicLayer.findAll());
+
+        String servletPath = req.getServletPath();
+        String view = pathsToViews.getOrDefault(servletPath, "/ListUsers.jsp");
+        String path = String.format("/WEB-INF/views%s", view);
+        req.getRequestDispatcher(path).forward(req, resp);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -23,6 +44,6 @@ public class UserServlet extends HttpServlet {
                 .getOperation(action)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
         targetOperation.apply(logicLayer, req);
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

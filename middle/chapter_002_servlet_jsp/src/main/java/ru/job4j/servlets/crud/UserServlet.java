@@ -4,24 +4,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * Presentation layer.
  */
 public class UserServlet extends HttpServlet {
-
     private final Validate logicLayer = ValidateService.getInstance();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<User> users = logicLayer.findAll();
-
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream(), true);
-        writer.println(users);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -35,6 +23,6 @@ public class UserServlet extends HttpServlet {
                 .getOperation(action)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
         targetOperation.apply(logicLayer, req);
-        doGet(req, resp);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

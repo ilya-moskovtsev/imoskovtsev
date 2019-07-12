@@ -11,6 +11,7 @@ public class OperatorFactory {
         operationMap.put("add", new AddOperation());
         operationMap.put("update", new UpdateOperation());
         operationMap.put("delete", new DeleteOperation());
+        operationMap.put("upload", new UploadOperation());
     }
 
     public static Optional<Operation> getOperation(String operator) {

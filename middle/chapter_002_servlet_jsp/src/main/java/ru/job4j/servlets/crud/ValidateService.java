@@ -1,5 +1,6 @@
 package ru.job4j.servlets.crud;
 
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -49,5 +50,10 @@ public class ValidateService implements Validate {
     @Override
     public User findById(int id) {
         return persistentLayer.findById(id);
+    }
+
+    @Override
+    public List<Path> getFiles() {
+        return persistentLayer.getFiles();
     }
 }

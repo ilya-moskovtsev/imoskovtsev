@@ -20,15 +20,16 @@ public class DbStore implements Store {
     private Connection conn;
 
     // queries
-    public static final String CREATE_USERS = "create table users(id serial primary key,name varchar(200),login varchar(200),email varchar(200),create_date varchar(200))";
-    public static final String IDS = "select rowId from users";
-    public static final String GET_USERS = "select * from users";
+    public static final String CREATE_USERS = "create table users(name varchar(200),login varchar(200),email varchar(200),create_date varchar(200))";
+    public static final String IDS = "select ROWID from users";
+    public static final String FIND_ALL = "SELECT t.*, ROWID FROM users t";
     // prepared statements
-    public static final String ADD_USER = "insert into users(id, name, login, email, create_date) values (? ,? ,? ,? ,?)";
-    public static final String UPDATE_USER = "update users set name = ?, login = ?, email = ? where id = ?";
-    public static final String DELETE = "delete from users where id = ?";
+    public static final String ADD_USER = "insert into users(name, login, email, create_date) values (? ,? ,? ,?)";
+    public static final String UPDATE_USER = "update users set name = ?, login = ?, email = ? where ROWID = ?";
+    public static final String DELETE = "delete from users where ROWID = ?";
+    public static final String FIND_BY_ID = "SELECT t.*, ROWID FROM users t where ROWID = ?";
     // column label
-    public static final String ID = "id";
+    public static final String ID = "ROWID";
     public static final String NAME = "name";
     public static final String LOGIN = "login";
     public static final String EMAIL = "email";
@@ -58,11 +59,10 @@ public class DbStore implements Store {
     @Override
     public void add(User user) {
         try (final PreparedStatement st = conn.prepareStatement(ADD_USER)) {
-            st.setInt(1, user.getId());
-            st.setString(2, user.getName());
-            st.setString(3, user.getLogin());
-            st.setString(4, user.getEmail());
-            st.setString(5, String.valueOf(LocalDate.now()));
+            st.setString(1, user.getName());
+            st.setString(2, user.getLogin());
+            st.setString(3, user.getEmail());
+            st.setString(4, String.valueOf(LocalDate.now()));
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -96,7 +96,7 @@ public class DbStore implements Store {
     public List<User> findAll() {
         List<User> users = new LinkedList<>();
         try (final Statement st = conn.createStatement();
-             ResultSet resultSet = st.executeQuery(GET_USERS)) {
+             ResultSet resultSet = st.executeQuery(FIND_ALL)) {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt(ID));
@@ -114,7 +114,20 @@ public class DbStore implements Store {
 
     @Override
     public User findById(int id) {
-        return findAll().stream().filter(user -> user != null && user.getId() == id).findFirst().orElse(null);
+        User user = new User();
+        try (final PreparedStatement st = conn.prepareStatement(FIND_BY_ID)) {
+            st.setInt(1, id);
+            ResultSet resultSet = st.executeQuery();
+            resultSet.next();
+            user.setId(resultSet.getInt(ID));
+            user.setName(resultSet.getString(NAME));
+            user.setLogin(resultSet.getString(LOGIN));
+            user.setEmail(resultSet.getString(EMAIL));
+            user.setDateCreated(LocalDate.parse(resultSet.getString(CREATE_DATE)));
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return user;
     }
 
     private void createUsersTableIfNotExists() throws SQLException {

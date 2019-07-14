@@ -12,4 +12,8 @@ public interface Store {
     List<User> findAll();
 
     User findById(int id);
+
+    boolean isValid(String login, String password);
+
+    User findByLogin(String login);
 }

@@ -20,11 +20,11 @@ public class DbStore implements Store {
     private Connection conn;
 
     // queries
-    public static final String CREATE_USERS = "create table users(name varchar(200),login varchar(200),email varchar(200),create_date varchar(200))";
+    public static final String CREATE_USERS = "create table users(name varchar(200), login varchar(200) unique, email varchar(200) unique, create_date varchar(200))";
     public static final String IDS = "select ROWID from users";
     public static final String FIND_ALL = "SELECT t.*, ROWID FROM users t";
     // prepared statements
-    public static final String ADD_USER = "insert into users(name, login, email, create_date) values (? ,? ,? ,?)";
+    public static final String ADD_USER = "insert into users(name, login, email, create_date) values (?, ?, ?, ?)";
     public static final String UPDATE_USER = "update users set name = ?, login = ?, email = ? where ROWID = ?";
     public static final String DELETE = "delete from users where ROWID = ?";
     public static final String FIND_BY_ID = "SELECT t.*, ROWID FROM users t where ROWID = ?";
@@ -57,7 +57,7 @@ public class DbStore implements Store {
     }
 
     @Override
-    public void add(User user) {
+    public void add(User user) throws SQLException {
         try (final PreparedStatement st = conn.prepareStatement(ADD_USER)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
@@ -66,11 +66,12 @@ public class DbStore implements Store {
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
+            throw e;
         }
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user) throws SQLException {
         try (final PreparedStatement st = conn.prepareStatement(UPDATE_USER)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
@@ -79,6 +80,7 @@ public class DbStore implements Store {
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
+            throw e;
         }
     }
 

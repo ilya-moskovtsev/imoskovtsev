@@ -1,14 +1,15 @@
 package ru.job4j.servlets.crud;
 
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Store {
-    void add(User user);
+    void add(User user) throws SQLException;
 
     void add(JsonPerson person);
 
-    void update(User user);
+    void update(User user) throws SQLException;
 
     void delete(User user);
 

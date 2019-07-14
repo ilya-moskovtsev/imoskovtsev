@@ -1,9 +1,8 @@
 package ru.job4j.servlets.crud;
 
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Logic layer.
@@ -18,8 +17,15 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public void add(User user) {
-        persistentLayer.add(user);
+    public boolean add(User user) {
+        boolean result;
+        try {
+            persistentLayer.add(user);
+            result = true;
+        } catch (SQLException e) {
+            result = false;
+        }
+        return result;
     }
 
     @Override
@@ -28,18 +34,15 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public void update(User user) {
-        User existingUser = persistentLayer.findById(user.getId());
-        if (Objects.nonNull(existingUser)) {
-            List<User> users = persistentLayer.findAll();
-            Optional<User> any = users.stream().filter(u -> u.getLogin().equals(user.getLogin()) || u.getEmail().equals(user.getEmail())).findAny();
-            if (any.isPresent() && any.get().getId() == user.getId()) {
-                persistentLayer.update(user);
-            }
-            if (any.isEmpty()) {
-                persistentLayer.update(user);
-            }
+    public boolean update(User user) {
+        boolean result;
+        try {
+            persistentLayer.update(user);
+            result = true;
+        } catch (SQLException e) {
+            result = false;
         }
+        return result;
     }
 
     @Override

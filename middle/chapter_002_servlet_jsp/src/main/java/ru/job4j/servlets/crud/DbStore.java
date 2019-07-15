@@ -1,23 +1,28 @@
 package ru.job4j.servlets.crud;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.job4j.sqlite.Config;
 
-import java.sql.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-
-import ru.job4j.sqlite.Config;
-
-
-import org.apache.commons.dbcp2.BasicDataSource;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DbStore implements Store {
     private static final Logger LOG = LogManager.getLogger(DbStore.class.getName());
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static final DbStore INSTANCE = new DbStore();
-    private Connection conn;
 
     // queries
     public static final String CREATE_USERS = "create table users(name varchar(200), login varchar(200) unique, email varchar(200) unique, create_date varchar(200))";
@@ -44,12 +49,7 @@ public class DbStore implements Store {
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
-        try {
-            this.conn = SOURCE.getConnection();
-            createUsersTableIfNotExists();
-        } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
-        }
+        createUsersTableIfNotExists();
     }
 
     public static DbStore getInstance() {
@@ -58,7 +58,7 @@ public class DbStore implements Store {
 
     @Override
     public void add(User user) throws SQLException {
-        try (final PreparedStatement st = conn.prepareStatement(ADD_USER)) {
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(ADD_USER)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
             st.setString(3, user.getEmail());
@@ -72,7 +72,7 @@ public class DbStore implements Store {
 
     @Override
     public void update(User user) throws SQLException {
-        try (final PreparedStatement st = conn.prepareStatement(UPDATE_USER)) {
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(UPDATE_USER)) {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
             st.setString(3, user.getEmail());
@@ -86,7 +86,7 @@ public class DbStore implements Store {
 
     @Override
     public void delete(User user) {
-        try (final PreparedStatement st = conn.prepareStatement(DELETE)) {
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(DELETE)) {
             st.setInt(1, user.getId());
             st.executeUpdate();
         } catch (SQLException e) {
@@ -97,7 +97,7 @@ public class DbStore implements Store {
     @Override
     public List<User> findAll() {
         List<User> users = new LinkedList<>();
-        try (final Statement st = conn.createStatement();
+        try (final Statement st = SOURCE.getConnection().createStatement();
              ResultSet resultSet = st.executeQuery(FIND_ALL)) {
             while (resultSet.next()) {
                 User user = new User();
@@ -117,7 +117,7 @@ public class DbStore implements Store {
     @Override
     public User findById(int id) {
         User user = new User();
-        try (final PreparedStatement st = conn.prepareStatement(FIND_BY_ID)) {
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(FIND_BY_ID)) {
             st.setInt(1, id);
             ResultSet resultSet = st.executeQuery();
             resultSet.next();
@@ -132,14 +132,28 @@ public class DbStore implements Store {
         return user;
     }
 
-    private void createUsersTableIfNotExists() throws SQLException {
-        try (PreparedStatement st = conn.prepareStatement(IDS);
+    @Override
+    public List<Path> getFiles() {
+        List<Path> files = null;
+        Path uploads = Paths.get(System.getProperty("java.io.tmpdir"), "uploads");
+        try (Stream<Path> list = Files.list(uploads)) {
+            files = list.collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return files;
+    }
+
+    private void createUsersTableIfNotExists() {
+        try (PreparedStatement st = SOURCE.getConnection().prepareStatement(IDS);
              ResultSet rs = st.executeQuery()) {
             rs.next();
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            try (Statement statement = conn.createStatement()) {
+            try (Statement statement = SOURCE.getConnection().createStatement()) {
                 statement.executeUpdate(CREATE_USERS);
+            } catch (SQLException ex) {
+                LOG.error(ex.getMessage(), ex);
             }
         }
     }

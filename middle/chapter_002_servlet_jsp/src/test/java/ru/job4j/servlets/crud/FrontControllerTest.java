@@ -20,17 +20,19 @@ import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(ValidateService.class)
-public class UserServletTest {
+public class FrontControllerTest {
     @Test
-    public void doPost() throws ServletException, IOException {
+    public void doPost() throws IOException {
         Validate validate = new ValidateStub();
         PowerMockito.mockStatic(ValidateService.class);
         Mockito.when(ValidateService.getInstance()).thenReturn(validate);
 
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
+        when(req.getParameter("action")).thenReturn("add");
+        when(req.getParameter("id")).thenReturn("1");
         when(req.getParameter("name")).thenReturn("name1");
-        new UserServlet().doPost(req, resp);
+        new FrontController().doPost(req, resp);
 
         assertThat(validate.findAll().iterator().next().getName(), is("name1"));
     }

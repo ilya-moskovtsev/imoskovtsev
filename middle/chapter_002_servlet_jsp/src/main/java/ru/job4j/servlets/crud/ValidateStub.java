@@ -1,5 +1,6 @@
 package ru.job4j.servlets.crud;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,11 @@ public class ValidateStub implements Validate {
 
     @Override
     public User findById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Path> getFiles() {
         return null;
     }
 }

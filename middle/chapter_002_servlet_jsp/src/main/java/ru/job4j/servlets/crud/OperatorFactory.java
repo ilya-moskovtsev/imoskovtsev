@@ -11,6 +11,7 @@ public class OperatorFactory {
         operationMap.put("add", new AddOperation());
         operationMap.put("update", new UpdateOperation());
         operationMap.put("delete", new DeleteOperation());
+        operationMap.put("upload", new UploadOperation());
         operationMap.put("login", new LoginOperation());
         operationMap.put("logout", new LogoutOperation());
     }

@@ -1,6 +1,7 @@
 package ru.job4j.servlets.crud;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Presentation layer.
  */
+@MultipartConfig
 public class FrontController extends HttpServlet {
     private final Validate logicLayer = ValidateService.getInstance();
 
@@ -20,12 +22,15 @@ public class FrontController extends HttpServlet {
         pathsToViews.put("/", "/ListUsers.jsp");
         pathsToViews.put("/create", "/CreateUser.jsp");
         pathsToViews.put("/edit", "/EditUser.jsp");
+        pathsToViews.put("/upload", "/UploadFile.jsp");
+        pathsToViews.put("/download", "/DownloadFile.jsp");
         pathsToViews.put("/login", "/Login.jsp");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("users", logicLayer.findAll());
+        req.setAttribute("files", logicLayer.getFiles());
 
         String servletPath = req.getServletPath();
         String view = pathsToViews.getOrDefault(servletPath, "/ListUsers.jsp");

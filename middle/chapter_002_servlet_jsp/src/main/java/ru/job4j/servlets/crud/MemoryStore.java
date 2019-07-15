@@ -1,8 +1,14 @@
 package ru.job4j.servlets.crud;
 
-import java.time.LocalDate;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.time.LocalDate;
 
 /**
  * Persistent layer
@@ -53,6 +59,18 @@ public class MemoryStore implements Store {
     @Override
     public User findById(int id) {
         return users.stream().filter(user -> id == user.getId()).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Path> getFiles() {
+        List<Path> files = null;
+        Path uploads = Paths.get(System.getProperty("java.io.tmpdir"), "uploads");
+        try (Stream<Path> list = Files.list(uploads)) {
+            files = list.collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return files;
     }
 
     @Override

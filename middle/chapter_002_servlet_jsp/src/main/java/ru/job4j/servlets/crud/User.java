@@ -3,6 +3,7 @@ package ru.job4j.servlets.crud;
 import com.google.common.base.Joiner;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class User {
     private int id;
@@ -49,6 +50,23 @@ public class User {
 
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

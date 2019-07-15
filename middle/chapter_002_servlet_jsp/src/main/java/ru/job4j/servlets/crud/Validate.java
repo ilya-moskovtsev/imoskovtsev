@@ -1,5 +1,6 @@
 package ru.job4j.servlets.crud;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface Validate {
@@ -13,4 +14,5 @@ public interface Validate {
 
     User findById(int id);
 
+    List<Path> getFiles();
 }

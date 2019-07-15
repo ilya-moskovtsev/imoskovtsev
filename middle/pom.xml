@@ -11,6 +11,15 @@
 
     <artifactId>middle</artifactId>
     <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+    </dependencies>
+
     <modules>
         <module>chapter_001_multithreading</module>
         <module>chapter_002_servlet_jsp</module>

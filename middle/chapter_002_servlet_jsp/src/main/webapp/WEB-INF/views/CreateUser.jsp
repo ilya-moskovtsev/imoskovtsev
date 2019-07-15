@@ -4,7 +4,7 @@
     <title>Create User</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/user" method="post">
+<form action="${pageContext.servletContext.contextPath}/user" method="post">
     <input type="hidden" name="action" value="add">
     <label>
         id:

@@ -14,6 +14,8 @@ public class OperatorFactory {
         operationMap.put("upload", new UploadOperation());
         operationMap.put("login", new LoginOperation());
         operationMap.put("logout", new LogoutOperation());
+        operationMap.put("readJson", new ReadJsonOperation());
+        operationMap.put("writeJson", new WriteJsonOperation());
     }
 
     public static Optional<Operation> getOperation(String operator) {

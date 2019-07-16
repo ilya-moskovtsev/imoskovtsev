@@ -1,5 +1,7 @@
 package ru.job4j.servlets.crud;
 
+import javax.annotation.concurrent.GuardedBy;
+import javax.annotation.concurrent.ThreadSafe;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,10 +15,13 @@ import java.time.LocalDate;
 /**
  * Persistent layer
  */
+@ThreadSafe
 public class MemoryStore implements Store {
     private static final MemoryStore INSTANCE = new MemoryStore();
     private final List<User> users = new CopyOnWriteArrayList<>();
-    private int id = 0;
+    private final List<JsonPerson> people = new CopyOnWriteArrayList<>();
+    @GuardedBy("this")
+    private int id;
 
     public MemoryStore() {
         User user = new User();
@@ -35,8 +40,15 @@ public class MemoryStore implements Store {
 
     @Override
     public void add(User user) {
-        user.setId(this.id++);
+        synchronized (this) {
+            user.setId(this.id++);
+        }
         users.add(user);
+    }
+
+    @Override
+    public void add(JsonPerson person) {
+        people.add(person);
     }
 
     @Override
@@ -88,5 +100,10 @@ public class MemoryStore implements Store {
     @Override
     public User findByLogin(String login) {
         return users.stream().filter(user -> login.equals(user.getLogin())).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<JsonPerson> getPeople() {
+        return people;
     }
 }

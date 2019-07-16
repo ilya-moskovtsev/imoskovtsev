@@ -24,6 +24,7 @@ public class FrontController extends HttpServlet {
         pathsToViews.put("/edit", "/EditUser.jsp");
         pathsToViews.put("/upload", "/UploadFile.jsp");
         pathsToViews.put("/download", "/DownloadFile.jsp");
+        pathsToViews.put("/login", "/Login.jsp");
     }
 
     @Override
@@ -38,7 +39,7 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
 
         // Many if statements can be replaced with
@@ -48,7 +49,7 @@ public class FrontController extends HttpServlet {
         Operation targetOperation = OperatorFactory
                 .getOperation(action)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
-        targetOperation.apply(logicLayer, req);
+        targetOperation.apply(logicLayer, req, resp);
         resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

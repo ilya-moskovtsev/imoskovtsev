@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.time.LocalDate;
 
 /**
  * Persistent layer
@@ -15,6 +16,18 @@ import java.util.stream.Stream;
 public class MemoryStore implements Store {
     private static final MemoryStore INSTANCE = new MemoryStore();
     private final List<User> users = new CopyOnWriteArrayList<>();
+    private int id = 0;
+
+    public MemoryStore() {
+        User user = new User();
+        user.setName("root");
+        user.setLogin("root");
+        user.setEmail("root@root.root");
+        user.setDateCreated(LocalDate.now());
+        user.setPassword("root");
+        user.setRole(Role.ADMIN);
+        add(user);
+    }
 
     public static MemoryStore getInstance() {
         return INSTANCE;
@@ -22,6 +35,7 @@ public class MemoryStore implements Store {
 
     @Override
     public void add(User user) {
+        user.setId(this.id++);
         users.add(user);
     }
 
@@ -57,5 +71,22 @@ public class MemoryStore implements Store {
             e.printStackTrace();
         }
         return files;
+    }
+
+    @Override
+    public boolean isValid(String login, String password) {
+        boolean isValid = false;
+        for (User user : users) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                isValid = true;
+                break;
+            }
+        }
+        return isValid;
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return users.stream().filter(user -> login.equals(user.getLogin())).findFirst().orElse(null);
     }
 }

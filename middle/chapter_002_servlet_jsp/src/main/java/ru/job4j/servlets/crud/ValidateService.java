@@ -17,11 +17,7 @@ public class ValidateService implements Validate {
 
     @Override
     public void add(User user) {
-        int id = user.getId();
-        User existingUser = persistentLayer.findById(id);
-        if (existingUser == null) {
-            persistentLayer.add(user);
-        }
+        persistentLayer.add(user);
     }
 
     @Override
@@ -55,5 +51,15 @@ public class ValidateService implements Validate {
     @Override
     public List<Path> getFiles() {
         return persistentLayer.getFiles();
+    }
+
+    @Override
+    public boolean isValid(String login, String password) {
+        return persistentLayer.isValid(login, password);
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return persistentLayer.findByLogin(login);
     }
 }

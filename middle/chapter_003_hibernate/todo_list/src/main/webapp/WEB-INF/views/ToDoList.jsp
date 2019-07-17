@@ -60,5 +60,62 @@
         }, false);
     })();
 </script>
+<script>
+    (function () {
+        function areAllControlsValid() {
+            const formControls = document.querySelectorAll('.form-control');
+            return formControls.length === [...formControls].filter(control => control.validity.valid).length;
+        }
+
+        function updateTable() {
+            $.ajax({
+                url: 'writeJson',
+                type: "POST",
+                data: {action: "writeJson"},
+                success: function (result) {
+                    // you can see the result from the console
+                    // tab of the developer tools
+                    console.log(result);
+                    const people = JSON.parse(result);
+                    let replacement = "<tbody>";
+                    people.map(person => {
+                        replacement += `<tr><td>` + person.firstName + `</td><td>` + person.lastName + `</td><td>` + person.gender + `</td><td>` + person.description + `</td></tr>`;
+                    });
+                    replacement += "</tbody>";
+                    $('tbody').replaceWith(replacement);
+                },
+                error: function (xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // click on button submit
+            $(".needs-validation").on('submit', function () {
+                if (areAllControlsValid()) {
+                    const description = document.querySelector('#description').value;
+                    // send ajax
+                    $.ajax({
+                        url: '', // url where to submit the request
+                        type: "POST", // type of action POST || GET
+                        contentType: "application/json",
+                        data: JSON.stringify({description}), // post data || get data
+                        success: function (result) {
+                            // you can see the result from the console
+                            // tab of the developer tools
+                            console.log(result);
+                            // updateTable();
+                        },
+                        error: function (xhr, resp, text) {
+                            console.log(xhr, resp, text);
+                            // updateTable();
+                        }
+                    });
+                }
+            });
+        });
+    })();
+</script>
 </body>
 </html>

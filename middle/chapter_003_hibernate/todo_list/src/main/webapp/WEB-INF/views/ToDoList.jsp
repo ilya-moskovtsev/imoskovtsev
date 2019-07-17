@@ -12,8 +12,8 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1>Todo list</h1>
 <div class="container mb-4">
+    <h2>Add Task</h2>
     <form class="needs-validation" novalidate>
         <div class="form-group">
             <label for="description">Description:</label>
@@ -28,6 +28,35 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
+<div class="container">
+    <h2>TODO List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>Male</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>Female</td>
+        </tr>
+        <tr>
+            <td>July</td>
+            <td>Dooley</td>
+            <td>Female</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -67,27 +96,20 @@
             return formControls.length === [...formControls].filter(control => control.validity.valid).length;
         }
 
-        function updateTable() {
-            $.ajax({
-                url: 'writeJson',
-                type: "POST",
-                data: {action: "writeJson"},
-                success: function (result) {
-                    // you can see the result from the console
-                    // tab of the developer tools
-                    console.log(result);
-                    const people = JSON.parse(result);
-                    let replacement = "<tbody>";
-                    people.map(person => {
-                        replacement += `<tr><td>` + person.firstName + `</td><td>` + person.lastName + `</td><td>` + person.gender + `</td><td>` + person.description + `</td></tr>`;
-                    });
-                    replacement += "</tbody>";
-                    $('tbody').replaceWith(replacement);
-                },
-                error: function (xhr, resp, text) {
-                    console.log(xhr, resp, text);
-                }
+
+        function updateTable(result) {
+            const tasks = JSON.parse(result);
+            let replacement = "<tbody>";
+            tasks.map(task => {
+                replacement += `<tr><td>` + task.description + `</td><td>month:` + task.created.month + ` day:` + task.created.day + `</td><td>`
+                    + `<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1" data-task-id="`
+                    + task.id +
+                    `"><label class="form-check-label" for="defaultCheck1">`
+                    + task.done
+                    + `</label></div></td></tr>`;
             });
+            replacement += "</tbody>";
+            $('tbody').replaceWith(replacement);
         }
 
         $(document).ready(function () {
@@ -105,11 +127,10 @@
                             // you can see the result from the console
                             // tab of the developer tools
                             console.log(result);
-                            // updateTable();
+                            updateTable(result);
                         },
                         error: function (xhr, resp, text) {
                             console.log(xhr, resp, text);
-                            // updateTable();
                         }
                     });
                 }

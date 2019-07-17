@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -14,13 +14,13 @@ import java.util.Objects;
 public class Item {
     private int id;
     private String description;
-    private LocalDateTime created;
+    private LocalDate created;
     private boolean done;
 
     public Item() {
     }
 
-    public Item(String description, LocalDateTime created, boolean done) {
+    public Item(String description, LocalDate created, boolean done) {
         this.description = description;
         this.created = created;
         this.done = done;
@@ -45,11 +45,11 @@ public class Item {
         this.description = description;
     }
 
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 

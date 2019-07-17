@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -28,7 +28,7 @@ public class ToDoList extends HttpServlet {
         Gson gson = new Gson();
 
         Item item = gson.fromJson(req.getReader(), Item.class);
-        item.setCreated(LocalDateTime.now());
+        item.setCreated(LocalDate.now());
         logicLayer.addItem(item);
 
         List<Item> items = logicLayer.getItems();

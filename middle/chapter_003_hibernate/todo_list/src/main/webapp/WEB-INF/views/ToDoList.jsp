@@ -104,12 +104,18 @@
                 replacement += `<tr><td>` + task.description + `</td><td>month:` + task.created.month + ` day:` + task.created.day + `</td><td>`
                     + `<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1" data-task-id="`
                     + task.id +
-                    `"><label class="form-check-label" for="defaultCheck1">`
+                    `" data-task-done="`
+                    + task.done
+                    + `"><label class="form-check-label" for="defaultCheck1">`
                     + task.done
                     + `</label></div></td></tr>`;
             });
             replacement += "</tbody>";
             $('tbody').replaceWith(replacement);
+
+            const checkboxes = document.querySelectorAll('tbody .form-check-input');
+            checkboxes.forEach(c => c.checked = JSON.parse(c.dataset.taskDone));
+            console.log(tasks);
         }
 
         $(document).ready(function () {

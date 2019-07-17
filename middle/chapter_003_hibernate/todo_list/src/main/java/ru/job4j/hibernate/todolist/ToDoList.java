@@ -1,12 +1,14 @@
 package ru.job4j.hibernate.todolist;
 
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -23,7 +25,13 @@ public class ToDoList extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logicLayer.addItem(new Item("one more item", LocalDateTime.now(), false));
+        Gson gson = new Gson();
+
+        Item item = gson.fromJson(req.getReader(), Item.class);
+        item.setCreated(LocalDate.now());
+        logicLayer.addItem(item);
+
         List<Item> items = logicLayer.getItems();
+        gson.toJson(items, resp.getWriter());
     }
 }

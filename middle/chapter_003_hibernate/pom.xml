@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter_003_hibernate</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>todo_list</module>
+    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->

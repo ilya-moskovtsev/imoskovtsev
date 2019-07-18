@@ -50,7 +50,8 @@ public class FrontController extends HttpServlet {
         Operation targetOperation = OperatorFactory
                 .getOperation(action)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
-        targetOperation.apply(logicLayer, req, resp);
+        targetOperation.
+                apply(logicLayer, req, resp);
 //        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

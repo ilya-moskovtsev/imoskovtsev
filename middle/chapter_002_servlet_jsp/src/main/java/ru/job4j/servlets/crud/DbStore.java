@@ -25,20 +25,23 @@ public class DbStore implements Store {
     private static final DbStore INSTANCE = new DbStore();
 
     // queries
-    public static final String CREATE_USERS = "create table users(name varchar(200), login varchar(200) unique, email varchar(200) unique, create_date varchar(200))";
+    public static final String CREATE_USERS = "create table users(name varchar(200), login varchar(200) unique, email varchar(200) unique, create_date varchar(200), password varchar(200))";
     public static final String IDS = "select ROWID from users";
     public static final String FIND_ALL = "SELECT t.*, ROWID FROM users t";
     // prepared statements
-    public static final String ADD_USER = "insert into users(name, login, email, create_date) values (?, ?, ?, ?)";
-    public static final String UPDATE_USER = "update users set name = ?, login = ?, email = ? where ROWID = ?";
+    public static final String ADD_USER = "insert into users(name, login, email, create_date, password) values (?, ?, ?, ?, ?)";
+    public static final String UPDATE_USER = "update users set name = ?, login = ?, email = ?, password = ? where ROWID = ?";
     public static final String DELETE = "delete from users where ROWID = ?";
     public static final String FIND_BY_ID = "SELECT t.*, ROWID FROM users t where ROWID = ?";
+    public static final String FIND_BY_LOGIN = "SELECT t.*, ROWID FROM users t where t.login = ?";
+    public static final String IS_VALID = "SELECT t.*, ROWID FROM users t where t.login = ? and t.password = ?";
     // column label
     public static final String ID = "ROWID";
     public static final String NAME = "name";
     public static final String LOGIN = "login";
     public static final String EMAIL = "email";
     public static final String CREATE_DATE = "create_date";
+    public static final String PASSWORD = "password";
 
     public DbStore() {
         Config config = new Config().init();
@@ -63,6 +66,7 @@ public class DbStore implements Store {
             st.setString(2, user.getLogin());
             st.setString(3, user.getEmail());
             st.setString(4, String.valueOf(LocalDate.now()));
+            st.setString(5, user.getPassword());
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -76,7 +80,8 @@ public class DbStore implements Store {
             st.setString(1, user.getName());
             st.setString(2, user.getLogin());
             st.setString(3, user.getEmail());
-            st.setInt(4, user.getId());
+            st.setString(4, user.getPassword());
+            st.setInt(5, user.getId());
             st.executeUpdate();
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
@@ -106,6 +111,7 @@ public class DbStore implements Store {
                 user.setLogin(resultSet.getString(LOGIN));
                 user.setEmail(resultSet.getString(EMAIL));
                 user.setDateCreated(LocalDate.parse(resultSet.getString(CREATE_DATE)));
+                user.setPassword(resultSet.getString(PASSWORD));
                 users.add(user);
             }
         } catch (Exception e) {
@@ -126,6 +132,7 @@ public class DbStore implements Store {
             user.setLogin(resultSet.getString(LOGIN));
             user.setEmail(resultSet.getString(EMAIL));
             user.setDateCreated(LocalDate.parse(resultSet.getString(CREATE_DATE)));
+            user.setPassword(resultSet.getString(PASSWORD));
         } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
@@ -142,6 +149,39 @@ public class DbStore implements Store {
             e.printStackTrace();
         }
         return files;
+    }
+
+    @Override
+    public boolean isValid(String login, String password) {
+        boolean isValid = false;
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(IS_VALID)) {
+            st.setString(1, login);
+            st.setString(2, password);
+            ResultSet resultSet = st.executeQuery();
+            isValid = resultSet.next();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return isValid;
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        User user = new User();
+        try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(FIND_BY_LOGIN)) {
+            st.setString(1, login);
+            ResultSet resultSet = st.executeQuery();
+            resultSet.next();
+            user.setId(resultSet.getInt(ID));
+            user.setName(resultSet.getString(NAME));
+            user.setLogin(resultSet.getString(LOGIN));
+            user.setEmail(resultSet.getString(EMAIL));
+            user.setDateCreated(LocalDate.parse(resultSet.getString(CREATE_DATE)));
+            user.setPassword(resultSet.getString(PASSWORD));
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return user;
     }
 
     private void createUsersTableIfNotExists() {

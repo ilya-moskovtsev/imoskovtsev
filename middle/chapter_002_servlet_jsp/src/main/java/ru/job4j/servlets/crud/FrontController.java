@@ -25,6 +25,7 @@ public class FrontController extends HttpServlet {
         pathsToViews.put("/upload", "/UploadFile.jsp");
         pathsToViews.put("/download", "/DownloadFile.jsp");
         pathsToViews.put("/login", "/Login.jsp");
+        pathsToViews.put("/json", "/JsonPerson.jsp");
     }
 
     @Override
@@ -49,7 +50,8 @@ public class FrontController extends HttpServlet {
         Operation targetOperation = OperatorFactory
                 .getOperation(action)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
-        targetOperation.apply(logicLayer, req, resp);
-        resp.sendRedirect(String.format("%s/", req.getContextPath()));
+        targetOperation.
+                apply(logicLayer, req, resp);
+//        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

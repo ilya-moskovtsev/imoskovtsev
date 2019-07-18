@@ -29,6 +29,7 @@
     <modules>
         <module>chapter_001_multithreading</module>
         <module>chapter_002_servlet_jsp</module>
+        <module>chapter_003_hibernate</module>
     </modules>
 
 

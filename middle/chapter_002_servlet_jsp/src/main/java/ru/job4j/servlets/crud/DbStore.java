@@ -75,6 +75,11 @@ public class DbStore implements Store {
     }
 
     @Override
+    public void add(JsonPerson person) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void update(User user) throws SQLException {
         try (final PreparedStatement st = SOURCE.getConnection().prepareStatement(UPDATE_USER)) {
             st.setString(1, user.getName());
@@ -182,6 +187,11 @@ public class DbStore implements Store {
             LOG.error(e.getMessage(), e);
         }
         return user;
+    }
+
+    @Override
+    public List<JsonPerson> getPeople() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     private void createUsersTableIfNotExists() {

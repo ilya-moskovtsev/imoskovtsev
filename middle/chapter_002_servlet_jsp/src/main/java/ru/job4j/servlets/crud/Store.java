@@ -7,7 +7,7 @@ import java.util.List;
 public interface Store {
     void add(User user) throws SQLException;
 
-    void add(JsonPerson person);
+    void add(JsonPerson person) throws UnsupportedOperationException;
 
     void update(User user) throws SQLException;
 
@@ -23,5 +23,5 @@ public interface Store {
 
     User findByLogin(String login);
 
-    List<JsonPerson> getPeople();
+    List<JsonPerson> getPeople() throws UnsupportedOperationException;
 }

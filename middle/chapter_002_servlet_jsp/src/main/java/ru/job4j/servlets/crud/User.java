@@ -11,6 +11,8 @@ public class User {
     private String login;
     private String email;
     private LocalDate dateCreated;
+    private String password;
+    private Role role;
 
     public int getId() {
         return id;
@@ -52,6 +54,22 @@ public class User {
         this.dateCreated = dateCreated;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -79,4 +97,5 @@ public class User {
                 ", dateCreated=", dateCreated, '}'
         );
     }
+
 }

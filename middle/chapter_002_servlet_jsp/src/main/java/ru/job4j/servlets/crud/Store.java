@@ -16,4 +16,8 @@ public interface Store {
     User findById(int id);
 
     List<Path> getFiles();
+
+    boolean isValid(String login, String password);
+
+    User findByLogin(String login);
 }

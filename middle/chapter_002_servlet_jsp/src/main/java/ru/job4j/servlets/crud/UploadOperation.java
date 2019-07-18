@@ -1,6 +1,7 @@
 package ru.job4j.servlets.crud;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,7 +9,7 @@ import java.nio.file.Paths;
 
 public class UploadOperation implements Operation {
     @Override
-    public void apply(Validate logicLayer, HttpServletRequest req) {
+    public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) {
         try {
             Part filePart = req.getPart("file");
 

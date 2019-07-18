@@ -63,4 +63,14 @@ public class ValidateService implements Validate {
     public List<Path> getFiles() {
         return persistentLayer.getFiles();
     }
+
+    @Override
+    public boolean isValid(String login, String password) {
+        return persistentLayer.isValid(login, password);
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return persistentLayer.findByLogin(login);
+    }
 }

@@ -21,6 +21,11 @@ public class ValidateService implements Validate {
     }
 
     @Override
+    public void add(JsonPerson person) {
+        persistentLayer.add(person);
+    }
+
+    @Override
     public void update(User user) {
         int id = user.getId();
         User existingUser = persistentLayer.findById(id);
@@ -61,5 +66,10 @@ public class ValidateService implements Validate {
     @Override
     public User findByLogin(String login) {
         return persistentLayer.findByLogin(login);
+    }
+
+    @Override
+    public List<JsonPerson> getPeople() {
+        return persistentLayer.getPeople();
     }
 }

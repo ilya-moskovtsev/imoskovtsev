@@ -6,6 +6,8 @@ import java.util.List;
 public interface Validate {
     void add(User user);
 
+    void add(JsonPerson person);
+
     void update(User user);
 
     void delete(User user);
@@ -19,4 +21,6 @@ public interface Validate {
     boolean isValid(String login, String password);
 
     User findByLogin(String login);
+
+    List<JsonPerson> getPeople();
 }

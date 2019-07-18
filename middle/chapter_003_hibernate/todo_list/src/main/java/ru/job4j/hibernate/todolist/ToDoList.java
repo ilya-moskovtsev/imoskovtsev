@@ -25,13 +25,12 @@ public class ToDoList extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Gson gson = new Gson();
+        String action = req.getParameter("action");
 
-        Item item = gson.fromJson(req.getReader(), Item.class);
-        item.setCreated(LocalDate.now());
-        logicLayer.addItem(item);
-
-        List<Item> items = logicLayer.getItems();
-        gson.toJson(items, resp.getWriter());
+        Action targetAction = ActionFactory
+                .getAction(action)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Action"));
+        targetAction.
+                apply(logicLayer, req, resp);
     }
 }

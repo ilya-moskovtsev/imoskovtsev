@@ -8,6 +8,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -43,6 +44,18 @@ public class HibernateStore implements Store {
         session.getTransaction().commit();
         session.close();
         return items;
+    }
+
+    @Override
+    public void done(Item item) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.createQuery("update Item u set u.done = :newDone where u.id = :id")
+                .setParameter("newDone", item.isDone())
+                .setParameter("id", item.getId())
+                .executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
 
     private static void setUp() {

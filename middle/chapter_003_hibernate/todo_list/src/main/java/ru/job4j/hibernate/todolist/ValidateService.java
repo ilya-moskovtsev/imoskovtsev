@@ -23,4 +23,9 @@ public class ValidateService implements Validate {
     public List<Item> getItems() {
         return persistentLayer.getItems();
     }
+
+    @Override
+    public void done(Item item) {
+        persistentLayer.done(item);
+    }
 }

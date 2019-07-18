@@ -6,4 +6,6 @@ public interface Validate {
     void addItem(Item item);
 
     List<Item> getItems();
+
+    void done(Item item);
 }

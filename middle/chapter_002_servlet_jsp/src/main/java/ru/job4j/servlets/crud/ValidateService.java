@@ -10,7 +10,7 @@ import java.util.List;
 public class ValidateService implements Validate {
     private static final ValidateService INSTANCE = new ValidateService();
 
-    private final Store persistentLayer = DbStore.getInstance();
+    private final Store persistentLayer = MemoryStore.getInstance();
 
     public static Validate getInstance() {
         return INSTANCE;
@@ -26,6 +26,11 @@ public class ValidateService implements Validate {
             result = false;
         }
         return result;
+    }
+
+    @Override
+    public void add(JsonPerson person) {
+        persistentLayer.add(person);
     }
 
     @Override
@@ -72,5 +77,10 @@ public class ValidateService implements Validate {
     @Override
     public User findByLogin(String login) {
         return persistentLayer.findByLogin(login);
+    }
+
+    @Override
+    public List<JsonPerson> getPeople() {
+        return persistentLayer.getPeople();
     }
 }

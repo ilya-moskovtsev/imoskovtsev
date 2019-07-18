@@ -4,9 +4,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface Validate {
-    void add(User user);
+    boolean add(User user);
 
-    void update(User user);
+    boolean update(User user);
 
     void delete(User user);
 

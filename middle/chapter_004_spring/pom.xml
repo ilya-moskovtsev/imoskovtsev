@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring_mvc_configuration_xml</module>
+        <module>spring_mvc_configuration_annotation</module>
     </modules>
 
     <properties>

@@ -22,6 +22,7 @@
         <module>intern</module>
         <module>junior</module>
         <module>middle</module>
+        <module>interview</module>
     </modules>
 
     <dependencies>

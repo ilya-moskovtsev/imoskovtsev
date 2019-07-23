@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 public class PathConsumer implements Runnable {
@@ -30,13 +29,13 @@ public class PathConsumer implements Runnable {
                 if (path.equals(poisonPill)) {
                     return;
                 }
-                try (BufferedReader reader = Files.newBufferedReader(path);) {
+                try (BufferedReader reader = Files.newBufferedReader(path)) {
                     boolean match = reader.lines().anyMatch(line -> line.contains(text));
                     if (match) {
                         LOG.info(path);
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error(e.getMessage(), e);
                 }
             }
         } catch (InterruptedException e) {

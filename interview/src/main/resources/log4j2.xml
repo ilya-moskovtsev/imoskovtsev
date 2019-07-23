@@ -7,6 +7,7 @@
     </Appenders>
     <Loggers>
         <Logger name="ru.job4j.search" level="trace"/>
+        <Logger name="ru.job4j.email" level="trace"/>
         <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>

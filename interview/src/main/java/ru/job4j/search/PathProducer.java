@@ -10,7 +10,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class PathProducer implements Runnable {
     private static final Logger LOG = LogManager.getLogger(PathProducer.class.getName());
-    private BlockingQueue<Path> queue;
+    private final BlockingQueue<Path> queue;
     private final Path start;
     private final Path poisonPill;
     private final int poisonPillPerProducer;

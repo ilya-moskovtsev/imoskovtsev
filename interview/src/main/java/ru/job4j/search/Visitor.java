@@ -14,7 +14,7 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class Visitor extends SimpleFileVisitor<Path> {
     private static final Logger LOG = LogManager.getLogger(Visitor.class.getName());
-    private BlockingQueue<Path> paths;
+    private final BlockingQueue<Path> paths;
 
     public Visitor(BlockingQueue<Path> paths) {
         this.paths = paths;

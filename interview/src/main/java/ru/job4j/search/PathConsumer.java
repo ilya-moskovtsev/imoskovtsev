@@ -11,7 +11,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class PathConsumer implements Runnable {
     private static final Logger LOG = LogManager.getLogger(PathConsumer.class.getName());
-    private BlockingQueue<Path> queue;
+    private final BlockingQueue<Path> queue;
     private final Path poisonPill;
     private final String text;
 

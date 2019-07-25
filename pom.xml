@@ -146,8 +146,8 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.28.0</version>
         </dependency>
-        <!-- Apache Commons DBCP software implements Database Connection Pooling -->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+        <!-- Apache Commons DBCP software implements Database Connection Pooling -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>

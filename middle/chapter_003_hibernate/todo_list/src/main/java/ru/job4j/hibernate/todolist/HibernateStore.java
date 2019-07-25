@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class HibernateStore implements Store {
     private static final HibernateStore INSTANCE = new HibernateStore();
-    private static final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-    private static final SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    private static final StandardServiceRegistry REGISTRY = new StandardServiceRegistryBuilder().configure().build();
+    private static final SessionFactory SESSION_FACTORY = new MetadataSources(REGISTRY).buildMetadata().buildSessionFactory();
 
     public static HibernateStore getInstance() {
         return INSTANCE;
@@ -22,7 +22,7 @@ public class HibernateStore implements Store {
 
     @Override
     public void addItem(Item item) {
-        Session session = sessionFactory.openSession();
+        Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
         session.save(item);
         session.getTransaction().commit();
@@ -31,7 +31,7 @@ public class HibernateStore implements Store {
 
     @Override
     public List<Item> getItems() {
-        Session session = sessionFactory.openSession();
+        Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
         List<Item> items = session.createQuery("from Item", Item.class).getResultList();
         session.getTransaction().commit();
@@ -41,9 +41,9 @@ public class HibernateStore implements Store {
 
     @Override
     public void done(Item item) {
-        Session session = sessionFactory.openSession();
+        Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
-        session.createQuery("update Item u set u.done = :newDone where u.id = :id")
+        session.createQuery("update Item i set i.done = :newDone where i.id = :id")
                 .setParameter("newDone", item.isDone())
                 .setParameter("id", item.getId())
                 .executeUpdate();

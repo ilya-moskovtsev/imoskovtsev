@@ -18,5 +18,6 @@ public class LoginOperation implements Operation {
             req.setAttribute("error", "invalid login or password");
             req.getRequestDispatcher("/WEB-INF/views/Login.jsp").forward(req, resp);
         }
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

@@ -2,10 +2,11 @@ package ru.job4j.servlets.crud;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class UpdateOperation implements Operation {
     @Override
-    public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) {
+    public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
@@ -26,5 +27,7 @@ public class UpdateOperation implements Operation {
         user.setRole(Role.valueOf(role));
 
         logicLayer.update(user);
+
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }

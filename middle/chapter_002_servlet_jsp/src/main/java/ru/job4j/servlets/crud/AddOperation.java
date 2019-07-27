@@ -13,6 +13,9 @@ public class AddOperation implements Operation {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
+        String country = req.getParameter("country");
+        String state = req.getParameter("state");
+        String city = req.getParameter("city");
 
         User user = new User();
 
@@ -22,6 +25,9 @@ public class AddOperation implements Operation {
         user.setDateCreated(LocalDate.now());
         user.setPassword(password);
         user.setRole(Role.valueOf(role));
+        user.setCountry(country);
+        user.setState(state);
+        user.setCity(city);
 
         logicLayer.add(user);
 

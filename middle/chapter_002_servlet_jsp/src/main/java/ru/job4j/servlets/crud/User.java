@@ -13,6 +13,9 @@ public class User {
     private LocalDate dateCreated;
     private String password;
     private Role role;
+    private String country;
+    private String state;
+    private String city;
 
     public int getId() {
         return id;
@@ -98,4 +101,27 @@ public class User {
         );
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
 }

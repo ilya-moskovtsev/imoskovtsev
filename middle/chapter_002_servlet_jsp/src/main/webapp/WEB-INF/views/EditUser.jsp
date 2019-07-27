@@ -95,6 +95,42 @@
                 <input type="hidden" name="role" value="${user.role}">
             </c:otherwise>
         </c:choose>
+        <div class="form-group">
+            <label for="countryId">country:</label>
+            <select name="country" class="custom-select countries order-alpha" id="countryId" required>
+                <option value="">Select Country</option>
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Country is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="stateId">state:</label>
+            <select name="state" class="custom-select states order-alpha" id="stateId" required>
+                <option value="">Select State</option>
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                State is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cityId">city:</label>
+            <select name="city" class="custom-select cities order-alpha" id="cityId" required>
+                <option value="">Select City</option>
+            </select>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                City is required.
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>
@@ -107,8 +143,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
 <script type="text/javascript">
-    <%@include file="/WEB-INF/js/form-validation.js" %>
+    <%@include file="/WEB-INF/js/form-validation.js"%>
+</script>
+<script>
+    <%@include file="/WEB-INF/js/geodata.js"%>
 </script>
 </body>
 </html>

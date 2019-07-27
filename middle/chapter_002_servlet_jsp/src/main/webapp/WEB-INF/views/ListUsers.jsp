@@ -43,6 +43,9 @@
             <th scope="col" class="text-left">email</th>
             <th scope="col" class="text-left">date created</th>
             <th scope="col" class="text-left">role</th>
+            <th scope="col" class="text-left">country</th>
+            <th scope="col" class="text-left">state</th>
+            <th scope="col" class="text-left">city</th>
             <th scope="col" class="text-left">edit</th>
             <th scope="col" class="text-left">delete</th>
         </tr>
@@ -58,6 +61,9 @@
                         <td><c:out value="${user.email}"/></td>
                         <td><c:out value="${user.dateCreated}"/></td>
                         <td><c:out value="${user.role}"/></td>
+                        <td><c:out value="${user.country}"/></td>
+                        <td><c:out value="${user.state}"/></td>
+                        <td><c:out value="${user.city}"/></td>
 
                         <td>
                             <form action="${pageContext.servletContext.contextPath}/edit" method="get">
@@ -85,6 +91,9 @@
                     <td><c:out value="${loggedInUser.email}"/></td>
                     <td><c:out value="${loggedInUser.dateCreated}"/></td>
                     <td><c:out value="${loggedInUser.role}"/></td>
+                    <td><c:out value="${loggedInUser.country}"/></td>
+                    <td><c:out value="${loggedInUser.state}"/></td>
+                    <td><c:out value="${loggedInUser.city}"/></td>
 
                     <td>
                         <form action="${pageContext.servletContext.contextPath}/edit" method="get">

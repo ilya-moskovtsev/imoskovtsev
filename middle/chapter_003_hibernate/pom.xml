@@ -10,10 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chapter_003_hibernate</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>hibernate_mapping_annotation</module>
-    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -27,13 +23,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.199</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

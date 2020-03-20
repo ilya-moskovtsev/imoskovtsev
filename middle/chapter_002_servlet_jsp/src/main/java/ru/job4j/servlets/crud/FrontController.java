@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Presentation layer.
@@ -31,6 +32,10 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("users", logicLayer.findAll());
+        String id = req.getParameter("id");
+        if (Objects.nonNull(id)) {
+            req.setAttribute("user", logicLayer.findById(Integer.parseInt(id)));
+        }
         req.setAttribute("files", logicLayer.getFiles());
 
         String servletPath = req.getServletPath();

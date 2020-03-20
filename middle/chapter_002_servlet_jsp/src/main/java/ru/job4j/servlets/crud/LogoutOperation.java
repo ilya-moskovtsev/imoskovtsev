@@ -9,5 +9,7 @@ public class LogoutOperation implements Operation {
     @Override
     public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         req.getSession(false).invalidate();
+
+        resp.sendRedirect(String.format("%s/login", req.getContextPath()));
     }
 }

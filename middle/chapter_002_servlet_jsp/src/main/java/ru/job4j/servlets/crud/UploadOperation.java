@@ -3,13 +3,14 @@ package ru.job4j.servlets.crud;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class UploadOperation implements Operation {
     @Override
-    public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) {
+    public void apply(Validate logicLayer, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
             Part filePart = req.getPart("file");
 
@@ -25,5 +26,7 @@ public class UploadOperation implements Operation {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        resp.sendRedirect(String.format("%s/upload", req.getContextPath()));
     }
 }

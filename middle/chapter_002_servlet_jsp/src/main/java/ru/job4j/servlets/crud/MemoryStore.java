@@ -31,6 +31,9 @@ public class MemoryStore implements Store {
         user.setDateCreated(LocalDate.now());
         user.setPassword("root");
         user.setRole(Role.ADMIN);
+        user.setCountry("Russian Federation");
+        user.setState("Moscow");
+        user.setCity("Moscow");
         add(user);
     }
 
